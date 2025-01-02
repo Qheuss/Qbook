@@ -1,0 +1,17 @@
+# .NET build output
+bin/
+obj/
+
+# User-specific files
+.vs/
+.vscode/
+.idea/
+
+# ASP.NET temporary files
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Local.json
+
+# Dotnet core specific
+project.lock.json
+project.fragment.lock.json
