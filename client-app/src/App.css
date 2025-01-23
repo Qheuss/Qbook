@@ -1,42 +1,50 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+html,
+body {
+  height: 100%;
+  font-size: 62.5%; /* Sets a base font size of 10px */
+  line-height: 1.5; /* Sets a consistent line height */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  font-family: sans-serif; /* Default font family */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%; /* Makes images responsive by default */
 }
 
-.card {
-  padding: 2em;
+button,
+input,
+textarea,
+select {
+  font: inherit; /* Ensures text inputs and buttons use the same font */
+  border: none; /* Removes default borders */
+  background: none; /* Clears default button styles */
+  padding: 0;
 }
 
-.read-the-docs {
-  color: #888;
+ul,
+ol {
+  list-style: none; /* Removes list bullets/numbers */
+}
+
+a {
+  text-decoration: none; /* Removes underlines on links */
+  color: inherit; /* Makes links inherit text color */
+}
+
+table {
+  border-collapse: collapse; /* Removes gaps in table borders */
+  border-spacing: 0; /* Ensures no spacing */
 }
