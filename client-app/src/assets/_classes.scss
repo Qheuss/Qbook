@@ -5,8 +5,10 @@ $fontDarker-color-darkMode: #a6a9ac;
 $fontDarker-color-lightMode: #606367;
 
 // Background
-$background-color-darkMode: #080809;
-$background-color-lightMode: #e2e5e9;
+$background-color-darkMode: #1c1c1d;
+$background-color-lightMode: #f2f4f7;
+$backgroundHeader-color-darkMode: #252728;
+$backgroundHeader-color-lightMode: #ffffff;
 $backgroundComments-color-darkMode: #252728;
 $backgroundComments-color-lightMode: #f0f2f5;
 $backgroundSearch-color-darkMode: #333334;
@@ -16,4 +18,6 @@ $backgroundIcons-color-lightMode: #f2f4f7;
 
 // Accent color
 $accent-color: #54c078;
-$accent-color: #f5a623;
+
+// Container
+$container-width: 680px;

@@ -1,3 +1,6 @@
+@use './src/assets/classes' as cls;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* Reset CSS */
 * {
   margin: 0;
@@ -8,12 +11,14 @@
 html,
 body {
   height: 100%;
-  font-size: 62.5%; /* Sets a base font size of 10px */
+  font-size: 100%; /* Sets a base font size of 10px */
   line-height: 1.5; /* Sets a consistent line height */
+  background-color: cls.$background-color-darkMode;
 }
 
 body {
-  font-family: sans-serif; /* Default font family */
+  font-family: 'Roboto', serif;
+  position: relative;
 }
 
 img,
@@ -28,10 +33,15 @@ button,
 input,
 textarea,
 select {
-  font: inherit; /* Ensures text inputs and buttons use the same font */
   border: none; /* Removes default borders */
   background: none; /* Clears default button styles */
   padding: 0;
+  font-family: inherit; /* Makes form elements inherit font */
+}
+
+input:focus {
+  outline: none;
+  border: none;
 }
 
 ul,

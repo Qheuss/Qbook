@@ -1,0 +1,6 @@
+@use '../../assets/classes' as cls;
+
+.quentin {
+  width: cls.$container-width;
+  margin: 0 auto;
+}
