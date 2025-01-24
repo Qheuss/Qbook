@@ -19,9 +19,7 @@ const Post = ({ text, images }: PostProps) => {
         <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
         <div>
           <h2>Quentin Heusse</h2>
-          <h3>
-            {now.getDay() + '/' + now.getDate() + '/' + now.getFullYear()}
-          </h3>
+          <h3>{now.toLocaleDateString()}</h3>
         </div>
       </div>
       <div className={styles.content}>
