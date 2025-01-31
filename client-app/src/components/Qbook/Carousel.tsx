@@ -15,10 +15,11 @@ const images = [
   'images/Clicker.png',
 ];
 
-// TODO: Fix les mouvements du carousel
-
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const itemWidth = 100 / images.length;
+  const gap = 7;
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -32,7 +33,9 @@ const Carousel = () => {
     <div className={styles.carousel}>
       <div
         className={styles.carousel__track}
-        style={{ transform: `translateX(-${currentIndex * 20}%)` }}
+        style={{
+          transform: `translateX(-${currentIndex * (itemWidth + gap)}%)`,
+        }}
       >
         {images.map((image, index) => (
           <div className={styles.carousel__item} key={index}>
