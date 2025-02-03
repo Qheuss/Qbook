@@ -4,9 +4,12 @@ import { HiMiniHome } from 'react-icons/hi2';
 import { GiCalculator } from 'react-icons/gi';
 import { FaMoon } from 'react-icons/fa6';
 import { HiOutlineDownload } from 'react-icons/hi';
-import { IoMdSearch } from 'react-icons/io';
-import { IoIosMail } from 'react-icons/io';
+import { IoMdSearch, IoIosMail } from 'react-icons/io';
+import { LuSunMedium } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
+import { useContext } from 'react';
+import { NavItem } from './NavItem';
 
 interface HeaderProps {
   selectedPage: number;
@@ -15,8 +18,25 @@ interface HeaderProps {
 const Header = ({ selectedPage }: HeaderProps) => {
   const navigate = useNavigate();
 
+  const themeContext = useContext(ThemeContext);
+
+  if (!themeContext) {
+    throw new Error('ThemeToggle must be used within a ThemeProvider');
+  }
+
+  const navItems = [
+    { icon: HiMiniHome, path: '/', index: 0 },
+    { icon: IoIosMail, path: '/leaveamessage', index: 1 },
+    { icon: GiCalculator, path: '/calculator', index: 2 },
+  ];
+
   return (
-    <section className={styles.header}>
+    <section
+      className={
+        styles.header +
+        (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-white')
+      }
+    >
       <div className={styles.header__logo}>
         <img
           className={styles.logo}
@@ -31,63 +51,31 @@ const Header = ({ selectedPage }: HeaderProps) => {
         </div>
       </div>
       <ul className={styles.header__middle}>
-        <li
-          style={{
-            borderBottom: selectedPage === 0 ? '2px solid #54c078' : 'none',
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: selectedPage === 0 ? 'transparent' : '',
-            }}
-            onClick={() => navigate('/')}
-          >
-            <HiMiniHome
-              style={{
-                color: selectedPage === 0 ? '#54c078' : '#a6a9ac',
-              }}
-            />
-          </div>
-        </li>
-        <li
-          style={{
-            borderBottom: selectedPage === 1 ? '2px solid #54c078' : 'none',
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: selectedPage === 1 ? 'transparent' : '',
-            }}
-            onClick={() => navigate('/leaveamessage')}
-          >
-            <IoIosMail
-              style={{ color: selectedPage === 1 ? '#54c078' : '#a6a9ac' }}
-            />
-          </div>
-        </li>
-        <li
-          style={{
-            borderBottom: selectedPage === 2 ? '2px solid #54c078' : 'none',
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: selectedPage === 2 ? 'transparent' : '',
-            }}
-            onClick={() => navigate('/calculator')}
-          >
-            <GiCalculator
-              style={{ color: selectedPage === 2 ? '#54c078' : '#a6a9ac' }}
-            />
-          </div>
-        </li>
+        {navItems.map((item) => (
+          <NavItem
+            key={item.index}
+            {...item}
+            selectedPage={selectedPage}
+            navigate={navigate}
+          />
+        ))}
       </ul>
       <ul className={styles.header__profile}>
         <li>
-          <FaMoon />
+          <button onClick={themeContext.toggleTheme}>
+            {themeContext.theme === 'dark' ? (
+              <FaMoon className='text-white text-2xl hover:text-yellow-500' />
+            ) : (
+              <LuSunMedium className='text-yellow-500 text-2xl hover:text-white' />
+            )}
+          </button>
         </li>
         <li>
-          <a href='CV.pdf' target='_blank' rel='noopener noreferrer'>
+          <a
+            href='CV-Quentin_Heusse.pdf'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             <img src='images/QuentinHeusse.jpg' alt='Profile' />
             <HiOutlineDownload />
           </a>

@@ -5,7 +5,7 @@
   flex-direction: column;
   padding: 10px;
   margin: 75px 0 15px 0;
-  background-color: cls.$backgroundComments-color-darkMode;
+  background-color: cls.$backgroundComments-darkMode;
   border-radius: 7px;
   gap: 5px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -21,8 +21,8 @@
     }
 
     h1 {
-      background-color: cls.$backgroundSearch-color-darkMode;
-      color: cls.$fontDarker-color-darkMode;
+      background-color: cls.$backgroundSearch-darkMode;
+      color: cls.$fontDarker-darkMode;
       font-weight: 400;
       font-size: 18px;
       height: fit-content;
@@ -47,7 +47,7 @@
     padding: 5px 0 0 0;
 
     li {
-      color: cls.$fontDarker-color-darkMode;
+      color: cls.$fontDarker-darkMode;
       font-size: 18px;
       width: 100%;
       cursor: pointer;
@@ -74,7 +74,7 @@
       }
 
       &:hover {
-        background-color: cls.$backgroundIcons-color-darkMode;
+        background-color: cls.$backgroundIcons-darkMode;
       }
     }
   }

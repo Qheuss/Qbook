@@ -26,8 +26,8 @@
     width: fit-content;
     height: fit-content;
     top: 20%;
-    background-color: cls.$backgroundComments-color-darkMode;
-    color: cls.$fontDarker-color-darkMode;
+    background-color: cls.$backgroundComments-darkMode;
+    color: cls.$fontDarker-darkMode;
     padding: 20px;
     border-radius: 10px;
 
@@ -52,8 +52,8 @@
       gap: 10px;
 
       button {
-        background-color: cls.$backgroundSearch-color-darkMode;
-        color: cls.$fontDarker-color-darkMode;
+        background-color: cls.$backgroundSearch-darkMode;
+        color: cls.$fontDarker-darkMode;
         font-size: 16px;
         width: 100%;
         height: 30px;
