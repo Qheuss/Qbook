@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './Carousel.module.scss';
 import {
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
 } from 'react-icons/md';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const images = [
   'images/Clicker.png',
@@ -26,8 +27,15 @@ const Carousel = () => {
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1) % images.length);
+    if (currentIndex > 0)
+      setCurrentIndex((prevIndex) => (prevIndex - 1) % images.length);
   };
+
+  const themeContext = useContext(ThemeContext);
+
+  if (!themeContext) {
+    throw new Error('ThemeToggle must be used within a ThemeProvider');
+  }
 
   return (
     <div className={styles.carousel}>
@@ -45,13 +53,28 @@ const Carousel = () => {
       </div>
       <div className={styles.carousel__controls}>
         <button
-          className={styles.carousel__button}
+          className={
+            styles.carousel__button +
+            (themeContext.theme === 'dark'
+              ? ' bg-[#252728] text-[#a6a9ac]'
+              : ' bg-[#f0f2f5] text-[#606367]')
+          }
           onClick={prevSlide}
-          style={{ opacity: currentIndex === 0 ? '0' : '1' }}
+          style={{
+            opacity: currentIndex === 0 ? 0 : 1,
+          }}
         >
           <MdOutlineArrowBackIosNew />
         </button>
-        <button className={styles.carousel__button} onClick={nextSlide}>
+        <button
+          className={
+            styles.carousel__button +
+            (themeContext.theme === 'dark'
+              ? ' bg-[#252728] text-[#a6a9ac]'
+              : ' bg-[#f0f2f5] text-[#606367]')
+          }
+          onClick={nextSlide}
+        >
           <MdOutlineArrowForwardIos />
         </button>
       </div>

@@ -5,8 +5,6 @@
   justify-content: space-between;
   padding: 0 20px;
   height: 60px;
-  // background-color: cls.$backgroundHeader-darkMode;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.034);
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
@@ -25,9 +23,6 @@
     }
 
     .searchBar {
-      background-color: cls.$backgroundSearch-darkMode;
-      font-weight: 500;
-      color: cls.$fontDarker-darkMode;
       padding-left: 14px;
       border-radius: 20px;
       width: 250px;
@@ -43,22 +38,13 @@
         svg {
           width: 20px;
           height: 20px;
-          color: cls.$fontDarker-darkMode;
         }
       }
 
       input {
         height: 40px;
         caret-color: cls.$accent;
-        color: cls.$fontDarker-darkMode;
         font-size: 16px;
-        background: none;
-        border: none;
-        outline: none;
-
-        &::placeholder {
-          color: cls.$fontDarker-darkMode;
-        }
       }
     }
   }
@@ -96,7 +82,6 @@
     width: 300px;
 
     li {
-      background-color: cls.$backgroundIcons-darkMode;
       border-radius: 50%;
       width: 40px;
       height: 40px;
@@ -138,8 +123,6 @@
             padding: 2px;
             width: 15px;
             height: 15px;
-            color: white;
-            background-color: cls.$backgroundIcons-darkMode;
           }
         }
       }

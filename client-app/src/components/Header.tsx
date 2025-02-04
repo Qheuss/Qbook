@@ -40,14 +40,34 @@ const Header = ({ selectedPage }: HeaderProps) => {
       <div className={styles.header__logo}>
         <img
           className={styles.logo}
-          src='/images/Q.svg'
+          src={
+            themeContext.theme === 'dark'
+              ? '/images/QDark.svg'
+              : '/images/QLight.svg'
+          }
           onClick={() => navigate('/')}
         />
-        <div className={styles.searchBar}>
+        <div
+          className={
+            styles.searchBar +
+            (themeContext.theme === 'dark'
+              ? ' bg-[#333334] text-[#a6a9ac]'
+              : ' bg-[#e4e6e8] text-[#606367]')
+          }
+        >
           <label htmlFor='search'>
             <IoMdSearch />
           </label>
-          <input id='search' type='text' placeholder='Rechercher' />
+          <input
+            id='search'
+            type='text'
+            placeholder='Rechercher'
+            className={
+              themeContext.theme === 'dark'
+                ? ' text-[#a6a9ac] placeholder:text-[#a6a9ac]'
+                : ' text-[#606367] placeholder:text-[#606367]'
+            }
+          />
         </div>
       </div>
       <ul className={styles.header__middle}>
@@ -61,7 +81,11 @@ const Header = ({ selectedPage }: HeaderProps) => {
         ))}
       </ul>
       <ul className={styles.header__profile}>
-        <li>
+        <li
+          className={
+            themeContext.theme === 'dark' ? 'bg-[#4f5152]' : 'bg-[#e3e4e6]'
+          }
+        >
           <button onClick={themeContext.toggleTheme}>
             {themeContext.theme === 'dark' ? (
               <FaMoon className='text-white text-2xl hover:text-yellow-500' />
@@ -77,7 +101,13 @@ const Header = ({ selectedPage }: HeaderProps) => {
             rel='noopener noreferrer'
           >
             <img src='images/QuentinHeusse.jpg' alt='Profile' />
-            <HiOutlineDownload />
+            <HiOutlineDownload
+              className={
+                themeContext.theme === 'dark'
+                  ? 'bg-[#4f5152] text-[#e3e4e6]'
+                  : 'bg-[#e3e4e6] text-[#4f5152]'
+              }
+            />
           </a>
         </li>
       </ul>

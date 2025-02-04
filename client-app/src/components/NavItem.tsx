@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
+
 interface NavItemProps {
   icon: React.ElementType;
   path: string;
@@ -5,6 +8,7 @@ interface NavItemProps {
   selectedPage: number;
   navigate: (path: string) => void;
 }
+
 export const NavItem = ({
   icon: Icon,
   path,
@@ -12,6 +16,12 @@ export const NavItem = ({
   selectedPage,
   navigate,
 }: NavItemProps) => {
+  const themeContext = useContext(ThemeContext);
+
+  if (!themeContext) {
+    throw new Error('ThemeToggle must be used within a ThemeProvider');
+  }
+
   return (
     <li
       className={`${
@@ -24,7 +34,12 @@ export const NavItem = ({
       >
         <Icon
           className={`text-2xl ${
-            selectedPage === index ? 'text-[#54c078]' : 'text-neutral-400'
+            selectedPage === index
+              ? 'text-[#54c078]'
+              : themeContext.theme === 'dark'
+              ? ' text-[#a6a9ac]'
+              : ' text-[#606367]'
+          }
           }`}
         />
       </div>
