@@ -53,16 +53,12 @@ const ContactForm: React.FC = () => {
       .then(
         (response) => {
           console.log(
-            'Email sent successfully!',
+            'Message sent successfully!',
             response.status,
             response.text
           );
           setStatus('Message sent successfully!');
           setStatusVisible(true);
-
-          setName('');
-          setEmail('');
-          setMessage('');
 
           setTimeout(() => setStatusVisible(false), 10000);
         },
@@ -73,6 +69,10 @@ const ContactForm: React.FC = () => {
           setTimeout(() => setStatusVisible(false), 10000);
         }
       );
+
+    setName('');
+    setEmail('');
+    setMessage('');
   };
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -102,7 +102,7 @@ const ContactForm: React.FC = () => {
       className={styles.contactForm}
       drag
       dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-      dragElastic={0.2}
+      dragElastic={0.3}
       onDragEnd={(_e, info) =>
         setDragPosition({ x: info.point.x, y: info.point.y })
       }
@@ -159,6 +159,7 @@ const ContactForm: React.FC = () => {
             onChange={(e) => setHoneypot(e.target.value)}
           />
         </div>
+        {/* Honeypot */}
 
         <button
           type='submit'
