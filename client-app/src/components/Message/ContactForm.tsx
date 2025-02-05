@@ -103,7 +103,7 @@ const ContactForm: React.FC = () => {
       drag
       dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
       dragElastic={0.2}
-      onDragEnd={(e, info) =>
+      onDragEnd={(_e, info) =>
         setDragPosition({ x: info.point.x, y: info.point.y })
       }
       style={{
