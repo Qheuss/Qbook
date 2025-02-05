@@ -1,4 +1,4 @@
-import ContactForm from '../components/ContactForm';
+import ContactForm from '../components/Message/ContactForm';
 import Header from '../components/Header';
 import styles from './Message.module.scss';
 

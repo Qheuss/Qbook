@@ -4,7 +4,7 @@ import Post from './Post';
 import Title from './Title';
 const Feed = () => {
   return (
-    <section className={styles.quentin}>
+    <main className={styles.quentin}>
       <Title />
       <Carousel />
       <Post
@@ -15,7 +15,7 @@ const Feed = () => {
         text={`COMPÉTENCES TECH: React.js | Sass | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Git | Node.js | TypeScript | Jira`}
         images={['images/techskills.jpg']}
       />
-    </section>
+    </main>
   );
 };
 

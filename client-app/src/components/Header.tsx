@@ -1,14 +1,14 @@
 import styles from './Header.module.scss';
 import { HiMiniHome } from 'react-icons/hi2';
-
 import { GiCalculator } from 'react-icons/gi';
 import { FaMoon } from 'react-icons/fa6';
 import { HiOutlineDownload } from 'react-icons/hi';
 import { IoMdSearch, IoIosMail } from 'react-icons/io';
 import { LuSunMedium } from 'react-icons/lu';
+import { HiX } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { NavItem } from './NavItem';
 
 interface HeaderProps {
@@ -17,8 +17,10 @@ interface HeaderProps {
 
 const Header = ({ selectedPage }: HeaderProps) => {
   const navigate = useNavigate();
-
   const themeContext = useContext(ThemeContext);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [triggerSearch, setTriggerSearch] = useState(false);
+  const [highlightedWordsExist, setHighlightedWordsExist] = useState(false);
 
   if (!themeContext) {
     throw new Error('ThemeToggle must be used within a ThemeProvider');
@@ -29,6 +31,77 @@ const Header = ({ selectedPage }: HeaderProps) => {
     { icon: IoIosMail, path: '/leaveamessage', index: 1 },
     { icon: GiCalculator, path: '/calculator', index: 2 },
   ];
+
+  const removeHighlights = () => {
+    document.querySelectorAll('mark').forEach((mark) => {
+      const parent = mark.parentNode;
+      if (parent) {
+        parent.replaceChild(
+          document.createTextNode(mark.textContent || ''),
+          mark
+        );
+      }
+    });
+    setHighlightedWordsExist(false);
+  };
+
+  useEffect(() => {
+    if (!triggerSearch) return;
+
+    const highlightMatches = () => {
+      if (!searchQuery) return;
+      removeHighlights();
+
+      const content = document.querySelector('main');
+      if (!content) return;
+
+      const walker = document.createTreeWalker(
+        content,
+        NodeFilter.SHOW_TEXT,
+        null
+      );
+      const regex = new RegExp(searchQuery, 'gi');
+
+      let node;
+      while ((node = walker.nextNode())) {
+        if (node.parentNode && node.parentNode.nodeName !== 'INPUT') {
+          const text = node.nodeValue;
+          if (text && regex.test(text)) {
+            const span = document.createElement('span');
+            span.innerHTML = text.replace(
+              regex,
+              (match) =>
+                `<mark style="background-color: #54c078;">${match}</mark>`
+            );
+            node.parentNode.replaceChild(span, node);
+          }
+        }
+      }
+    };
+
+    highlightMatches();
+    setTriggerSearch(false);
+  }, [triggerSearch, searchQuery]);
+
+  useEffect(() => {
+    const checkHighlightedWords = () => {
+      const highlightedElements = document.querySelectorAll('mark');
+      setHighlightedWordsExist(highlightedElements.length > 0);
+    };
+
+    checkHighlightedWords();
+  }, [searchQuery]);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      setTriggerSearch(true);
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+    removeHighlights();
+  };
 
   return (
     <section
@@ -56,12 +129,23 @@ const Header = ({ selectedPage }: HeaderProps) => {
           }
         >
           <label htmlFor='search'>
-            <IoMdSearch />
+            <button
+              onClick={clearSearch}
+              style={{
+                cursor:
+                  searchQuery || highlightedWordsExist ? 'pointer' : 'default',
+              }}
+            >
+              {searchQuery || highlightedWordsExist ? <HiX /> : <IoMdSearch />}
+            </button>
           </label>
           <input
             id='search'
             type='text'
             placeholder='Rechercher'
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
             className={
               themeContext.theme === 'dark'
                 ? ' text-[#a6a9ac] placeholder:text-[#a6a9ac]'
