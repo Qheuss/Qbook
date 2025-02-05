@@ -1,0 +1,3 @@
+- finir le theme blanc
+- calculatrice ou autre projet
+- responsive

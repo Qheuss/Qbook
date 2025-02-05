@@ -24,7 +24,7 @@ function App() {
     <BrowserRouter>
       <BackgroundAnimation />
       <Routes>
-        <Route path='/leaveamessage' element={<Message />} />
+        <Route path='/message' element={<Message />} />
         <Route path='/calculator' element={<Calculator />} />
         <Route path='/' element={<Qbook />} />
         <Route path='*' element={<Qbook />} />

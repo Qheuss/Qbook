@@ -28,7 +28,7 @@ const Header = ({ selectedPage }: HeaderProps) => {
 
   const navItems = [
     { icon: HiMiniHome, path: '/', index: 0 },
-    { icon: IoIosMail, path: '/leaveamessage', index: 1 },
+    { icon: IoIosMail, path: '/message', index: 1 },
     { icon: GiCalculator, path: '/calculator', index: 2 },
   ];
 
