@@ -1,0 +1,62 @@
+@use '../assets/classes' as cls;
+
+.contactForm {
+  margin: 100px 0;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 680px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: cls.$backgroundComments-darkMode;
+
+    h2 {
+      font-size: 24px;
+      color: cls.$font-darkMode;
+      span {
+        color: cls.$accent;
+      }
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: cls.$font-darkMode;
+
+      input,
+      textarea {
+        padding: 7px 10px;
+        border: 1px solid #a6a9ac3b;
+        border-radius: 8px;
+        color: cls.$fontDarker-darkMode;
+        outline: none;
+      }
+
+      textarea {
+        resize: none;
+        min-height: 120px;
+        max-height: 700px;
+        overflow: hidden;
+      }
+    }
+
+    button {
+      background-color: cls.$backgroundSearch-darkMode;
+      color: cls.$fontDarker-darkMode;
+      font-size: 18px;
+      padding: 7px 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  }
+
+  .status {
+    color: cls.$accent;
+    text-align: center;
+    padding: 10px 0;
+  }
+}
