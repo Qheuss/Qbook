@@ -5,7 +5,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    return localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('theme') as 'light' | 'dark') || 'dark';
+    }
+    return 'dark';
   });
 
   useEffect(() => {
