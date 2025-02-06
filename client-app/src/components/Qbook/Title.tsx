@@ -27,7 +27,7 @@ const Title = () => {
         </>
       )).then(
         async () => {
-          navigate('/leaveamessage');
+          navigate('/message');
         },
         () => {}
       );

@@ -1,3 +1,4 @@
 - finir le theme blanc
 - calculatrice ou autre projet
 - responsive
+- changement page message qui a une erreur?
