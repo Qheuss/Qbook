@@ -2,3 +2,5 @@
 - calculatrice ou autre projet
 - responsive
 - changement page message qui a une erreur?
+- fix le dialog qui permet de toujours scroller
+- fix le carousel

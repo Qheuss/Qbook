@@ -1,11 +1,35 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { createDialog } from '../Dialog';
 import styles from './Title.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import { ThemeContext } from '../../context/ThemeContext';
+import Socials from './Socials';
 
 const Title = () => {
   const navigate = useNavigate();
+  const themeContext = useContext(ThemeContext);
+
+  if (!themeContext) {
+    throw new Error('ThemeToggle must be used within a ThemeProvider');
+  }
+
+  const socials = [
+    {
+      icon: FaLinkedin,
+      link: 'https://www.linkedin.com/in/quentin-heusse',
+      colorDark: '#0a66c2',
+      colorLight: '#0a66c2',
+      text: 'Linkedin',
+    },
+    {
+      icon: FaGithub,
+      link: 'https://github.com/Qheuss',
+      colorDark: '#fff',
+      colorLight: '#000',
+      text: 'Github',
+    },
+  ];
 
   const contact = useMemo(() => {
     return async () => {
@@ -35,25 +59,35 @@ const Title = () => {
   }, [navigate]);
 
   return (
-    <div className={styles.title}>
+    <div
+      className={
+        styles.title +
+        (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#f0f2f5]')
+      }
+    >
       <div>
         <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
-        <h1 onClick={contact}>Portfolio de Quentin Heusse</h1>
-      </div>
-      <div className={styles.lineBreak}></div>
-      <ul>
-        <li
-          onClick={() =>
-            window.open('https://www.linkedin.com/in/quentin-heusse')
+        <button
+          onClick={contact}
+          className={
+            themeContext.theme === 'dark'
+              ? ' bg-[#333334] text-[#a6a9ac]'
+              : ' bg-[#e4e6e8] text-[#606367]'
           }
         >
-          <FaLinkedin className={styles.linkedin} />
-          Linkedin
-        </li>
-        <li onClick={() => window.open('https://github.com/Qheuss')}>
-          <FaGithub className={styles.github} />
-          Github
-        </li>
+          <h1>Portfolio de Quentin Heusse</h1>
+        </button>
+      </div>
+      <div
+        className={
+          styles.lineBreak +
+          (themeContext.theme === 'dark' ? ' bg-[#ffffff13]' : ' bg-[#e2e2e2]')
+        }
+      ></div>
+      <ul>
+        {socials.map((item, i) => (
+          <Socials key={i} {...item} />
+        ))}
       </ul>
     </div>
   );

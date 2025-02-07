@@ -29,6 +29,11 @@ export const NavItem = ({
       }`}
     >
       <div
+        className={
+          themeContext.theme === 'dark'
+            ? ' hover:bg-[#4f5152]'
+            : ' hover:bg-[#e3e4e6]'
+        }
         style={{ backgroundColor: selectedPage === index ? 'transparent' : '' }}
         onClick={() => navigate(path)}
       >
@@ -37,8 +42,8 @@ export const NavItem = ({
             selectedPage === index
               ? 'text-[#54c078]'
               : themeContext.theme === 'dark'
-              ? ' text-[#a6a9ac]'
-              : ' text-[#606367]'
+              ? ' text-[#a6a9ac] hover:bg-[#4f5152]'
+              : ' text-[#606367] hover:bg-[#e3e4e6]'
           }
           }`}
         />

@@ -31,7 +31,7 @@ const ContactForm: React.FC = () => {
     e.preventDefault();
 
     if (honeypot) {
-      setStatus('Bot detected, form not submitted.');
+      setStatus('Bot detecté, message non envoyé.');
       setStatusVisible(true);
       setTimeout(() => setStatusVisible(false), 10000);
       return;
@@ -57,14 +57,14 @@ const ContactForm: React.FC = () => {
             response.status,
             response.text
           );
-          setStatus('Message sent successfully!');
+          setStatus('Message envoyé!');
           setStatusVisible(true);
 
           setTimeout(() => setStatusVisible(false), 10000);
         },
         (err) => {
           console.error('Failed to send message.', err);
-          setStatus('Failed to send message.');
+          setStatus("Erreur lors de l'envoi du message.");
           setStatusVisible(true);
           setTimeout(() => setStatusVisible(false), 10000);
         }
@@ -128,7 +128,7 @@ const ContactForm: React.FC = () => {
           />
         </div>
         <div>
-          <label>Email:</label>
+          <label>Adresse email:</label>
           <input
             type='email'
             value={email}
@@ -169,7 +169,7 @@ const ContactForm: React.FC = () => {
           }}
           disabled={!isFormValid}
         >
-          Send Message
+          Envoyer le message
         </button>
       </form>
 
