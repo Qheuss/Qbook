@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import emailjs from 'emailjs-com';
 import styles from './ContactForm.module.scss';
 import { motion } from 'framer-motion';
+import { ThemeContext } from '../../context/ThemeContext';
 
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
@@ -33,7 +34,7 @@ const ContactForm: React.FC = () => {
     if (honeypot) {
       setStatus('Bot detecté, message non envoyé.');
       setStatusVisible(true);
-      setTimeout(() => setStatusVisible(false), 10000);
+      // setTimeout(() => setStatusVisible(false), 10000);
       return;
     }
 
@@ -60,13 +61,13 @@ const ContactForm: React.FC = () => {
           setStatus('Message envoyé!');
           setStatusVisible(true);
 
-          setTimeout(() => setStatusVisible(false), 10000);
+          // setTimeout(() => setStatusVisible(false), 10000);
         },
         (err) => {
           console.error('Failed to send message.', err);
           setStatus("Erreur lors de l'envoi du message.");
           setStatusVisible(true);
-          setTimeout(() => setStatusVisible(false), 10000);
+          // setTimeout(() => setStatusVisible(false), 10000);
         }
       );
 
@@ -97,6 +98,12 @@ const ContactForm: React.FC = () => {
     }
   };
 
+  const themeContext = useContext(ThemeContext);
+
+  if (!themeContext) {
+    throw new Error('ThemeToggle must be used within a ThemeProvider');
+  }
+
   return (
     <motion.div
       className={styles.contactForm}
@@ -112,13 +119,37 @@ const ContactForm: React.FC = () => {
         y: dragPosition.y,
       }}
     >
-      <form onSubmit={handleSubmit}>
-        <h2>
+      <form
+        onSubmit={handleSubmit}
+        className={
+          themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]'
+        }
+      >
+        <h2
+          className={
+            themeContext.theme === 'dark'
+              ? ' text-[#e2e5e9]'
+              : ' text-[#080809]'
+          }
+        >
           Laissez moi un <span>message</span> !
         </h2>
         <div>
-          <label>Nom:</label>
+          <label
+            className={
+              themeContext.theme === 'dark'
+                ? ' text-[#a6a9ac]'
+                : ' text-[#606367]'
+            }
+          >
+            Nom:
+          </label>
           <input
+            className={
+              themeContext.theme === 'dark'
+                ? ' text-[#e2e5e9]'
+                : ' text-[#080809]'
+            }
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -128,8 +159,21 @@ const ContactForm: React.FC = () => {
           />
         </div>
         <div>
-          <label>Adresse email:</label>
+          <label
+            className={
+              themeContext.theme === 'dark'
+                ? ' text-[#a6a9ac]'
+                : ' text-[#606367]'
+            }
+          >
+            Adresse email:
+          </label>
           <input
+            className={
+              themeContext.theme === 'dark'
+                ? ' text-[#e2e5e9]'
+                : ' text-[#080809]'
+            }
             type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -139,8 +183,21 @@ const ContactForm: React.FC = () => {
           />
         </div>
         <div>
-          <label>Message:</label>
+          <label
+            className={
+              themeContext.theme === 'dark'
+                ? ' text-[#a6a9ac]'
+                : ' text-[#606367]'
+            }
+          >
+            Message:
+          </label>
           <textarea
+            className={
+              themeContext.theme === 'dark'
+                ? ' text-[#e2e5e9]'
+                : ' text-[#080809]'
+            }
             ref={textareaRef}
             value={message}
             onChange={handleTextareaChange}
@@ -162,10 +219,19 @@ const ContactForm: React.FC = () => {
         {/* Honeypot */}
 
         <button
+          className={
+            themeContext.theme === 'dark'
+              ? ' bg-[#333334] text-[#a6a9ac]'
+              : ' bg-[#f0f2f5] text-[#606367]'
+          }
           type='submit'
           style={{
             backgroundColor: isFormValid ? '#54c078' : '',
-            color: isFormValid ? 'black' : '',
+            color: isFormValid
+              ? themeContext.theme === 'dark'
+                ? 'black'
+                : 'white'
+              : '',
           }}
           disabled={!isFormValid}
         >

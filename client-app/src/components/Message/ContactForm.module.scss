@@ -13,11 +13,9 @@
     padding: 20px;
     font-size: 18px;
     border-radius: 8px;
-    background-color: cls.$backgroundComments-darkMode;
 
     h2 {
       font-size: 24px;
-      color: cls.$font-darkMode;
       span {
         color: cls.$accent;
       }
@@ -26,7 +24,6 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      color: cls.$font-darkMode;
 
       label {
         cursor: grab;
@@ -37,7 +34,6 @@
         padding: 7px 10px;
         border: 1px solid #a6a9ac3b;
         border-radius: 8px;
-        color: cls.$fontDarker-darkMode;
         outline: none;
       }
 
@@ -50,8 +46,6 @@
     }
 
     button {
-      background-color: cls.$backgroundSearch-darkMode;
-      color: cls.$fontDarker-darkMode;
       font-size: 18px;
       padding: 7px 0;
       border-radius: 8px;
@@ -63,5 +57,6 @@
     color: cls.$accent;
     text-align: center;
     padding: 10px 0;
+    cursor: default;
   }
 }

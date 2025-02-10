@@ -107,7 +107,7 @@ const Header = ({ selectedPage }: HeaderProps) => {
     <section
       className={
         styles.header +
-        (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-white')
+        (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
       }
     >
       <div className={styles.header__logo}>
@@ -125,7 +125,7 @@ const Header = ({ selectedPage }: HeaderProps) => {
             styles.searchBar +
             (themeContext.theme === 'dark'
               ? ' bg-[#333334] text-[#a6a9ac]'
-              : ' bg-[#e4e6e8] text-[#606367]')
+              : ' bg-[#f0f2f5] text-[#606367]')
           }
         >
           <label htmlFor='search'>

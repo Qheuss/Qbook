@@ -62,7 +62,7 @@ const Title = () => {
     <div
       className={
         styles.title +
-        (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#f0f2f5]')
+        (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
       }
     >
       <div>
@@ -72,7 +72,7 @@ const Title = () => {
           className={
             themeContext.theme === 'dark'
               ? ' bg-[#333334] text-[#a6a9ac]'
-              : ' bg-[#e4e6e8] text-[#606367]'
+              : ' bg-[#f0f2f5] text-[#606367]'
           }
         >
           <h1>Portfolio de Quentin Heusse</h1>
