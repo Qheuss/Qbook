@@ -24,7 +24,7 @@ const Post = ({ text, images }: PostProps) => {
     <div
       className={
         styles.post +
-        (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#f0f2f5]')
+        (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
       }
     >
       <div className={styles.me}>

@@ -13,7 +13,7 @@ const Feed = () => {
       />
       <Post
         text={`COMPÉTENCES TECH: React.js | Sass | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Git | Node.js | TypeScript | Jira`}
-        images={['images/techskills.jpg']}
+        images={['images/techskills.png']}
       />
     </main>
   );

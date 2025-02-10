@@ -1,5 +1,7 @@
+- finir le theme blanc (dialog)
 - responsive
 - changement page message qui a une erreur?
 - fix le dialog qui permet de toujours scroller
 - fix le carousel
 - calculatrice ou autre projet
+- traduction en anglais?
