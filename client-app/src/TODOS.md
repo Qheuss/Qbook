@@ -2,6 +2,6 @@
 - responsive
 - changement page message qui a une erreur?
 - fix le dialog qui permet de toujours scroller
-- fix le carousel
+- fix le carousel (refaire un mieux)
 - calculatrice ou autre projet
 - traduction en anglais?
