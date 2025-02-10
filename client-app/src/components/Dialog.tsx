@@ -72,7 +72,7 @@ export function createDialog(
       }, [handleKeyDown]);
 
       return createPortal(
-        <div className={styles.dialogContainer}>
+        <div className={styles.dialogContainer} role='dialog'>
           <div className={styles.dialogBackground} onClick={rejectValue} />
           <div className={styles.dialog}>
             {renderDialog(
