@@ -12,7 +12,7 @@ const images = [
   'images/aviron1.png',
   'images/aviron2.png',
   'images/aviron3.png',
-  'images/Clicker.png',
+  'images/weather.png',
   'images/Clicker.png',
 ];
 
