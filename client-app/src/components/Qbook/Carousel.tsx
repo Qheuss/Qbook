@@ -7,11 +7,11 @@ import {
 import { ThemeContext } from '../../context/ThemeContext';
 
 const images = [
-  'images/Clicker.png',
-  'images/Clicker.png',
-  'images/Clicker.png',
-  'images/Clicker.png',
-  'images/Clicker.png',
+  'images/clickerlogin.png',
+  'images/clickermoney.png',
+  'images/aviron1.png',
+  'images/aviron2.png',
+  'images/aviron3.png',
   'images/Clicker.png',
   'images/Clicker.png',
 ];
