@@ -18,9 +18,10 @@ interface HeaderProps {
 const Header = ({ selectedPage }: HeaderProps) => {
   const navigate = useNavigate();
   const themeContext = useContext(ThemeContext);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [triggerSearch, setTriggerSearch] = useState(false);
-  const [highlightedWordsExist, setHighlightedWordsExist] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [triggerSearch, setTriggerSearch] = useState<boolean>(false);
+  const [highlightedWordsExist, setHighlightedWordsExist] =
+    useState<boolean>(false);
 
   if (!themeContext) {
     throw new Error('ThemeToggle must be used within a ThemeProvider');
