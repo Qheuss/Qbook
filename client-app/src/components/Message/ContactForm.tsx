@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import styles from './ContactForm.module.scss';
 import { motion } from 'framer-motion';
 import { ThemeContext } from '../../context/ThemeContext';
