@@ -5,18 +5,18 @@
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  height: 200px;
+  height: 220px;
 
   .carousel__track {
     display: flex;
     transition: transform 0.5s ease;
     height: 100%;
-    gap: 10px;
+    gap: 7px;
     padding: 4px 0;
   }
 
   .carousel__item {
-    flex: 0 0 20%;
+    flex: 0 0 150px;
     height: auto;
     cursor: pointer;
     border-radius: 7px;

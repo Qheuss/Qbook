@@ -13,22 +13,27 @@ const images = [
   'images/aviron2.png',
   'images/aviron3.png',
   'images/weather.png',
-  'images/Clicker.png',
 ];
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const itemWidth = 100 / images.length;
   const gap = 7;
+  const itemWidth = 150;
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    if (currentIndex === images.length - 4) {
+      setCurrentIndex(0);
+    } else {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }
   };
 
   const prevSlide = () => {
-    if (currentIndex > 0)
-      setCurrentIndex((prevIndex) => (prevIndex - 1) % images.length);
+    if (currentIndex === 0) {
+      setCurrentIndex(images.length - 4);
+    } else {
+      setCurrentIndex((prevIndex) => prevIndex - 1);
+    }
   };
 
   const themeContext = useContext(ThemeContext);
@@ -42,7 +47,7 @@ const Carousel = () => {
       <div
         className={styles.carousel__track}
         style={{
-          transform: `translateX(-${currentIndex * (itemWidth + gap)}%)`,
+          transform: `translateX(-${currentIndex * (itemWidth + gap)}px)`,
         }}
       >
         {images.map((image, index) => (
@@ -60,9 +65,6 @@ const Carousel = () => {
               : ' bg-[#f0f2f5] text-[#606367]')
           }
           onClick={prevSlide}
-          style={{
-            opacity: currentIndex === 0 ? 0 : 1,
-          }}
         >
           <MdOutlineArrowBackIosNew />
         </button>
