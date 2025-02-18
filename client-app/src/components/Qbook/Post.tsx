@@ -17,7 +17,7 @@ const Post = ({ text, images }: PostProps) => {
   const themeContext = useContext(ThemeContext);
 
   if (!themeContext) {
-    throw new Error('ThemeToggle must be used within a ThemeProvider');
+    throw new Error('Post must be used within a ThemeProvider');
   }
 
   return (

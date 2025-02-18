@@ -24,7 +24,7 @@ const Header = ({ selectedPage }: HeaderProps) => {
     useState<boolean>(false);
 
   if (!themeContext) {
-    throw new Error('ThemeToggle must be used within a ThemeProvider');
+    throw new Error('Header must be used within a ThemeProvider');
   }
 
   const navItems = [

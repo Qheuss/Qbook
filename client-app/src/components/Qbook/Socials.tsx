@@ -18,7 +18,7 @@ const Socials = ({
   const themeContext = useContext(ThemeContext);
 
   if (!themeContext) {
-    throw new Error('ThemeToggle must be used within a ThemeProvider');
+    throw new Error('Socials must be used within a ThemeProvider');
   }
 
   return (

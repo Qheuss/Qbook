@@ -11,7 +11,7 @@ const Title = () => {
   const themeContext = useContext(ThemeContext);
 
   if (!themeContext) {
-    throw new Error('ThemeToggle must be used within a ThemeProvider');
+    throw new Error('Title must be used within a ThemeProvider');
   }
 
   const socials = [
