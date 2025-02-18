@@ -1,7 +1,7 @@
 import { mockNavigate } from '../__mocks__/react-router-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from '../../../context/ThemeProvider';
 import '@testing-library/jest-dom';
