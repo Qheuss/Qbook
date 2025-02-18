@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import styles from './ContactForm.module.scss';
-import { motion } from 'framer-motion';
 import { ThemeContext } from '../../context/ThemeContext';
 
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
@@ -15,8 +14,6 @@ const ContactForm: React.FC = () => {
   const [statusVisible, setStatusVisible] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -102,20 +99,7 @@ const ContactForm: React.FC = () => {
   }
 
   return (
-    <motion.div
-      className={styles.contactForm}
-      drag
-      dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-      dragElastic={0.3}
-      onDragEnd={(_e, info) =>
-        setDragPosition({ x: info.point.x, y: info.point.y })
-      }
-      style={{
-        position: 'absolute',
-        x: dragPosition.x,
-        y: dragPosition.y,
-      }}
-    >
+    <div className={styles.contactForm}>
       <form
         onSubmit={handleSubmit}
         id='contact-form'
@@ -248,7 +232,7 @@ const ContactForm: React.FC = () => {
       </form>
 
       {statusVisible && <p className={styles.status}>{status}</p>}
-    </motion.div>
+    </div>
   );
 };
 
