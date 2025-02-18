@@ -13,7 +13,7 @@ export function createDialog(
   renderDialog: (
     resolve: () => void,
     reject: () => void,
-    inputRef: RefObject<HTMLInputElement>,
+    inputRef: RefObject<HTMLInputElement | null>,
     isToggleChecked: () => void,
     inputValue: string,
     setInputValue: React.Dispatch<React.SetStateAction<string>>

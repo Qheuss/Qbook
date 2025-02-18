@@ -34,7 +34,7 @@ const ContactForm: React.FC = () => {
     if (honeypot) {
       setStatus('Bot detecté, message non envoyé.');
       setStatusVisible(true);
-      // setTimeout(() => setStatusVisible(false), 10000);
+      setTimeout(() => setStatusVisible(false), 10000);
       return;
     }
 
@@ -51,25 +51,22 @@ const ContactForm: React.FC = () => {
         templateParams,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string
       )
-      .then(
-        (response) => {
-          console.log(
-            'Message sent successfully!',
-            response.status,
-            response.text
-          );
-          setStatus('Message envoyé!');
-          setStatusVisible(true);
-
-          // setTimeout(() => setStatusVisible(false), 10000);
-        },
-        (err) => {
-          console.error('Failed to send message.', err);
-          setStatus("Erreur lors de l'envoi du message.");
-          setStatusVisible(true);
-          // setTimeout(() => setStatusVisible(false), 10000);
-        }
-      );
+      .then((response) => {
+        console.log(
+          'Message sent successfully!',
+          response.status,
+          response.text
+        );
+        setStatus('Message envoyé!');
+        setStatusVisible(true);
+        setTimeout(() => setStatusVisible(false), 10000);
+      })
+      .catch((error) => {
+        console.error('Failed to send message. Error:', error);
+        setStatus("Erreur lors de l'envoi du message.");
+        setStatusVisible(true);
+        setTimeout(() => setStatusVisible(false), 10000);
+      });
 
     setName('');
     setEmail('');
@@ -121,6 +118,8 @@ const ContactForm: React.FC = () => {
     >
       <form
         onSubmit={handleSubmit}
+        id='contact-form'
+        name='contact-form'
         className={
           themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]'
         }
@@ -141,6 +140,7 @@ const ContactForm: React.FC = () => {
                 ? ' text-[#a6a9ac]'
                 : ' text-[#606367]'
             }
+            htmlFor='name'
           >
             Nom:
           </label>
@@ -155,6 +155,8 @@ const ContactForm: React.FC = () => {
             onChange={(e) => setName(e.target.value)}
             onKeyDown={handleKeyDown}
             maxLength={70}
+            id='name'
+            autoComplete='name'
             required
           />
         </div>
@@ -165,6 +167,7 @@ const ContactForm: React.FC = () => {
                 ? ' text-[#a6a9ac]'
                 : ' text-[#606367]'
             }
+            htmlFor='email'
           >
             Adresse email:
           </label>
@@ -179,6 +182,8 @@ const ContactForm: React.FC = () => {
             onChange={(e) => setEmail(e.target.value)}
             onKeyDown={handleKeyDown}
             maxLength={320}
+            id='email'
+            autoComplete='email'
             required
           />
         </div>
@@ -189,6 +194,7 @@ const ContactForm: React.FC = () => {
                 ? ' text-[#a6a9ac]'
                 : ' text-[#606367]'
             }
+            htmlFor='message'
           >
             Message:
           </label>
@@ -202,18 +208,20 @@ const ContactForm: React.FC = () => {
             value={message}
             onChange={handleTextareaChange}
             maxLength={1201}
+            id='message'
             required
           />
         </div>
 
         {/* Honeypot */}
         <div style={{ display: 'none' }}>
-          <label>Leave this field empty</label>
+          <label htmlFor='honey'>Leave this field empty</label>
           <input
             type='text'
             name='honey'
             value={honeypot}
             onChange={(e) => setHoneypot(e.target.value)}
+            id='honey'
           />
         </div>
         {/* Honeypot */}
