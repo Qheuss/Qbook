@@ -1,6 +1,7 @@
+- tanstack store au lieu de context
+- fix le dialog et le modal qui permettent de toujours scroller
 - finir le theme blanc (dialog)
 - responsive
-- fix le dialog et le modal qui permettent de toujours scroller
 - zoom dans le modal
 - calculatrice ou autre projet
 - traduction en anglais?
