@@ -1,7 +1,6 @@
 - finir le theme blanc (dialog)
 - responsive
-- changement page message qui a une erreur?
-- fix le dialog qui permet de toujours scroller
-- fix le carousel (refaire un mieux) + permettre d'agrandir les images
+- fix le dialog et le modal qui permettent de toujours scroller
+- zoom dans le modal
 - calculatrice ou autre projet
 - traduction en anglais?
