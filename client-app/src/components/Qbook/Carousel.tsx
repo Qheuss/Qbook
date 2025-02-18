@@ -5,8 +5,9 @@ import {
   MdOutlineArrowForwardIos,
 } from 'react-icons/md';
 import { ThemeContext } from '../../context/ThemeContext';
+import Modal from './Modal';
 
-const images = [
+const images: string[] = [
   'images/clickerlogin.png',
   'images/clickermoney.png',
   'images/aviron1.png',
@@ -15,8 +16,11 @@ const images = [
   'images/weather.png',
 ];
 
-const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const Carousel: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
+
   const gap = 7;
   const itemWidth = 150;
 
@@ -36,6 +40,16 @@ const Carousel = () => {
     }
   };
 
+  const handleClickItem = (index: number): void => {
+    setModalImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = (): void => {
+    setIsModalOpen(false);
+    setModalImageIndex(null);
+  };
+
   const themeContext = useContext(ThemeContext);
 
   if (!themeContext) {
@@ -51,7 +65,11 @@ const Carousel = () => {
         }}
       >
         {images.map((image, index) => (
-          <div className={styles.carousel__item} key={index}>
+          <div
+            className={styles.carousel__item}
+            key={index}
+            onClick={() => handleClickItem(index)}
+          >
             <img src={image} alt={`image ${index + 1}`} />
           </div>
         ))}
@@ -80,6 +98,11 @@ const Carousel = () => {
           <MdOutlineArrowForwardIos />
         </button>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        imageSrc={images[modalImageIndex!]}
+        onClose={closeModal}
+      />
     </div>
   );
 };
