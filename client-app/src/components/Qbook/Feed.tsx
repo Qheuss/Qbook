@@ -2,6 +2,7 @@ import Carousel from './Carousel';
 import styles from './Feed.module.scss';
 import Post from './Post';
 import Title from './Title';
+
 const Feed = () => {
   return (
     <main className={styles.quentin}>
@@ -12,8 +13,7 @@ const Feed = () => {
         images={['images/photocv.jpg']}
       />
       <Post
-        text={`COMPÉTENCES TECH: React.js | Sass | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Git | Javascript/TypeScript | Jira`}
-        images={['images/techskills.png']}
+        text={`COMPÉTENCES TECH: React.js | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Vitest/Jest | Git | Javascript/TypeScript | Jira | Tailwindcss`}
       />
     </main>
   );

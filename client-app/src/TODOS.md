@@ -1,3 +1,4 @@
+- popup "telecharger mon cv"
 - tanstack store au lieu de context
 - fix le dialog et le modal qui permettent de toujours scroller
 - finir le theme blanc (dialog)

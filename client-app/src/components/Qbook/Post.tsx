@@ -7,7 +7,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 
 interface PostProps {
   text: string;
-  images: string[];
+  images?: string[];
 }
 
 const Post = ({ text, images }: PostProps) => {
@@ -58,12 +58,14 @@ const Post = ({ text, images }: PostProps) => {
         >
           {text}
         </p>
-        <div className={styles.images}>
-          {images.length > 0 &&
-            images.map((image, index) => (
-              <img key={index} src={image} alt={`image ${index + 1}`} />
-            ))}
-        </div>
+        {images && (
+          <div className={styles.images}>
+            {images.length > 0 &&
+              images.map((image, index) => (
+                <img key={index} src={image} alt={`image ${index + 1}`} />
+              ))}
+          </div>
+        )}
       </div>
       <div className={styles.actions}>
         <div
