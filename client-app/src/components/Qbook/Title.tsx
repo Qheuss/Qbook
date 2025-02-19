@@ -75,7 +75,7 @@ const Title = () => {
               : ' bg-[#f0f2f5] text-[#606367]'
           }
         >
-          <h1>Portfolio de Quentin Heusse</h1>
+          <h1>Cliquez ici pour me contacter!</h1>
         </button>
       </div>
       <div
