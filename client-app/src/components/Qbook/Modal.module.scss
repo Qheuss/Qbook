@@ -11,29 +11,26 @@
   z-index: 1000;
 
   .modal__content {
-    position: relative;
     max-width: 90vw;
     max-height: 99vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: start;
+    flex-wrap: nowrap;
     border-radius: 10px;
 
     img {
-      max-width: 99vw;
+      max-width: 99%;
       max-height: 99vh;
       object-fit: contain;
     }
 
     .modal__close {
-      position: absolute;
-      top: 0;
-      right: -35px;
-      background: transparent;
-      border: none;
-      font-size: 30px;
       color: #fff;
       cursor: pointer;
+
+      svg {
+        font-size: 30px;
+      }
     }
   }
 }

@@ -14,10 +14,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, imageSrc, onClose }) => {
   return (
     <div className={styles.modal}>
       <div className={styles.modal__content}>
+        <img src={imageSrc} alt='Modal content' />
         <button className={styles.modal__close} onClick={onClose}>
           <MdClose />
         </button>
-        <img src={imageSrc} alt='Modal content' />
       </div>
     </div>
   );
