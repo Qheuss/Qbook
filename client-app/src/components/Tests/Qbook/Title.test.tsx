@@ -1,13 +1,15 @@
-import { mockNavigate } from '../__mocks__/react-router-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { ThemeProvider } from '../../../context/ThemeProvider';
 import '@testing-library/jest-dom';
 import Title from '../../Qbook/Title';
+import { routeTree } from '../../../routeTree.gen';
+import { mockNavigate } from '../__mocks__/tanstack/react-router';
 
-// Reset mocks before each test
+const router = createRouter({ routeTree });
+
 beforeEach(() => {
   mockNavigate.mockReset();
 });
@@ -15,11 +17,10 @@ beforeEach(() => {
 describe('Title', () => {
   const renderComponent = () => {
     render(
-      <MemoryRouter>
-        <ThemeProvider>
-          <Title />
-        </ThemeProvider>
-      </MemoryRouter>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+        <Title />
+      </ThemeProvider>
     );
   };
 
@@ -53,7 +54,7 @@ describe('Title', () => {
     renderComponent();
 
     // Get the button and click on it
-    const buttonPortfolio = screen.getByText(/Quentin Heusse/i);
+    const buttonPortfolio = screen.getByText(/Cliquez ici pour me contacter!/i);
     expect(buttonPortfolio).toBeInTheDocument();
     await userEvent.click(buttonPortfolio);
 
@@ -73,8 +74,8 @@ describe('Title', () => {
     // Check if the dialog disappears when the enter key is pressed
     await userEvent.keyboard('{Enter}');
     expect(dialog2).not.toBeInTheDocument();
-    console.log('Mock Navigate Function:', mockNavigate);
 
-    expect(mockNavigate).toHaveBeenCalledWith('/message');
+    // Check if navigation happens when clicking the button again (e.g., after dialog close)
+    expect(mockNavigate).toHaveBeenCalledWith('/contact');
   });
 });

@@ -6,7 +6,7 @@ import { HiOutlineDownload } from 'react-icons/hi';
 import { IoMdSearch, IoIosMail } from 'react-icons/io';
 import { LuSunMedium } from 'react-icons/lu';
 import { HiX } from 'react-icons/hi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@tanstack/react-router';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext, useState, useEffect } from 'react';
 import { NavItem } from './NavItem';
@@ -29,7 +29,7 @@ const Header = ({ selectedPage }: HeaderProps) => {
 
   const navItems = [
     { icon: HiMiniHome, path: '/', index: 0 },
-    { icon: IoIosMail, path: '/message', index: 1 },
+    { icon: IoIosMail, path: '/contact', index: 1 },
     { icon: GiCalculator, path: '/calculator', index: 2 },
   ];
 
@@ -119,7 +119,7 @@ const Header = ({ selectedPage }: HeaderProps) => {
               ? '/images/QDark.svg'
               : '/images/QLight.svg'
           }
-          onClick={() => navigate('/')}
+          onClick={() => navigate({ to: '/' })}
         />
         <div
           className={
@@ -155,16 +155,11 @@ const Header = ({ selectedPage }: HeaderProps) => {
           />
         </div>
       </div>
-      <ul className={styles.header__middle}>
+      <nav className={styles.header__nav}>
         {navItems.map((item) => (
-          <NavItem
-            key={item.index}
-            {...item}
-            selectedPage={selectedPage}
-            navigate={navigate}
-          />
+          <NavItem key={item.index} {...item} selectedPage={selectedPage} />
         ))}
-      </ul>
+      </nav>
       <ul className={styles.header__profile}>
         <li
           className={

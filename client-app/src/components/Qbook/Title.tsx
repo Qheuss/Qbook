@@ -1,10 +1,10 @@
 import { useContext, useMemo } from 'react';
 import { createDialog } from '../Dialog';
 import styles from './Title.module.scss';
-import { useNavigate } from 'react-router-dom';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { ThemeContext } from '../../context/ThemeContext';
 import Socials from './Socials';
+import { useNavigate } from '@tanstack/react-router';
 
 const Title = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const Title = () => {
         </>
       )).then(
         async () => {
-          navigate('/message');
+          navigate({ to: '/contact' });
         },
         () => {}
       );

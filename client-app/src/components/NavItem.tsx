@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
+import { Link } from '@tanstack/react-router';
 
 interface NavItemProps {
   icon: React.ElementType;
   path: string;
   index: number;
   selectedPage: number;
-  navigate: (path: string) => void;
 }
 
 export const NavItem = ({
@@ -14,7 +14,6 @@ export const NavItem = ({
   path,
   index,
   selectedPage,
-  navigate,
 }: NavItemProps) => {
   const themeContext = useContext(ThemeContext);
 
@@ -28,14 +27,14 @@ export const NavItem = ({
         selectedPage === index ? 'border-[#54c078] border-b-2' : ''
       }`}
     >
-      <div
+      <Link
         className={
           themeContext.theme === 'dark'
             ? ' hover:bg-[#4f5152]'
             : ' hover:bg-[#e3e4e6]'
         }
         style={{ backgroundColor: selectedPage === index ? 'transparent' : '' }}
-        onClick={() => navigate(path)}
+        to={path}
       >
         <Icon
           className={`text-2xl ${
@@ -47,7 +46,7 @@ export const NavItem = ({
           }
           }`}
         />
-      </div>
+      </Link>
     </li>
   );
 };
