@@ -6,17 +6,14 @@ import { HiOutlineDownload } from 'react-icons/hi';
 import { IoMdSearch, IoIosMail } from 'react-icons/io';
 import { LuSunMedium } from 'react-icons/lu';
 import { HiX } from 'react-icons/hi';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, useLocation } from '@tanstack/react-router';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext, useState, useEffect } from 'react';
 import { NavItem } from './NavItem';
 
-interface HeaderProps {
-  selectedPage: number;
-}
-
-const Header = ({ selectedPage }: HeaderProps) => {
+const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const themeContext = useContext(ThemeContext);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [triggerSearch, setTriggerSearch] = useState<boolean>(false);
@@ -105,7 +102,7 @@ const Header = ({ selectedPage }: HeaderProps) => {
   };
 
   return (
-    <section
+    <header
       className={
         styles.header +
         (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
@@ -157,7 +154,11 @@ const Header = ({ selectedPage }: HeaderProps) => {
       </div>
       <nav className={styles.header__nav}>
         {navItems.map((item) => (
-          <NavItem key={item.index} {...item} selectedPage={selectedPage} />
+          <NavItem
+            key={item.index}
+            {...item}
+            selected={location.pathname === item.path}
+          />
         ))}
       </nav>
       <ul className={styles.header__profile}>
@@ -191,7 +192,7 @@ const Header = ({ selectedPage }: HeaderProps) => {
           </a>
         </li>
       </ul>
-    </section>
+    </header>
   );
 };
 

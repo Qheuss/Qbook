@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router';
-import Header from '../components/Header';
 import styles from './calculator.module.scss';
 
 export const Route = createFileRoute('/calculator')({
@@ -9,7 +8,7 @@ export const Route = createFileRoute('/calculator')({
 function Calculator() {
   return (
     <div className={styles.calculator}>
-      <Header selectedPage={2} />
+      <h1>cc</h1>
     </div>
   );
 }

@@ -5,16 +5,10 @@ import { Link } from '@tanstack/react-router';
 interface NavItemProps {
   icon: React.ElementType;
   path: string;
-  index: number;
-  selectedPage: number;
+  selected: boolean;
 }
 
-export const NavItem = ({
-  icon: Icon,
-  path,
-  index,
-  selectedPage,
-}: NavItemProps) => {
+export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
   const themeContext = useContext(ThemeContext);
 
   if (!themeContext) {
@@ -22,23 +16,19 @@ export const NavItem = ({
   }
 
   return (
-    <li
-      className={`${
-        selectedPage === index ? 'border-[#54c078] border-b-2' : ''
-      }`}
-    >
+    <li className={`${selected ? 'border-[#54c078] border-b-2' : ''}`}>
       <Link
         className={
           themeContext.theme === 'dark'
             ? ' hover:bg-[#4f5152]'
             : ' hover:bg-[#e3e4e6]'
         }
-        style={{ backgroundColor: selectedPage === index ? 'transparent' : '' }}
+        style={{ backgroundColor: selected ? 'transparent' : '' }}
         to={path}
       >
         <Icon
           className={`text-2xl ${
-            selectedPage === index
+            selected
               ? 'text-[#54c078]'
               : themeContext.theme === 'dark'
               ? ' text-[#a6a9ac] hover:bg-[#4f5152]'
