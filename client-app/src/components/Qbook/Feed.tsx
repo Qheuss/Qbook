@@ -13,7 +13,7 @@ const Feed = () => {
         images={['images/photocv.jpg']}
       />
       <Post
-        text={`COMPÉTENCES TECH: React.js | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Vitest/Jest | Git | Javascript/TypeScript | Jira | Tailwindcss`}
+        text={`COMPÉTENCES TECH: React.js | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Vitest/Jest | Git | Javascript/TypeScript | Jira | Tailwindcss | Tanstack`}
       />
     </main>
   );

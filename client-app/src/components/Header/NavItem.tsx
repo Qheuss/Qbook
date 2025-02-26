@@ -1,6 +1,7 @@
 import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext } from '../../context/ThemeContext';
 import { Link } from '@tanstack/react-router';
+import styles from './NavItem.module.scss';
 
 interface NavItemProps {
   icon: React.ElementType;
@@ -16,7 +17,11 @@ export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
   }
 
   return (
-    <li className={`${selected ? 'border-[#54c078] border-b-2' : ''}`}>
+    <li
+      className={
+        styles.navItem + `${selected ? ' border-[#54c078] border-b-2' : ''}`
+      }
+    >
       <Link
         className={
           themeContext.theme === 'dark'
