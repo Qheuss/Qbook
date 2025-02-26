@@ -8,5 +8,3 @@
 - animation du contact form
 - calculatrice ou autre projet
 - traduction en anglais?
-
-- fix : quand reload de la page /message dans le deploy "page not found"
