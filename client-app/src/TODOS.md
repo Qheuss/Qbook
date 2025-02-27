@@ -10,3 +10,5 @@
 
 - redux au lieu de context
 - fix le dialog et le modal qui permettent de toujours scroller
+
+- commentaires en dessous des posts?

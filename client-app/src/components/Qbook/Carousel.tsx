@@ -4,7 +4,7 @@ import {
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
 } from 'react-icons/md';
-import Modal from './Modal';
+import Modal from '../Modal';
 import { useAppSelector } from '../../redux/hooks';
 
 const images: string[] = [
