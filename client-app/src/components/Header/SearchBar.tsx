@@ -1,18 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import styles from './SearchBar.module.scss';
 import { HiX } from 'react-icons/hi';
-import { ThemeContext } from '../../context/ThemeContext';
+import { useAppSelector } from '../../redux/hooks';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [triggerSearch, setTriggerSearch] = useState(false);
   const [highlightedWordsExist, setHighlightedWordsExist] = useState(false);
-  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) {
-    throw new Error('Logo must be used within a ThemeProvider');
-  }
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const removeHighlights = () => {
     document.querySelectorAll('mark').forEach((mark) => {
@@ -82,7 +78,7 @@ const SearchBar = () => {
     <div
       className={
         styles.searchBar +
-        (themeContext.theme === 'dark'
+        (theme === 'dark'
           ? ' bg-[#333334] text-[#a6a9ac]'
           : ' bg-[#f0f2f5] text-[#606367]')
       }
@@ -106,7 +102,7 @@ const SearchBar = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
         onKeyDown={(event) => event.key === 'Enter' && setTriggerSearch(true)}
         className={
-          themeContext.theme === 'dark'
+          theme === 'dark'
             ? ' text-[#a6a9ac] placeholder:text-[#a6a9ac]'
             : ' text-[#606367] placeholder:text-[#606367]'
         }

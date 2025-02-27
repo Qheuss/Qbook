@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+import { useAppSelector } from '../../redux/hooks';
 
 interface SocialsProps {
   icon: React.ElementType;
@@ -16,16 +15,12 @@ const Socials = ({
   colorLight,
   text,
 }: SocialsProps) => {
-  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) {
-    throw new Error('Socials must be used within a ThemeProvider');
-  }
+  const theme = useAppSelector((state) => state.theme.theme);
 
   return (
     <li
       className={
-        themeContext.theme === 'dark'
+        theme === 'dark'
           ? ' text-[#a6a9ac] hover:bg-[#4f5152]'
           : ' text-[#606367] hover:bg-[#e3e4e6]'
       }
@@ -33,7 +28,7 @@ const Socials = ({
     >
       <Icon
         style={{
-          color: themeContext.theme === 'dark' ? colorDark : colorLight,
+          color: theme === 'dark' ? colorDark : colorLight,
         }}
       />
       {text}

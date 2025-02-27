@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen';
-import { ThemeProvider } from './context/ThemeProvider';
+import { ThemeProvider } from './ThemeProvider';
 import BackgroundAnimation from './components/BackgroundAnimation';
 
 import './global.css';

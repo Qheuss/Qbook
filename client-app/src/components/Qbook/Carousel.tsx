@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import styles from './Carousel.module.scss';
 import {
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
 } from 'react-icons/md';
-import { ThemeContext } from '../../context/ThemeContext';
 import Modal from './Modal';
+import { useAppSelector } from '../../redux/hooks';
 
 const images: string[] = [
   'images/clickerlogin.png',
@@ -20,6 +20,7 @@ const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const gap = 7;
   const itemWidth = 150;
@@ -50,12 +51,6 @@ const Carousel: React.FC = () => {
     setModalImageIndex(null);
   };
 
-  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) {
-    throw new Error('Carousel must be used within a ThemeProvider');
-  }
-
   return (
     <div className={styles.carousel}>
       <div
@@ -78,7 +73,7 @@ const Carousel: React.FC = () => {
         <button
           className={
             styles.carousel__button +
-            (themeContext.theme === 'dark'
+            (theme === 'dark'
               ? ' bg-[#252728] text-[#a6a9ac]'
               : ' bg-[#f0f2f5] text-[#606367]')
           }
@@ -89,7 +84,7 @@ const Carousel: React.FC = () => {
         <button
           className={
             styles.carousel__button +
-            (themeContext.theme === 'dark'
+            (theme === 'dark'
               ? ' bg-[#252728] text-[#a6a9ac]'
               : ' bg-[#f0f2f5] text-[#606367]')
           }

@@ -1,18 +1,14 @@
-import { useEffect, useMemo, useState, useContext } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { Engine, ISourceOptions, Container } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
-import { ThemeContext } from '../context/ThemeContext';
+import { useAppSelector } from '../redux/hooks';
 
 const ParticleBackground = () => {
   const [init, setInit] = useState(false);
-  const themeContext = useContext(ThemeContext);
+  const theme = useAppSelector((state) => state.theme.theme);
 
-  if (!themeContext) {
-    throw new Error('ParticleBackground must be used within a ThemeProvider');
-  }
-
-  const backgroundColor = themeContext.theme === 'dark' ? '#1c1c1d' : '#f2f4f7';
+  const backgroundColor = theme === 'dark' ? '#1c1c1d' : '#f2f4f7';
 
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
@@ -102,8 +98,8 @@ const ParticleBackground = () => {
       detectRetina: true,
     };
 
-    return themeContext.theme === 'dark' ? darkOptions : lightOptions;
-  }, [themeContext.theme, backgroundColor]);
+    return theme === 'dark' ? darkOptions : lightOptions;
+  }, [theme, backgroundColor]);
 
   return init ? (
     <div className='fixed inset-0 -z-10'>

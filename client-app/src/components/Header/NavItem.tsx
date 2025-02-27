@@ -1,7 +1,6 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
 import { Link } from '@tanstack/react-router';
 import styles from './NavItem.module.scss';
+import { useAppSelector } from '../../redux/hooks';
 
 interface NavItemProps {
   icon: React.ElementType;
@@ -10,11 +9,7 @@ interface NavItemProps {
 }
 
 export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
-  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) {
-    throw new Error('NavItem must be used within a ThemeProvider');
-  }
+  const theme = useAppSelector((state) => state.theme.theme);
 
   return (
     <li
@@ -24,9 +19,7 @@ export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
     >
       <Link
         className={
-          themeContext.theme === 'dark'
-            ? ' hover:bg-[#4f5152]'
-            : ' hover:bg-[#e3e4e6]'
+          theme === 'dark' ? ' hover:bg-[#4f5152]' : ' hover:bg-[#e3e4e6]'
         }
         style={{ backgroundColor: selected ? 'transparent' : '' }}
         to={path}
@@ -35,7 +28,7 @@ export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
           className={`text-2xl ${
             selected
               ? 'text-[#54c078]'
-              : themeContext.theme === 'dark'
+              : theme === 'dark'
               ? ' text-[#a6a9ac] hover:bg-[#4f5152]'
               : ' text-[#606367] hover:bg-[#e3e4e6]'
           }

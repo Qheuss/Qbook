@@ -1,18 +1,15 @@
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 import { createDialog } from '../Dialog';
 import styles from './Title.module.scss';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
-import { ThemeContext } from '../../context/ThemeContext';
+
 import Socials from './Socials';
 import { useNavigate } from '@tanstack/react-router';
+import { useAppSelector } from '../../redux/hooks';
 
 const Title = () => {
   const navigate = useNavigate();
-  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) {
-    throw new Error('Title must be used within a ThemeProvider');
-  }
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const socials = [
     {
@@ -37,7 +34,7 @@ const Title = () => {
         <div
           className={
             styles.dialog +
-            (themeContext.theme === 'dark'
+            (theme === 'dark'
               ? ' bg-[#252728] text-[#a6a9ac]'
               : ' bg-[#f0f2f5] text-[#606367]')
           }
@@ -45,9 +42,7 @@ const Title = () => {
           <section>
             <h4
               className={
-                themeContext.theme === 'dark'
-                  ? ' text-[#e2e5e9]'
-                  : ' text-[#080809]'
+                theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'
               }
             >
               Me contacter
@@ -61,18 +56,14 @@ const Title = () => {
             <button
               onClick={resolve}
               style={{ color: '#54c078' }}
-              className={
-                themeContext.theme === 'dark'
-                  ? ' bg-[#333334]'
-                  : ' bg-[#f5f5f5]'
-              }
+              className={theme === 'dark' ? ' bg-[#333334]' : ' bg-[#f5f5f5]'}
             >
               Oui
             </button>
             <button
               onClick={reject}
               className={
-                themeContext.theme === 'dark'
+                theme === 'dark'
                   ? ' bg-[#333334] text-[#a6a9ac]'
                   : ' bg-[#f5f5f5] text-[#606367]'
               }
@@ -88,13 +79,12 @@ const Title = () => {
         () => {}
       );
     };
-  }, [navigate, themeContext.theme]);
+  }, [navigate, theme]);
 
   return (
     <div
       className={
-        styles.title +
-        (themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
+        styles.title + (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
       }
     >
       <div>
@@ -102,7 +92,7 @@ const Title = () => {
         <button
           onClick={contact}
           className={
-            themeContext.theme === 'dark'
+            theme === 'dark'
               ? ' bg-[#333334] text-[#a6a9ac]'
               : ' bg-[#f0f2f5] text-[#606367]'
           }
@@ -113,7 +103,7 @@ const Title = () => {
       <div
         className={
           styles.lineBreak +
-          (themeContext.theme === 'dark' ? ' bg-[#ffffff13]' : ' bg-[#e2e2e2]')
+          (theme === 'dark' ? ' bg-[#ffffff13]' : ' bg-[#e2e2e2]')
         }
       ></div>
       <ul>

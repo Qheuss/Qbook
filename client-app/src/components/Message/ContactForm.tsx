@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import styles from './ContactForm.module.scss';
-import { ThemeContext } from '../../context/ThemeContext';
+import { useAppSelector } from '../../redux/hooks';
 
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
@@ -14,6 +14,7 @@ const ContactForm: React.FC = () => {
   const [statusVisible, setStatusVisible] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   useEffect(() => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -92,48 +93,28 @@ const ContactForm: React.FC = () => {
     }
   };
 
-  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) {
-    throw new Error('ThemeToggle must be used within a ThemeProvider');
-  }
-
   return (
     <div className={styles.contactForm}>
       <form
         onSubmit={handleSubmit}
         id='contact-form'
         name='contact-form'
-        className={
-          themeContext.theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]'
-        }
+        className={theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]'}
       >
         <h2
-          className={
-            themeContext.theme === 'dark'
-              ? ' text-[#e2e5e9]'
-              : ' text-[#080809]'
-          }
+          className={theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'}
         >
           Laissez moi un <span>message</span> !
         </h2>
         <div>
           <label
-            className={
-              themeContext.theme === 'dark'
-                ? ' text-[#a6a9ac]'
-                : ' text-[#606367]'
-            }
+            className={theme === 'dark' ? ' text-[#a6a9ac]' : ' text-[#606367]'}
             htmlFor='name'
           >
             Nom:
           </label>
           <input
-            className={
-              themeContext.theme === 'dark'
-                ? ' text-[#e2e5e9]'
-                : ' text-[#080809]'
-            }
+            className={theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'}
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -146,21 +127,13 @@ const ContactForm: React.FC = () => {
         </div>
         <div>
           <label
-            className={
-              themeContext.theme === 'dark'
-                ? ' text-[#a6a9ac]'
-                : ' text-[#606367]'
-            }
+            className={theme === 'dark' ? ' text-[#a6a9ac]' : ' text-[#606367]'}
             htmlFor='email'
           >
             Adresse email:
           </label>
           <input
-            className={
-              themeContext.theme === 'dark'
-                ? ' text-[#e2e5e9]'
-                : ' text-[#080809]'
-            }
+            className={theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'}
             type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -173,21 +146,13 @@ const ContactForm: React.FC = () => {
         </div>
         <div>
           <label
-            className={
-              themeContext.theme === 'dark'
-                ? ' text-[#a6a9ac]'
-                : ' text-[#606367]'
-            }
+            className={theme === 'dark' ? ' text-[#a6a9ac]' : ' text-[#606367]'}
             htmlFor='message'
           >
             Message:
           </label>
           <textarea
-            className={
-              themeContext.theme === 'dark'
-                ? ' text-[#e2e5e9]'
-                : ' text-[#080809]'
-            }
+            className={theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'}
             ref={textareaRef}
             value={message}
             onChange={handleTextareaChange}
@@ -212,18 +177,14 @@ const ContactForm: React.FC = () => {
 
         <button
           className={
-            themeContext.theme === 'dark'
+            theme === 'dark'
               ? ' bg-[#333334] text-[#a6a9ac]'
               : ' bg-[#f0f2f5] text-[#606367]'
           }
           type='submit'
           style={{
             backgroundColor: isFormValid ? '#54c078' : '',
-            color: isFormValid
-              ? themeContext.theme === 'dark'
-                ? 'black'
-                : 'white'
-              : '',
+            color: isFormValid ? (theme === 'dark' ? 'black' : 'white') : '',
           }}
           disabled={!isFormValid}
         >
