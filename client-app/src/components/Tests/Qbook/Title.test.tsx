@@ -2,11 +2,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { ThemeProvider } from '../../../context/ThemeProvider';
 import '@testing-library/jest-dom';
 import Title from '../../Qbook/Title';
 import { routeTree } from '../../../routeTree.gen';
 import { mockNavigate } from '../__mocks__/tanstack/react-router';
+import { ThemeProvider } from '../../../ThemeProvider';
 
 const router = createRouter({ routeTree });
 

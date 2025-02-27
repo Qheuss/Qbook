@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { createDialog } from '../Dialog';
 import styles from './Title.module.scss';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
-
 import Socials from './Socials';
 import { useNavigate } from '@tanstack/react-router';
 import { useAppSelector } from '../../redux/hooks';
