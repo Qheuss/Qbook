@@ -1,10 +1,12 @@
-- popup "telecharger mon cv"
 - logos des competences
-- tanstack store au lieu de context
-- fix le dialog et le modal qui permettent de toujours scroller
-- finir le theme blanc (dialog)
+
 - responsive
+
 - zoom dans le modal
 - animation du contact form
+
 - calculatrice ou autre projet
 - traduction en anglais?
+
+- redux au lieu de context
+- fix le dialog et le modal qui permettent de toujours scroller

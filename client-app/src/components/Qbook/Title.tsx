@@ -34,21 +34,53 @@ const Title = () => {
   const contact = useMemo(() => {
     return async () => {
       createDialog((resolve, reject) => (
-        <>
+        <div
+          className={
+            styles.dialog +
+            (themeContext.theme === 'dark'
+              ? ' bg-[#252728] text-[#a6a9ac]'
+              : ' bg-[#f0f2f5] text-[#606367]')
+          }
+        >
           <section>
-            <h4>Me contacter</h4>
+            <h4
+              className={
+                themeContext.theme === 'dark'
+                  ? ' text-[#e2e5e9]'
+                  : ' text-[#080809]'
+              }
+            >
+              Me contacter
+            </h4>
             <p>
               Souhaitez-vous me contacter? Je vous répondrai dans les plus brefs
               délais.
             </p>
           </section>
           <div>
-            <button onClick={resolve} style={{ color: '#54c078' }}>
+            <button
+              onClick={resolve}
+              style={{ color: '#54c078' }}
+              className={
+                themeContext.theme === 'dark'
+                  ? ' bg-[#333334]'
+                  : ' bg-[#f5f5f5]'
+              }
+            >
               Oui
             </button>
-            <button onClick={reject}>Non</button>
+            <button
+              onClick={reject}
+              className={
+                themeContext.theme === 'dark'
+                  ? ' bg-[#333334] text-[#a6a9ac]'
+                  : ' bg-[#f5f5f5] text-[#606367]'
+              }
+            >
+              Non
+            </button>
           </div>
-        </>
+        </div>
       )).then(
         async () => {
           navigate({ to: '/contact' });
@@ -56,7 +88,7 @@ const Title = () => {
         () => {}
       );
     };
-  }, [navigate]);
+  }, [navigate, themeContext.theme]);
 
   return (
     <div

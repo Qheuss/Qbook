@@ -8,6 +8,7 @@ interface SocialsProps {
   colorLight: string;
   text: string;
 }
+
 const Socials = ({
   icon: Icon,
   link,
