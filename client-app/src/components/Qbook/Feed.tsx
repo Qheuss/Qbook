@@ -10,7 +10,7 @@ const Feed = () => {
       <Carousel />
       <Post
         text="Ayant récemment terminé la formation Junior Développeur chez BeCode et complété celui-ci par un stage enrichissant chez EVS Broadcast, je suis à la recherche d'une opportunité pour mettre à profit mes compétences dans un environnement professionnel. Éligible au dispositif PFI, je suis ponctuel, dévoué, à l’aise dans les environnements collaboratifs et impatient de contribuer à une équipe tout en continuant à développer mes compétences."
-        images={['images/moi.jpg']}
+        images={['images/QuentinHeusse.jpg']}
       />
       <Post
         text={`COMPÉTENCES TECH: React.js | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Vitest/Jest | Git | Javascript/TypeScript | Jira | Tailwindcss | Tanstack`}
