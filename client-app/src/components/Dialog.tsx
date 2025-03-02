@@ -30,6 +30,8 @@ export function createDialog(
       const [inputValue, setInputValue] = useState<string>('');
       const [isToggleChecked, setIsToggleChecked] = useState<boolean>(false);
 
+      document.documentElement.classList.add('popup-active');
+
       const toggleChecked = () => {
         setIsToggleChecked((prev) => !prev);
       };
@@ -37,6 +39,7 @@ export function createDialog(
       const closeDialog = () => {
         if (dialogContainer.parentNode) {
           document.body.removeChild(dialogContainer);
+          document.documentElement.classList.remove('popup-active');
         }
       };
 
@@ -72,7 +75,7 @@ export function createDialog(
       }, [handleKeyDown]);
 
       return createPortal(
-        <div className={styles.dialogContainer} role='dialog'>
+        <div className={styles.dialogContainer} role='dialog' aria-modal='true'>
           <div className={styles.dialogBackground} onClick={rejectValue} />
           <div className={styles.dialog}>
             {renderDialog(

@@ -3,10 +3,10 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import '@testing-library/jest-dom';
-import Title from '../../Qbook/Title';
 import { routeTree } from '../../../routeTree.gen';
-import { mockNavigate } from '../__mocks__/tanstack/react-router';
+import { mockNavigate } from '../../__mocks__/tanstack/react-router';
 import { ThemeProvider } from '../../../ThemeProvider';
+import Title from '../../../components/Qbook/Title';
 
 const router = createRouter({ routeTree });
 

@@ -1,6 +1,5 @@
 - responsive
-- theme clair/sombre du modal
-- fix le dialog et le modal qui permettent de toujours scroller
+- Tailwind colors
 
 - logos des competences
 - animation du contact form

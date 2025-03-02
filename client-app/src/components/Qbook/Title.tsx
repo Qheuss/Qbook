@@ -27,7 +27,7 @@ const Title = () => {
     },
   ];
 
-  const contact = useMemo(() => {
+  const createContactDialog = useMemo(() => {
     return async () => {
       createDialog((resolve, reject) => (
         <div
@@ -89,7 +89,7 @@ const Title = () => {
       <div>
         <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
         <button
-          onClick={contact}
+          onClick={createContactDialog}
           className={
             theme === 'dark'
               ? ' bg-[#333334] text-[#a6a9ac]'

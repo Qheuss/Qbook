@@ -186,7 +186,6 @@ const ContactForm: React.FC = () => {
             backgroundColor: isFormValid ? '#54c078' : '',
             color: isFormValid ? (theme === 'dark' ? 'black' : 'white') : '',
           }}
-          disabled={!isFormValid}
         >
           Envoyer le message
         </button>

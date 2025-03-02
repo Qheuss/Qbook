@@ -44,11 +44,13 @@ const Carousel: React.FC = () => {
   const handleClickItem = (index: number): void => {
     setModalImageIndex(index);
     setIsModalOpen(true);
+    document.documentElement.classList.add('popup-active');
   };
 
   const closeModal = (): void => {
     setIsModalOpen(false);
     setModalImageIndex(null);
+    document.documentElement.classList.remove('popup-active');
   };
 
   return (

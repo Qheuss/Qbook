@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import styles from './Modal.module.scss';
 import { MdClose, MdZoomIn, MdZoomOut } from 'react-icons/md';
+import { useAppSelector } from '../redux/hooks';
 
 interface ModalProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   // Update container size on mount and window resize
   useEffect(() => {
@@ -181,7 +183,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
   };
 
   return (
-    <div className={styles.modal} onClick={onClose}>
+    <div className={styles.modal} onClick={onClose} aria-modal='true'>
       <div
         className={styles.modal__content}
         onClick={(e) => e.stopPropagation()}
@@ -218,25 +220,63 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
             />
           </div>
         </div>
-        <div className={styles.modal__controls}>
-          <button onClick={handleZoomIn} className={styles.modal__zoomButton}>
-            <MdZoomIn />
-          </button>
+        <div
+          className={
+            styles.modal__controls +
+            ' border-t' +
+            (theme === 'dark'
+              ? ' bg-[#333334] text-[#a6a9ac] border-[#4f5152]'
+              : ' bg-[#f5f5f5] text-[#606367] border-[#e3e4e6]')
+          }
+        >
           <button
             onClick={handleZoomOut}
-            className={styles.modal__zoomButton}
+            className={
+              styles.modal__zoomButton +
+              '  border' +
+              (theme === 'dark'
+                ? ' border-[#4f5152] hover:bg-[#3f3f40]'
+                : ' border-[#e3e4e6] hover:bg-[#eee]')
+            }
             disabled={scale === 1}
           >
             <MdZoomOut />
           </button>
           <button
+            onClick={handleZoomIn}
+            className={
+              styles.modal__zoomButton +
+              '  border' +
+              (theme === 'dark'
+                ? ' hover:bg-[#3f3f40] border-[#4f5152]'
+                : ' hover:bg-[#eee] border-[#e3e4e6]')
+            }
+          >
+            <MdZoomIn />
+          </button>
+          <button
             onClick={handleReset}
-            className={styles.modal__resetButton}
+            className={
+              styles.modal__resetButton +
+              '  border' +
+              (theme === 'dark'
+                ? ' hover:bg-[#3f3f40] border-[#4f5152]'
+                : ' hover:bg-[#eee] border-[#e3e4e6]')
+            }
             disabled={scale === 1 && position.x === 0 && position.y === 0}
           >
             Reset
           </button>
-          <button className={styles.modal__close} onClick={onClose}>
+          <button
+            className={
+              styles.modal__close +
+              '  border' +
+              (theme === 'dark'
+                ? ' hover:bg-[#3f3f40] border-[#4f5152]'
+                : ' hover:bg-[#eee] border-[#e3e4e6]')
+            }
+            onClick={onClose}
+          >
             <MdClose />
           </button>
         </div>
