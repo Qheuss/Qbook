@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import ContactForm from '../components/Message/ContactForm';
+import ContactForm from '../components/Contact/ContactForm';
 import styles from './contact.module.scss';
 
 export const Route = createFileRoute('/contact')({
@@ -8,7 +8,7 @@ export const Route = createFileRoute('/contact')({
 
 function Contact() {
   return (
-    <div className={styles.message}>
+    <div className={styles.contact + ' block md:flex mt-4 md:mt-0'}>
       <ContactForm />
     </div>
   );

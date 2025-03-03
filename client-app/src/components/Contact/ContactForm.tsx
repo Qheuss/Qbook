@@ -99,7 +99,10 @@ const ContactForm: React.FC = () => {
         onSubmit={handleSubmit}
         id='contact-form'
         name='contact-form'
-        className={theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]'}
+        className={
+          'w-[100%] md:w-[680px] md:rounded-lg' +
+          (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
+        }
       >
         <h2
           className={theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'}
