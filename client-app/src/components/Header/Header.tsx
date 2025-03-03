@@ -14,7 +14,7 @@ const Header = () => {
         className={
           styles.header +
           (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]') +
-          ' static md:fixed'
+          ' static md:fixed md:px-[20px] px-[10px]'
         }
       >
         <div className={styles.header__logoSearch}>

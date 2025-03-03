@@ -2,7 +2,7 @@ import { useLocation } from '@tanstack/react-router';
 import { NavItem } from './NavItem';
 import { HiMiniHome } from 'react-icons/hi2';
 import { IoIosMail } from 'react-icons/io';
-import { GiCalculator } from 'react-icons/gi';
+// import { GiCalculator } from 'react-icons/gi';
 import styles from './Navigation.module.scss';
 import { useAppSelector } from '../../redux/hooks';
 
@@ -17,7 +17,7 @@ const Navigation = ({ className }: Navigation) => {
   const navItems = [
     { icon: HiMiniHome, path: '/', index: 0 },
     { icon: IoIosMail, path: '/contact', index: 1 },
-    { icon: GiCalculator, path: '/calculator', index: 2 },
+    // { icon: GiCalculator, path: '/calculator', index: 2 },
   ];
   return (
     <nav
