@@ -1,5 +1,5 @@
 - responsive
-- Tailwind colors
+- Tailwind colors + containers (md,...)
 
 - logos des competences
 - animation du contact form

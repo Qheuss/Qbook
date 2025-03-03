@@ -5,7 +5,12 @@ import Title from './Title';
 
 const Feed = () => {
   return (
-    <main className={styles.quentin}>
+    <main
+      className={
+        styles.quentin +
+        ' mr-4 ml-4 mt-0 mb-0 md:mr-auto md:ml-auto md:w-[680px]'
+      }
+    >
       <Title />
       <Carousel />
       <Post
