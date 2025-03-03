@@ -10,7 +10,7 @@ const Popup = () => {
   return (
     <>
       {!popupClosed && (
-        <div className={styles.popup}>
+        <div className={styles.popup + ' hidden lg:block'}>
           <div
             className={
               styles.popup__arrow +

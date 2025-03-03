@@ -4,9 +4,15 @@ import { HiMiniHome } from 'react-icons/hi2';
 import { IoIosMail } from 'react-icons/io';
 import { GiCalculator } from 'react-icons/gi';
 import styles from './Navigation.module.scss';
+import { useAppSelector } from '../../redux/hooks';
 
-const Navigation = () => {
+interface Navigation {
+  className?: string;
+}
+
+const Navigation = ({ className }: Navigation) => {
   const location = useLocation();
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const navItems = [
     { icon: HiMiniHome, path: '/', index: 0 },
@@ -14,7 +20,17 @@ const Navigation = () => {
     { icon: GiCalculator, path: '/calculator', index: 2 },
   ];
   return (
-    <nav className={styles.header__nav}>
+    <nav
+      className={
+        styles.header__nav +
+        ' border-t md:border-none' +
+        (theme === 'dark'
+          ? ' bg-[#252728] border-[#ffffff13]'
+          : ' bg-[#fff] border-[#e2e2e2]') +
+        ' ' +
+        className
+      }
+    >
       {navItems.map((item) => (
         <NavItem
           key={item.index}

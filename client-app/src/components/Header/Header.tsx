@@ -9,17 +9,22 @@ const Header = () => {
   const theme = useAppSelector((state) => state.theme.theme);
 
   return (
-    <header
-      className={
-        styles.header + (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
-      }
-    >
-      <div className={styles.header__logoSearch}>
-        <Logo />
-        <SearchBar />
+    <header>
+      <div
+        className={
+          styles.header +
+          (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]') +
+          ' static md:fixed'
+        }
+      >
+        <div className={styles.header__logoSearch}>
+          <Logo />
+          <SearchBar />
+        </div>
+        <Navigation className={'hidden md:flex'} />
+        <ProfileSection />
       </div>
-      <Navigation />
-      <ProfileSection />
+      <Navigation className={'md:hidden flex'} />
     </header>
   );
 };

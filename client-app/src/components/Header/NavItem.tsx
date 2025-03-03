@@ -19,7 +19,9 @@ export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
     >
       <Link
         className={
-          theme === 'dark' ? ' hover:bg-[#4f5152]' : ' hover:bg-[#e3e4e6]'
+          theme === 'dark'
+            ? ' hover:bg-[#4f5152] h-12 md:h-[50px]'
+            : ' hover:bg-[#e3e4e6] h-12 md:h-[50px]'
         }
         style={{ backgroundColor: selected ? 'transparent' : '' }}
         to={path}
@@ -29,8 +31,8 @@ export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
             selected
               ? 'text-[#54c078]'
               : theme === 'dark'
-              ? ' text-[#a6a9ac] hover:bg-[#4f5152]'
-              : ' text-[#606367] hover:bg-[#e3e4e6]'
+              ? 'text-[#a6a9ac] hover:bg-[#4f5152]'
+              : 'text-[#606367] hover:bg-[#e3e4e6]'
           }
           }`}
         />

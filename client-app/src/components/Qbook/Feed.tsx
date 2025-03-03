@@ -8,7 +8,7 @@ const Feed = () => {
     <main
       className={
         styles.quentin +
-        ' mr-4 ml-4 mt-0 mb-0 md:mr-auto md:ml-auto md:w-[680px]'
+        ' mr-1 ml-1 md:mt-[75px] md:mb-[15px] mt-4 mb-0 md:mr-auto md:ml-auto md:w-[680px]'
       }
     >
       <Title />
