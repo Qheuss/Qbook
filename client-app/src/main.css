@@ -11,6 +11,7 @@
   --color-commentsDark: #252728;
   --color-searchDark: #333334;
   --color-iconsDark: #4f5152;
+  --color-buttonHoverDark: #3f3f40;
 
   /* theme light */
   --color-fontLight: #080809;
@@ -20,6 +21,7 @@
   --color-commentsLight: #f0f2f5;
   --color-searchLight: #f5f5f5;
   --color-iconsLight: #e3e4e6;
+  --color-buttonHoverLight: #eee;
 
   --container-feed: 680px;
 }

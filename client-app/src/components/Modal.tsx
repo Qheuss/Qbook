@@ -235,8 +235,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
               styles.modal__zoomButton +
               '  border' +
               (theme === 'dark'
-                ? ' border-iconsDark hover:bg-[#3f3f40]'
-                : ' border-iconsLight hover:bg-[#eee]')
+                ? ' border-iconsDark hover:bg-buttonHoverDark'
+                : ' border-iconsLight hover:bg-buttonHoverLight')
             }
             disabled={scale === 1}
           >
@@ -248,8 +248,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
               styles.modal__zoomButton +
               '  border' +
               (theme === 'dark'
-                ? ' hover:bg-[#3f3f40] border-iconsDark'
-                : ' hover:bg-[#eee] border-iconsLight')
+                ? ' hover:bg-buttonHoverDark border-iconsDark'
+                : ' hover:bg-buttonHoverLight border-iconsLight')
             }
           >
             <MdZoomIn />
@@ -260,8 +260,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
               styles.modal__resetButton +
               '  border' +
               (theme === 'dark'
-                ? ' hover:bg-[#3f3f40] border-iconsDark'
-                : ' hover:bg-[#eee] border-iconsLight')
+                ? ' hover:bg-buttonHoverDark border-iconsDark'
+                : ' hover:bg-buttonHoverLight border-iconsLight')
             }
             disabled={scale === 1 && position.x === 0 && position.y === 0}
           >
@@ -272,8 +272,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
               styles.modal__close +
               '  border' +
               (theme === 'dark'
-                ? ' hover:bg-[#3f3f40] border-iconsDark'
-                : ' hover:bg-[#eee] border-iconsLight')
+                ? ' hover:bg-buttonHoverDark border-iconsDark'
+                : ' hover:bg-buttonHoverLight border-iconsLight')
             }
             onClick={onClose}
           >
