@@ -21,8 +21,8 @@ const Socials = ({
     <li
       className={
         theme === 'dark'
-          ? ' text-[#a6a9ac] hover:bg-[#4f5152]'
-          : ' text-[#606367] hover:bg-[#e3e4e6]'
+          ? ' text-fontDarker hover:bg-iconsDark'
+          : ' text-fontLighter hover:bg-iconsLight'
       }
       onClick={() => window.open(link)}
     >

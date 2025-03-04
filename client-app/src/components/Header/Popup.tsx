@@ -14,19 +14,19 @@ const Popup = () => {
           <div
             className={
               styles.popup__arrow +
-              (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
+              (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
             }
           ></div>
           <div
             className={
               styles.popup__content +
-              (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
+              (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
             }
           >
             <span
-              className={theme === 'dark' ? 'text-[#e2e5e9]' : 'text-[#080809]'}
+              className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
             >
-              Téléchargez mon cv ici
+              Téléchargez mon cv en cliquant sur la photo au dessus.
             </span>
             <button
               className={styles.popup__close}
@@ -34,7 +34,7 @@ const Popup = () => {
             >
               <MdClose
                 className={
-                  theme === 'dark' ? 'text-[#a6a9ac]' : 'text-[#606367]'
+                  theme === 'dark' ? 'text-fontDarker' : 'text-fontLighter'
                 }
               />
             </button>

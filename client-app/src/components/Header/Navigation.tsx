@@ -25,8 +25,8 @@ const Navigation = ({ className }: Navigation) => {
         styles.header__nav +
         ' border-t md:border-none' +
         (theme === 'dark'
-          ? ' bg-[#252728] border-[#ffffff13]'
-          : ' bg-[#fff] border-[#e2e2e2]') +
+          ? ' bg-headerDark border-[#ffffff13]'
+          : ' bg-headerLight border-[#e2e2e2]') +
         ' ' +
         className
       }

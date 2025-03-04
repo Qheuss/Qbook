@@ -18,7 +18,7 @@ const ProfileSection = () => {
 
   return (
     <ul className={styles.header__profile}>
-      <li className={theme === 'dark' ? 'bg-[#4f5152]' : 'bg-[#e3e4e6]'}>
+      <li className={theme === 'dark' ? 'bg-iconsDark' : 'bg-iconsLight'}>
         <button onClick={handleToggleTheme}>
           {theme === 'dark' ? (
             <FaMoon className='text-white text-2xl hover:text-yellow-500' />
@@ -37,8 +37,8 @@ const ProfileSection = () => {
           <HiOutlineDownload
             className={
               theme === 'dark'
-                ? 'bg-[#4f5152] text-[#e3e4e6]'
-                : 'bg-[#e3e4e6] text-[#4f5152]'
+                ? 'bg-iconsDark text-iconsLight'
+                : 'bg-iconsLight text-iconsDark'
             }
           />
         </a>

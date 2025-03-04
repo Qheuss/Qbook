@@ -8,7 +8,7 @@ const Footer = () => {
     <footer
       className={
         styles.footer +
-        (theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]')
+        (theme === 'dark' ? ' text-fontDark' : ' text-fontLight')
       }
     >
       <span>Quentin Heusse | 2025</span>

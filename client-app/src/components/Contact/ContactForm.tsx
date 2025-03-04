@@ -101,23 +101,23 @@ const ContactForm: React.FC = () => {
         name='contact-form'
         className={
           'w-[100%] md:w-[680px] md:rounded-lg' +
-          (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
+          (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
         }
       >
-        <h2
-          className={theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'}
-        >
+        <h2 className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}>
           Laissez moi un <span>message</span> !
         </h2>
         <div>
           <label
-            className={theme === 'dark' ? ' text-[#a6a9ac]' : ' text-[#606367]'}
+            className={
+              theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
+            }
             htmlFor='name'
           >
             Nom:
           </label>
           <input
-            className={theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'}
+            className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -130,13 +130,15 @@ const ContactForm: React.FC = () => {
         </div>
         <div>
           <label
-            className={theme === 'dark' ? ' text-[#a6a9ac]' : ' text-[#606367]'}
+            className={
+              theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
+            }
             htmlFor='email'
           >
             Adresse email:
           </label>
           <input
-            className={theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'}
+            className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
             type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -149,13 +151,15 @@ const ContactForm: React.FC = () => {
         </div>
         <div>
           <label
-            className={theme === 'dark' ? ' text-[#a6a9ac]' : ' text-[#606367]'}
+            className={
+              theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
+            }
             htmlFor='message'
           >
             Message:
           </label>
           <textarea
-            className={theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'}
+            className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
             ref={textareaRef}
             value={message}
             onChange={handleTextareaChange}
@@ -181,8 +185,8 @@ const ContactForm: React.FC = () => {
         <button
           className={
             theme === 'dark'
-              ? ' bg-[#333334] text-[#a6a9ac]'
-              : ' bg-[#f0f2f5] text-[#606367]'
+              ? ' bg-searchDark text-fontDarker'
+              : ' bg-commentsLight text-fontLighter'
           }
           type='submit'
           style={{

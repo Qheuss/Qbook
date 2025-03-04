@@ -13,7 +13,7 @@ const Header = () => {
       <div
         className={
           styles.header +
-          (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]') +
+          (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight') +
           ' static md:fixed md:px-[20px] px-[10px]'
         }
       >

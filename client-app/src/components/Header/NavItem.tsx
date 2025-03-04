@@ -14,14 +14,14 @@ export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
   return (
     <li
       className={
-        styles.navItem + `${selected ? ' border-[#54c078] border-b-2' : ''}`
+        styles.navItem + `${selected ? ' border-accent border-b-2' : ''}`
       }
     >
       <Link
         className={
           theme === 'dark'
-            ? ' hover:bg-[#4f5152] h-12 md:h-[50px]'
-            : ' hover:bg-[#e3e4e6] h-12 md:h-[50px]'
+            ? ' hover:bg-iconsDark h-12 md:h-[50px]'
+            : ' hover:bg-iconsLight h-12 md:h-[50px]'
         }
         style={{ backgroundColor: selected ? 'transparent' : '' }}
         to={path}
@@ -29,10 +29,10 @@ export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
         <Icon
           className={`text-2xl ${
             selected
-              ? 'text-[#54c078]'
+              ? 'text-accent'
               : theme === 'dark'
-              ? 'text-[#a6a9ac] hover:bg-[#4f5152]'
-              : 'text-[#606367] hover:bg-[#e3e4e6]'
+              ? 'text-fontDarker hover:bg-iconsDark'
+              : 'text-fontLighter hover:bg-iconsLight'
           }
           }`}
         />

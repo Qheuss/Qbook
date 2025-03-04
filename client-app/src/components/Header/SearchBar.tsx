@@ -79,8 +79,8 @@ const SearchBar = () => {
       className={
         styles.searchBar +
         (theme === 'dark'
-          ? ' bg-[#333334] text-[#a6a9ac]'
-          : ' bg-[#f0f2f5] text-[#606367]')
+          ? ' bg-searchDark text-fontDarker'
+          : ' bg-commentsLight text-fontLighter')
       }
     >
       <label htmlFor='search'>
@@ -103,8 +103,8 @@ const SearchBar = () => {
         onKeyDown={(event) => event.key === 'Enter' && setTriggerSearch(true)}
         className={
           theme === 'dark'
-            ? ' text-[#a6a9ac] placeholder:text-[#a6a9ac]'
-            : ' text-[#606367] placeholder:text-[#606367]'
+            ? ' text-fontDarker placeholder:text-fontDarker'
+            : ' text-fontLighter placeholder:text-fontLighter'
         }
       />
     </div>

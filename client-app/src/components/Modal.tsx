@@ -225,8 +225,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
             styles.modal__controls +
             ' border-t' +
             (theme === 'dark'
-              ? ' bg-[#333334] text-[#a6a9ac] border-[#4f5152]'
-              : ' bg-[#f5f5f5] text-[#606367] border-[#e3e4e6]')
+              ? ' bg-searchDark text-fontDarker border-iconsDark'
+              : ' bg-searchLight text-fontLighter border-iconsLight')
           }
         >
           <button
@@ -235,8 +235,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
               styles.modal__zoomButton +
               '  border' +
               (theme === 'dark'
-                ? ' border-[#4f5152] hover:bg-[#3f3f40]'
-                : ' border-[#e3e4e6] hover:bg-[#eee]')
+                ? ' border-iconsDark hover:bg-[#3f3f40]'
+                : ' border-iconsLight hover:bg-[#eee]')
             }
             disabled={scale === 1}
           >
@@ -248,8 +248,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
               styles.modal__zoomButton +
               '  border' +
               (theme === 'dark'
-                ? ' hover:bg-[#3f3f40] border-[#4f5152]'
-                : ' hover:bg-[#eee] border-[#e3e4e6]')
+                ? ' hover:bg-[#3f3f40] border-iconsDark'
+                : ' hover:bg-[#eee] border-iconsLight')
             }
           >
             <MdZoomIn />
@@ -260,8 +260,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
               styles.modal__resetButton +
               '  border' +
               (theme === 'dark'
-                ? ' hover:bg-[#3f3f40] border-[#4f5152]'
-                : ' hover:bg-[#eee] border-[#e3e4e6]')
+                ? ' hover:bg-[#3f3f40] border-iconsDark'
+                : ' hover:bg-[#eee] border-iconsLight')
             }
             disabled={scale === 1 && position.x === 0 && position.y === 0}
           >
@@ -272,8 +272,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
               styles.modal__close +
               '  border' +
               (theme === 'dark'
-                ? ' hover:bg-[#3f3f40] border-[#4f5152]'
-                : ' hover:bg-[#eee] border-[#e3e4e6]')
+                ? ' hover:bg-[#3f3f40] border-iconsDark'
+                : ' hover:bg-[#eee] border-iconsLight')
             }
             onClick={onClose}
           >

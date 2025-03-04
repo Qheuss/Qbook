@@ -5,7 +5,7 @@ import { routeTree } from './routeTree.gen';
 import { ThemeProvider } from './ThemeProvider';
 import BackgroundAnimation from './components/BackgroundAnimation';
 
-import './global.css';
+import './main.css';
 import '../index.scss';
 
 const router = createRouter({ routeTree });

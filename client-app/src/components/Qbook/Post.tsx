@@ -19,26 +19,26 @@ const Post = ({ text, images }: PostProps) => {
   return (
     <div
       className={
-        styles.post + (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
+        styles.post + (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
       }
     >
       <div className={styles.me}>
         <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
         <div>
-          <h2
-            className={theme === 'dark' ? 'text-[#e2e5e9]' : 'text-[#080809]'}
-          >
+          <h2 className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
             Quentin Heusse
           </h2>
           <h3
-            className={theme === 'dark' ? 'text-[#a6a9ac]' : 'text-[#606367]'}
+            className={
+              theme === 'dark' ? 'text-fontDarker' : 'text-fontLighter'
+            }
           >
             {now.toLocaleDateString()}
           </h3>
         </div>
       </div>
       <div className={styles.content}>
-        <p className={theme === 'dark' ? 'text-[#e2e5e9]' : 'text-[#080809]'}>
+        <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
           {text}
         </p>
         {images && (
@@ -54,7 +54,7 @@ const Post = ({ text, images }: PostProps) => {
         <div
           className={
             styles.likes +
-            (theme === 'dark' ? ' text-[#a6a9ac]' : ' text-[#606367]')
+            (theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter')
           }
         >
           <div>
@@ -71,8 +71,8 @@ const Post = ({ text, images }: PostProps) => {
           <button
             className={
               theme === 'dark'
-                ? ' text-[#a6a9ac] hover:bg-[#4f5152]'
-                : ' text-[#606367] hover:bg-[#e3e4e6]'
+                ? ' text-fontDarker hover:bg-iconsDark'
+                : ' text-fontLighter hover:bg-iconsLight'
             }
             onClick={() => setLikes(likes + 1)}
           >
@@ -82,8 +82,8 @@ const Post = ({ text, images }: PostProps) => {
           <button
             className={
               theme === 'dark'
-                ? ' text-[#a6a9ac] hover:bg-[#4f5152]'
-                : ' text-[#606367] hover:bg-[#e3e4e6]'
+                ? ' text-fontDarker hover:bg-iconsDark'
+                : ' text-fontLighter hover:bg-iconsLight'
             }
           >
             <TbMessageCircle />
@@ -92,8 +92,8 @@ const Post = ({ text, images }: PostProps) => {
           <button
             className={
               theme === 'dark'
-                ? ' text-[#a6a9ac] hover:bg-[#4f5152]'
-                : ' text-[#606367] hover:bg-[#e3e4e6]'
+                ? ' text-fontDarker hover:bg-iconsDark'
+                : ' text-fontLighter hover:bg-iconsLight'
             }
           >
             <TbShare3 />

@@ -18,7 +18,7 @@ const Feed = () => {
         images={['images/QuentinHeusse.jpg']}
       />
       <Post
-        text={`COMPÉTENCES TECH: React.js | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Vitest/Jest | Git | Javascript/TypeScript | Jira | Tailwindcss | Tanstack`}
+        text={`COMPÉTENCES TECH: React.js | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Vitest/Jest | Git | Javascript/TypeScript | Jira | Tailwindcss | Tanstack/router | Redux`}
       />
     </main>
   );

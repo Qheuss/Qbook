@@ -76,8 +76,8 @@ const Carousel: React.FC = () => {
           className={
             styles.carousel__button +
             (theme === 'dark'
-              ? ' bg-[#252728] text-[#a6a9ac]'
-              : ' bg-[#f0f2f5] text-[#606367]')
+              ? ' bg-headerDark text-fontDarker'
+              : ' bg-commentsLight text-fontLighter')
           }
           onClick={prevSlide}
         >
@@ -87,8 +87,8 @@ const Carousel: React.FC = () => {
           className={
             styles.carousel__button +
             (theme === 'dark'
-              ? ' bg-[#252728] text-[#a6a9ac]'
-              : ' bg-[#f0f2f5] text-[#606367]')
+              ? ' bg-headerDark text-fontDarker'
+              : ' bg-commentsLight text-fontLighter')
           }
           onClick={nextSlide}
         >

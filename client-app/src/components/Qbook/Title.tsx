@@ -34,14 +34,14 @@ const Title = () => {
           className={
             styles.dialog +
             (theme === 'dark'
-              ? ' bg-[#252728] text-[#a6a9ac]'
-              : ' bg-[#f0f2f5] text-[#606367]')
+              ? ' bg-headerDark text-fontDarker'
+              : ' bg-commentsLight text-fontLighter')
           }
         >
           <section>
             <h4
               className={
-                theme === 'dark' ? ' text-[#e2e5e9]' : ' text-[#080809]'
+                theme === 'dark' ? ' text-fontDark' : ' text-fontLight'
               }
             >
               Me contacter
@@ -54,8 +54,10 @@ const Title = () => {
           <div>
             <button
               onClick={resolve}
-              style={{ color: '#54c078' }}
-              className={theme === 'dark' ? ' bg-[#333334]' : ' bg-[#f5f5f5]'}
+              className={
+                'text-accent' +
+                (theme === 'dark' ? ' bg-searchDark' : ' bg-searchLight')
+              }
             >
               Oui
             </button>
@@ -63,8 +65,8 @@ const Title = () => {
               onClick={reject}
               className={
                 theme === 'dark'
-                  ? ' bg-[#333334] text-[#a6a9ac]'
-                  : ' bg-[#f5f5f5] text-[#606367]'
+                  ? ' bg-searchDark text-fontDarker'
+                  : ' bg-searchLight text-fontLighter'
               }
             >
               Non
@@ -83,7 +85,7 @@ const Title = () => {
   return (
     <div
       className={
-        styles.title + (theme === 'dark' ? ' bg-[#252728]' : ' bg-[#fff]')
+        styles.title + (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
       }
     >
       <div>
@@ -92,8 +94,8 @@ const Title = () => {
           onClick={createContactDialog}
           className={
             theme === 'dark'
-              ? ' bg-[#333334] text-[#a6a9ac]'
-              : ' bg-[#f0f2f5] text-[#606367]'
+              ? ' bg-searchDark text-fontDarker'
+              : ' bg-commentsLight text-fontLighter'
           }
         >
           <h1>Cliquez ici pour me contacter!</h1>
