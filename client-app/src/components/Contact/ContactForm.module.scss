@@ -1,5 +1,3 @@
-@use '../../assets/classes' as cls;
-
 .contactForm {
   // cursor: grab;
 
@@ -14,7 +12,7 @@
     h2 {
       font-size: 24px;
       span {
-        color: cls.$accent;
+        color: var(--color-accent);
       }
     }
     div {
@@ -51,7 +49,7 @@
   }
 
   .status {
-    color: cls.$accent;
+    color: var(--color-accent);
     text-align: center;
     padding: 10px 0;
     cursor: default;
