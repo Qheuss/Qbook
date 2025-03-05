@@ -6,6 +6,7 @@ import { useAppSelector } from '../../../redux/hooks';
 
 const PostActions = () => {
   const [likes, setLikes] = useState(0);
+  const [shares, setShares] = useState(0);
 
   const theme = useAppSelector((state) => state.theme.theme);
 
@@ -23,7 +24,7 @@ const PostActions = () => {
         </div>
         <div>
           <span>{0} commentaires</span>
-          <span>{0} partages</span>
+          <span>{shares} partages</span>
         </div>
       </div>
       <hr />
@@ -56,6 +57,7 @@ const PostActions = () => {
               : ' text-fontLighter hover:bg-iconsLight'
           }
           onClick={async () => {
+            setShares(shares + 1);
             if (navigator.share) {
               try {
                 await navigator.share({
