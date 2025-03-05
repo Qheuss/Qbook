@@ -1,0 +1,30 @@
+.me {
+  display: flex;
+  gap: 10px;
+  padding: 0 15px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+  }
+
+  div {
+    flex-direction: column;
+    gap: 0;
+    line-height: 1.2;
+
+    h2 {
+      font-weight: 400;
+      font-size: 18px;
+      height: fit-content;
+      border-radius: 18px;
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-top: 5px;
+      margin: 0;
+    }
+  }
+}

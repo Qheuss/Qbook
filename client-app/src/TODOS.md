@@ -1,5 +1,3 @@
-- Refaire logo
-- Posts liens
 - button partager
 
 - logos des competences
@@ -7,5 +5,3 @@
 
 - traduction en anglais?
 - calculatrice ou autre projet
-
-- commentaires en dessous des posts?

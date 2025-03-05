@@ -87,12 +87,6 @@ const ContactForm: React.FC = () => {
     resizeTextarea();
   }, []);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-    }
-  };
-
   return (
     <div className={styles.contactForm}>
       <form
@@ -121,7 +115,6 @@ const ContactForm: React.FC = () => {
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            onKeyDown={handleKeyDown}
             maxLength={70}
             id='name'
             autoComplete='name'
@@ -142,7 +135,6 @@ const ContactForm: React.FC = () => {
             type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={handleKeyDown}
             maxLength={320}
             id='email'
             autoComplete='email'
@@ -164,6 +156,13 @@ const ContactForm: React.FC = () => {
             value={message}
             onChange={handleTextareaChange}
             maxLength={1201}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                setMessage((prev) => prev + '\n');
+                resizeTextarea();
+              }
+            }}
             id='message'
             required
           />

@@ -8,8 +8,6 @@ const ParticleBackground = () => {
   const [init, setInit] = useState(false);
   const theme = useAppSelector((state) => state.theme.theme);
 
-  const backgroundColor = theme === 'dark' ? '#1c1c1d' : '#f2f4f7';
-
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
       await loadSlim(engine);
@@ -23,9 +21,25 @@ const ParticleBackground = () => {
   };
 
   const options = useMemo(() => {
+    const backgroundDark = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue('--backgroundDark');
+
+    const backgroundLight = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue('--backgroundLight');
+
+    const colorDark = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue('--colorDark');
+
+    const colorLight = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue('--colorLight');
+
     const darkOptions: ISourceOptions = {
       fpsLimit: 120,
-      background: { color: { value: backgroundColor } },
+      background: { color: { value: backgroundDark } },
       particles: {
         number: { density: { enable: true }, value: 80 },
         shape: { type: 'polygon' },
@@ -45,7 +59,7 @@ const ParticleBackground = () => {
           straight: false,
           outModes: 'out',
         },
-        color: { value: '#fff' },
+        color: { value: colorDark },
       },
       interactivity: {
         events: {
@@ -65,9 +79,9 @@ const ParticleBackground = () => {
 
     const lightOptions: ISourceOptions = {
       fpsLimit: 120,
-      background: { color: { value: backgroundColor } },
+      background: { color: { value: backgroundLight } },
       particles: {
-        number: { density: { enable: true }, value: 50 },
+        number: { density: { enable: true }, value: 80 },
         size: { value: { min: 2, max: 4 } },
         opacity: {
           value: 0.7,
@@ -83,7 +97,7 @@ const ParticleBackground = () => {
           random: true,
           outModes: 'out',
         },
-        color: { value: '#606367' },
+        color: { value: colorLight },
       },
       interactivity: {
         events: {
@@ -99,7 +113,7 @@ const ParticleBackground = () => {
     };
 
     return theme === 'dark' ? darkOptions : lightOptions;
-  }, [theme, backgroundColor]);
+  }, [theme]);
 
   return init ? (
     <div className='fixed inset-0 -z-10'>

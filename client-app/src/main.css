@@ -25,3 +25,10 @@
 
   --container-feed: 680px;
 }
+
+:root {
+  --backgroundDark: var(--color-backgroundDark);
+  --backgroundLight: var(--color-backgroundLight);
+  --colorDark: var(--color-fontDarker);
+  --colorLight: var(--color-fontLighter);
+}

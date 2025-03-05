@@ -1,25 +1,52 @@
+import { useAppSelector } from '../../redux/hooks';
 import Carousel from './Carousel';
-import styles from './Feed.module.scss';
-import Post from './Post';
+import Post from './Post/Post';
 import Title from './Title';
 
 const Feed = () => {
+  const theme = useAppSelector((state) => state.theme.theme);
+
   return (
     <main
       className={
-        styles.quentin +
         ' md:mt-[75px] md:mb-[15px] md:mx-auto md:w-[680px] mt-4 mb-0 mx-1'
       }
     >
       <Title />
       <Carousel />
-      <Post
-        text="Ayant récemment terminé la formation Junior Développeur chez BeCode et complété celui-ci par un stage enrichissant chez EVS Broadcast, je suis à la recherche d'une opportunité pour mettre à profit mes compétences dans un environnement professionnel. Éligible au dispositif PFI, je suis ponctuel, dévoué, à l’aise dans les environnements collaboratifs et impatient de contribuer à une équipe tout en continuant à développer mes compétences."
-        images={['images/QuentinHeusse.jpg']}
-      />
-      <Post
-        text={`COMPÉTENCES TECH: React.js | Next.js | HTML | Figma | Linux | C# | CSS/SCSS | Vite | Vitest/Jest | Git | Javascript/TypeScript | Jira | Tailwindcss | Tanstack/router | Redux`}
-      />
+      <Post>
+        <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
+          Ayant récemment terminé la formation Junior Développeur chez BeCode et
+          complété celui-ci par un stage enrichissant chez EVS Broadcast, je
+          suis à la recherche d'une opportunité pour mettre à profit mes
+          compétences dans un environnement professionnel. Éligible au
+          dispositif PFI, je suis ponctuel, dévoué, à l’aise dans les
+          environnements collaboratifs et impatient de contribuer à une équipe
+          tout en continuant à développer mes compétences.
+        </p>
+        <section>
+          <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
+        </section>
+      </Post>
+      <Post>
+        <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
+          Réalisations:
+        </p>
+        <a
+          className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+          target='_blank'
+          href='https://www.aviron-uliege.be/'
+        >
+          https://www.aviron-uliege.be/
+        </a>
+      </Post>
+      <Post>
+        <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
+          COMPÉTENCES TECH: React.js | Next.js | HTML | Figma | Linux | C# |
+          CSS/SCSS | Vite | Vitest/Jest | Git | Javascript/TypeScript | Jira |
+          Tailwindcss | Tanstack/router
+        </p>
+      </Post>
     </main>
   );
 };
