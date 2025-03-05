@@ -59,8 +59,8 @@ const PostActions = () => {
             if (navigator.share) {
               try {
                 await navigator.share({
-                  title: 'Check this out!',
-                  text: 'I found something interesting for you.',
+                  title: 'Partagez mon site web!',
+                  text: "N'hésitez pas à partager mon site web autour de vous!",
                   url: window.location.href,
                 });
                 console.log('Shared successfully!');
@@ -68,7 +68,7 @@ const PostActions = () => {
                 console.error('Error sharing:', error);
               }
             } else {
-              alert('Your browser does not support the Web Share API.');
+              alert('Votre navigateur ne supporte pas la fonction "share"');
             }
           }}
         >
