@@ -5,7 +5,7 @@ import {
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
 } from 'react-icons/md';
-// import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../redux/hooks';
 
 const images: string[] = [
   'images/clickerlogin.png',
@@ -20,7 +20,7 @@ const Carousel: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  // const theme = useAppSelector((state) => state.theme.theme);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const scrollAmount = 200;
 
@@ -50,9 +50,15 @@ const Carousel: React.FC = () => {
 
   return (
     <div className={styles.carousel}>
-      {/* Left Button */}
       <button
-        className={styles.carousel__button + ' ' + styles.left}
+        className={
+          styles.carousel__button +
+          ' ' +
+          styles.left +
+          (theme === 'dark'
+            ? ' bg-[#00000099] text-[#fff]'
+            : ' bg-[#fff] text-[#00000099] shadow-md')
+        }
         onClick={scrollLeft}
       >
         <MdOutlineArrowBackIosNew />
@@ -70,9 +76,15 @@ const Carousel: React.FC = () => {
         ))}
       </div>
 
-      {/* Right Button */}
       <button
-        className={styles.carousel__button + ' ' + styles.right}
+        className={
+          styles.carousel__button +
+          ' ' +
+          styles.right +
+          (theme === 'dark'
+            ? ' bg-[#00000099] text-[#fff]'
+            : ' bg-[#fff] text-[#00000099] shadow-md')
+        }
         onClick={scrollRight}
       >
         <MdOutlineArrowForwardIos />

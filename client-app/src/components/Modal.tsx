@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import styles from './Modal.module.scss';
 import { MdClose, MdZoomIn, MdZoomOut } from 'react-icons/md';
 import { useAppSelector } from '../redux/hooks';
@@ -14,176 +14,86 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const theme = useAppSelector((state) => state.theme.theme);
 
-  // Update container size on mount and window resize
-  useEffect(() => {
-    const updateSizes = () => {
-      if (containerRef.current) {
-        setContainerSize({
-          width: containerRef.current.clientWidth,
-          height: containerRef.current.clientHeight,
-        });
-      }
-    };
-
-    // Initialize
-    updateSizes();
-
-    // Add resize listener
-    window.addEventListener('resize', updateSizes);
-
-    // Clean up
-    return () => window.removeEventListener('resize', updateSizes);
-  }, [isOpen]);
-
-  // Handle image load
-  const handleImageLoad = () => {
-    if (imageRef.current && containerRef.current) {
-      // Get natural dimensions
-      const imgWidth = imageRef.current.naturalWidth;
-      const imgHeight = imageRef.current.naturalHeight;
-
-      // Get container dimensions
-      const containerWidth = containerRef.current.clientWidth;
-      const containerHeight = containerRef.current.clientHeight;
-
-      // Calculate the dimensions the image will have when fitted
-      let displayWidth, displayHeight;
-
-      const aspectRatio = imgWidth / imgHeight;
-      const containerRatio = containerWidth / containerHeight;
-
-      if (aspectRatio > containerRatio) {
-        // Image is wider than container (relative to height)
-        displayWidth = containerWidth;
-        displayHeight = containerWidth / aspectRatio;
-      } else {
-        // Image is taller than container (relative to width)
-        displayHeight = containerHeight;
-        displayWidth = containerHeight * aspectRatio;
-      }
-
-      setImageSize({
-        width: displayWidth,
-        height: displayHeight,
-      });
-
-      setContainerSize({
-        width: containerWidth,
-        height: containerHeight,
-      });
-    }
-  };
-
-  // Main function to calculate bounds
   const getBoundedPosition = useCallback(
     (x: number, y: number) => {
-      if (scale <= 1) return { x: 0, y: 0 };
+      if (scale <= 1 || !imageRef.current || !containerRef.current)
+        return { x: 0, y: 0 };
 
-      // Calculate the scaled dimensions
-      const scaledWidth = imageSize.width * scale;
-      const scaledHeight = imageSize.height * scale;
+      const scaledWidth = imageRef.current.offsetWidth * scale;
+      const scaledHeight = imageRef.current.offsetHeight * scale;
+      const xLimit = Math.max(
+        0,
+        (scaledWidth - containerRef.current.offsetWidth) / 2
+      );
+      const yLimit = Math.max(
+        0,
+        (scaledHeight - containerRef.current.offsetHeight) / 2
+      );
 
-      // Calculate the maximum allowed movement in each direction
-      const xLimit = Math.max(0, (scaledWidth - containerSize.width) / 2);
-      const yLimit = Math.max(0, (scaledHeight - containerSize.height) / 2);
-
-      // Enforce the limits
       return {
         x: Math.min(xLimit, Math.max(-xLimit, x)),
         y: Math.min(yLimit, Math.max(-yLimit, y)),
       };
     },
-    [
-      containerSize.height,
-      containerSize.width,
-      imageSize.height,
-      imageSize.width,
-      scale,
-    ]
+    [scale]
   );
-
-  // Reset position when scale changes or when returning to scale 1
-  useEffect(() => {
-    if (scale === 1) {
-      setPosition({ x: 0, y: 0 });
-    } else {
-      // Ensure position is within bounds when scale changes
-      const boundedPosition = getBoundedPosition(position.x, position.y);
-      if (
-        boundedPosition.x !== position.x ||
-        boundedPosition.y !== position.y
-      ) {
-        setPosition(boundedPosition);
-      }
-    }
-  }, [getBoundedPosition, position.x, position.y, scale]);
-
-  if (!isOpen) return null;
-
-  const handleZoomIn = () => {
-    setScale((prevScale) => Math.min(prevScale + 0.5, 5));
-  };
-
-  const handleZoomOut = () => {
-    setScale((prevScale) => Math.max(prevScale - 0.5, 1));
-  };
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (scale > 1) {
-      e.preventDefault();
       setIsDragging(true);
-      setDragStart({
-        x: e.clientX - position.x,
-        y: e.clientY - position.y,
-      });
+      setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
     }
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isDragging && scale > 1) {
-      // Calculate new unbounded position
-      const newX = e.clientX - dragStart.x;
-      const newY = e.clientY - dragStart.y;
-
-      // Apply bounds and update state
-      const boundedPosition = getBoundedPosition(newX, newY);
-      setPosition(boundedPosition);
+      setPosition(
+        getBoundedPosition(e.clientX - dragStart.x, e.clientY - dragStart.y)
+      );
     }
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
+  const handleMouseUp = () => setIsDragging(false);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (scale > 1 && e.touches.length === 1) {
+      setIsDragging(true);
+      setDragStart({
+        x: e.touches[0].clientX - position.x,
+        y: e.touches[0].clientY - position.y,
+      });
+    }
   };
 
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging && scale > 1 && e.touches.length === 1) {
+      setPosition(
+        getBoundedPosition(
+          e.touches[0].clientX - dragStart.x,
+          e.touches[0].clientY - dragStart.y
+        )
+      );
+    }
+  };
+
+  const handleTouchEnd = () => setIsDragging(false);
+
+  const handleZoomIn = () => setScale((prev) => Math.min(prev + 0.5, 5));
+  const handleZoomOut = () => setScale((prev) => Math.max(prev - 0.5, 1));
   const handleReset = () => {
     setScale(1);
     setPosition({ x: 0, y: 0 });
   };
 
-  // Prevent wheel scrolling when zoomed in
-  const handleWheel = (e: React.WheelEvent) => {
-    if (scale > 1) {
-      e.preventDefault();
-
-      // Calculate new position based on wheel delta
-      const newX = position.x;
-      const newY = position.y - e.deltaY;
-
-      // Apply bounds and update
-      const boundedPosition = getBoundedPosition(newX, newY);
-      setPosition(boundedPosition);
-    }
-  };
+  if (!isOpen) return null;
 
   return (
-    <div className={styles.modal} onClick={onClose} aria-modal='true'>
+    <div className={styles.modal} aria-modal='true'>
       <div
         className={styles.modal__content}
         onClick={(e) => e.stopPropagation()}
@@ -191,7 +101,9 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
         <div
           className={styles.modal__imageContainer}
           ref={containerRef}
-          onWheel={handleWheel}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           <div
             className={styles.modal__imageWrapper}
@@ -216,10 +128,10 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
                   : 'default',
               }}
               draggable='false'
-              onLoad={handleImageLoad}
             />
           </div>
         </div>
+
         <div
           className={
             styles.modal__controls +
@@ -233,7 +145,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
             onClick={handleZoomOut}
             className={
               styles.modal__zoomButton +
-              '  border' +
+              ' border' +
               (theme === 'dark'
                 ? ' border-iconsDark hover:bg-buttonHoverDark'
                 : ' border-iconsLight hover:bg-buttonHoverLight')
@@ -246,7 +158,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
             onClick={handleZoomIn}
             className={
               styles.modal__zoomButton +
-              '  border' +
+              ' border' +
               (theme === 'dark'
                 ? ' hover:bg-buttonHoverDark border-iconsDark'
                 : ' hover:bg-buttonHoverLight border-iconsLight')
@@ -258,7 +170,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
             onClick={handleReset}
             className={
               styles.modal__resetButton +
-              '  border' +
+              ' border' +
               (theme === 'dark'
                 ? ' hover:bg-buttonHoverDark border-iconsDark'
                 : ' hover:bg-buttonHoverLight border-iconsLight')
@@ -270,7 +182,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
           <button
             className={
               styles.modal__close +
-              '  border' +
+              ' border' +
               (theme === 'dark'
                 ? ' hover:bg-buttonHoverDark border-iconsDark'
                 : ' hover:bg-buttonHoverLight border-iconsLight')
