@@ -78,6 +78,7 @@ const SearchBar = () => {
     <div
       className={
         styles.searchBar +
+        ' md:w-[250px] w-[180px]' +
         (theme === 'dark'
           ? ' bg-searchDark text-fontDarker'
           : ' bg-commentsLight text-fontLighter')
