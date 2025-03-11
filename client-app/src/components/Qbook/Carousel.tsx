@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './Carousel.module.scss';
+import Modal from '../Modal';
 import {
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
 } from 'react-icons/md';
-import Modal from '../Modal';
-import { useAppSelector } from '../../redux/hooks';
+// import { useAppSelector } from '../../redux/hooks';
 
 const images: string[] = [
   'images/clickerlogin.png',
@@ -17,27 +17,22 @@ const images: string[] = [
 ];
 
 const Carousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
-  const theme = useAppSelector((state) => state.theme.theme);
+  const trackRef = useRef<HTMLDivElement>(null);
+  // const theme = useAppSelector((state) => state.theme.theme);
 
-  const gap = 7;
-  const itemWidth = 150;
+  const scrollAmount = 200;
 
-  const nextSlide = () => {
-    if (currentIndex === images.length - 4) {
-      setCurrentIndex(0);
-    } else {
-      setCurrentIndex((prevIndex) => prevIndex + 1);
+  const scrollLeft = () => {
+    if (trackRef.current) {
+      trackRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     }
   };
 
-  const prevSlide = () => {
-    if (currentIndex === 0) {
-      setCurrentIndex(images.length - 4);
-    } else {
-      setCurrentIndex((prevIndex) => prevIndex - 1);
+  const scrollRight = () => {
+    if (trackRef.current) {
+      trackRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
 
@@ -55,51 +50,42 @@ const Carousel: React.FC = () => {
 
   return (
     <div className={styles.carousel}>
-      <div
-        className={styles.carousel__track}
-        style={{
-          transform: `translateX(-${currentIndex * (itemWidth + gap)}px)`,
-        }}
+      {/* Left Button */}
+      <button
+        className={styles.carousel__button + ' ' + styles.left}
+        onClick={scrollLeft}
       >
+        <MdOutlineArrowBackIosNew />
+      </button>
+
+      <div className={styles.track} ref={trackRef}>
         {images.map((image, index) => (
           <div
-            className={styles.carousel__item}
             key={index}
+            className={styles.item}
             onClick={() => handleClickItem(index)}
           >
-            <img src={image} alt={`image ${index + 1}`} />
+            <img src={image} alt={`Slide ${index + 1}`} />
           </div>
         ))}
       </div>
-      <div className={styles.carousel__controls}>
-        <button
-          className={
-            styles.carousel__button +
-            (theme === 'dark'
-              ? ' bg-headerDark text-fontDarker'
-              : ' bg-commentsLight text-fontLighter')
-          }
-          onClick={prevSlide}
-        >
-          <MdOutlineArrowBackIosNew />
-        </button>
-        <button
-          className={
-            styles.carousel__button +
-            (theme === 'dark'
-              ? ' bg-headerDark text-fontDarker'
-              : ' bg-commentsLight text-fontLighter')
-          }
-          onClick={nextSlide}
-        >
-          <MdOutlineArrowForwardIos />
-        </button>
-      </div>
-      <Modal
-        isOpen={isModalOpen}
-        imageSrc={images[modalImageIndex!]}
-        onClose={closeModal}
-      />
+
+      {/* Right Button */}
+      <button
+        className={styles.carousel__button + ' ' + styles.right}
+        onClick={scrollRight}
+      >
+        <MdOutlineArrowForwardIos />
+      </button>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <Modal
+          isOpen={isModalOpen}
+          imageSrc={images[modalImageIndex!]}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };

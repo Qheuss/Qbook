@@ -3,64 +3,76 @@
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  height: 220px;
-  margin-top: 15px;
+  margin: 10px 0 0 0;
 
-  .carousel__track {
+  .track {
     display: flex;
-    transition: transform 0.5s ease;
-    height: 100%;
-    gap: 7px;
-    padding: 4px 0;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
-  .carousel__item {
-    flex: 0 0 150px;
-    height: auto;
+  .item {
+    flex: 0 0 auto;
+    width: 130px;
+    height: 180px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    border-radius: 7px;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 7px;
+      border-radius: 10px;
     }
 
     &:hover {
-      transform: scale(0.98);
-      transition: transform 0.5s;
+      transform: scale(1.05);
     }
   }
 
-  .carousel__controls {
+  .carousel__button {
     position: absolute;
     top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
     transform: translateY(-50%);
-    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    z-index: 10;
 
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .left {
+    left: 5px;
+  }
+
+  .right {
+    right: 5px;
+  }
+
+  @media (max-width: 768px) {
     .carousel__button {
-      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-      pointer-events: auto;
-      padding: 10px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 20px;
-      transition: opacity 0.3s;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 10px;
-
-      &:hover {
-        opacity: 0.9;
-      }
+      display: none;
     }
   }
 }
