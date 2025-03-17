@@ -98,7 +98,7 @@ const Title = () => {
               : ' bg-commentsLight text-fontLighter'
           }
         >
-          <h1>Cliquez ici pour me contacter!</h1>
+          <h1 data-test='cliquezici'>Cliquez ici pour me contacter!</h1>
         </button>
       </div>
       <div
