@@ -11,7 +11,8 @@
     "start": "concurrently \"dotnet run --project ../api/api.csproj\" \"vite\"",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "cy": "npx cypress open"
   },
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.25.9",
