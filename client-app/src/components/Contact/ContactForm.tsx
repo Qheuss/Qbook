@@ -98,15 +98,16 @@ const ContactForm: React.FC = () => {
           (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
         }
       >
-        <h2 className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}>
+        <h1 className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}>
           Laissez moi un <span>message</span> !
-        </h2>
+        </h1>
         <div>
           <label
             className={
               theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
             }
             htmlFor='name'
+            data-test='name-label'
           >
             Nom:
           </label>
@@ -119,6 +120,7 @@ const ContactForm: React.FC = () => {
             id='name'
             autoComplete='name'
             required
+            data-test='name-input'
           />
         </div>
         <div>
@@ -127,6 +129,7 @@ const ContactForm: React.FC = () => {
               theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
             }
             htmlFor='email'
+            data-test='email-label'
           >
             Adresse email:
           </label>
@@ -139,6 +142,7 @@ const ContactForm: React.FC = () => {
             id='email'
             autoComplete='email'
             required
+            data-test='email-input'
           />
         </div>
         <div>
@@ -147,6 +151,7 @@ const ContactForm: React.FC = () => {
               theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
             }
             htmlFor='message'
+            data-test='message-label'
           >
             Message:
           </label>
@@ -165,18 +170,22 @@ const ContactForm: React.FC = () => {
             }}
             id='message'
             required
+            data-test='message-textarea'
           />
         </div>
 
         {/* Honeypot */}
         <div style={{ display: 'none' }}>
-          <label htmlFor='honey'>Leave this field empty</label>
+          <label htmlFor='honey' data-test='honey-label'>
+            honey is yummy
+          </label>
           <input
             type='text'
             name='honey'
             value={honeypot}
             onChange={(e) => setHoneypot(e.target.value)}
             id='honey'
+            data-test='honey-input'
           />
         </div>
         {/* Honeypot */}
@@ -192,6 +201,7 @@ const ContactForm: React.FC = () => {
             backgroundColor: isFormValid ? '#54c078' : '',
             color: isFormValid ? (theme === 'dark' ? 'black' : 'white') : '',
           }}
+          data-test='submit-button'
         >
           Envoyer le message
         </button>

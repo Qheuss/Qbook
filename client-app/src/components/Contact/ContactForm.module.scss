@@ -9,7 +9,7 @@
     padding: 20px;
     font-size: 18px;
 
-    h2 {
+    h1 {
       font-size: 24px;
       span {
         color: var(--color-accent);
@@ -20,9 +20,9 @@
       flex-direction: column;
       gap: 0.5rem;
 
-      label {
-        // cursor: grab;
-      }
+      // label {
+      //   cursor: grab;
+      // }
 
       input,
       textarea {
