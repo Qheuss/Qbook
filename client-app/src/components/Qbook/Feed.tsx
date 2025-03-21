@@ -39,6 +39,13 @@ const Feed = () => {
         >
           https://www.aviron-uliege.be/
         </a>
+        <a
+          className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+          target='_blank'
+          href='https://velo-francorchamps.vercel.app/'
+        >
+          https://velo-francorchamps.vercel.app/ (en cours de développement)
+        </a>
       </Post>
       <Post>
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
