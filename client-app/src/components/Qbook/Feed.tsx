@@ -32,20 +32,26 @@ const Feed = () => {
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
           Réalisations:
         </p>
-        <a
-          className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
-          target='_blank'
-          href='https://www.aviron-uliege.be/'
-        >
-          https://www.aviron-uliege.be/
-        </a>
-        <a
-          className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
-          target='_blank'
-          href='https://velo-francorchamps.vercel.app/'
-        >
-          https://velo-francorchamps.vercel.app/ (en cours de développement)
-        </a>
+        <ul>
+          <li>
+            <a
+              className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+              target='_blank'
+              href='https://www.aviron-uliege.be/'
+            >
+              https://www.aviron-uliege.be/
+            </a>
+          </li>
+          <li>
+            <a
+              className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+              target='_blank'
+              href='https://velo-francorchamps.vercel.app/'
+            >
+              https://velo-francorchamps.vercel.app/ (en cours de développement)
+            </a>
+          </li>
+        </ul>
       </Post>
       <Post>
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
