@@ -2,9 +2,12 @@ import { useAppSelector } from '@/redux/hooks';
 import Carousel from './Carousel';
 import Post from './Post/Post';
 import Title from './Title';
+import { useTranslation } from 'react-i18next';
 
 const Feed = () => {
   const theme = useAppSelector((state) => state.theme.theme);
+
+  const { t } = useTranslation();
 
   return (
     <main
@@ -16,9 +19,6 @@ const Feed = () => {
       <Carousel />
 
       <Post>
-        <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
-          Réalisations:
-        </p>
         <ul>
           <li>
             <a
@@ -35,7 +35,7 @@ const Feed = () => {
               target='_blank'
               href='https://velo-francorchamps.vercel.app/'
             >
-              https://velo-francorchamps.vercel.app/ (en cours de développement)
+              https://velo-francorchamps.vercel.app/
             </a>
           </li>
         </ul>
@@ -43,13 +43,15 @@ const Feed = () => {
 
       <Post>
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
-          Ayant récemment terminé la formation Junior Développeur chez BeCode et
-          complété celui-ci par un stage enrichissant chez EVS Broadcast, je
-          suis à la recherche d&apos;une opportunité pour mettre à profit mes
-          compétences dans un environnement professionnel. Éligible au
-          dispositif PFI, je suis ponctuel, dévoué, à l&apos;aise dans les
-          environnements collaboratifs et impatient de contribuer à une équipe
-          tout en continuant à développer mes compétences.
+          {t('Introduction.description')}
+        </p>
+        <br />
+        <p
+          className={
+            theme === 'dark' ? 'text-fontDark' : 'text-fontLight' + ' font-bold'
+          }
+        >
+          {t('Introduction.help')}
         </p>
         <section>
           <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
@@ -58,7 +60,7 @@ const Feed = () => {
 
       <Post>
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
-          COMPÉTENCES TECH: React.js | Next.js | HTML | Figma | Linux | C# |
+          {t('Skills')}: React.js | Next.js | HTML | Figma | Linux | C# |
           CSS/SCSS | Vite | Vitest/Jest | Git | Javascript/TypeScript | Jira |
           Tailwindcss | Tanstack/router
         </p>

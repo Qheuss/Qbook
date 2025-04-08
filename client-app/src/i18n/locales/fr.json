@@ -31,6 +31,13 @@
     }
   },
 
+  "Introduction": {
+    "description": "Ayant récemment terminé la formation Junior Développeur chez BeCode et complété celle ci par un stage enrichissant chez EVS Broadcast, je suis à la recherche d une opportunité pour mettre à profit mes compétences dans un environnement professionnel. Je suis ponctuel, dévoué, à l'aise dans les environnements collaboratifs et impatient d'apporter ma contribution à une équipe tout en continuant à développer mes compétences.",
+    "help": "Éligible au dispositif PFI et accès à Impulsion 12 mois +"
+  },
+
+  "Skills": "COMPÉTENCES TECH",
+
   "Contact": {
     "title": {
       "prefix": "Laissez moi un ",
