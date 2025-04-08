@@ -2,6 +2,8 @@
 
 @theme {
   --color-accent: #54c078;
+  --color-accent-50: #54c07850;
+  --color-accent-30: #54c07820;
 
   /* theme dark */
   --color-fontDark: #e2e5e9;

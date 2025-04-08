@@ -4,7 +4,7 @@ import styles from './Title.module.scss';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import Socials from './Socials';
 import { useNavigate } from '@tanstack/react-router';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 
 const Title = () => {
   const navigate = useNavigate();

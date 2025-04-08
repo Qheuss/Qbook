@@ -1,5 +1,5 @@
 import styles from './Post.module.scss';
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 import PostHeader from './PostHeader';
 import PostActions from './PostActions';
 

@@ -4,8 +4,9 @@ import { LuSunMedium } from 'react-icons/lu';
 
 import Popup from './Popup';
 import styles from './ProfileSection.module.scss';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { toggleTheme } from '../../redux/themeSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { toggleTheme } from '@/redux/themeSlice';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const ProfileSection = () => {
   const theme = useAppSelector((state) => state.theme.theme);
@@ -18,13 +19,18 @@ const ProfileSection = () => {
 
   return (
     <ul className={styles.header__profile}>
-      <li className={theme === 'dark' ? 'bg-iconsDark' : 'bg-iconsLight'}>
+      <li>
+        <LanguageSwitcher />
+      </li>
+      <li
+        className={
+          theme === 'dark'
+            ? 'bg-searchDark text-white text-2xl hover:text-yellow-500'
+            : 'bg-searchLight text-yellow-500 text-2xl hover:text-white'
+        }
+      >
         <button onClick={handleToggleTheme}>
-          {theme === 'dark' ? (
-            <FaMoon className='text-white text-2xl hover:text-yellow-500' />
-          ) : (
-            <LuSunMedium className='text-yellow-500 text-2xl hover:text-white' />
-          )}
+          {theme === 'dark' ? <FaMoon /> : <LuSunMedium />}
         </button>
       </li>
       <li>

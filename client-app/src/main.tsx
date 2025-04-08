@@ -1,9 +1,9 @@
-import { StrictMode } from 'react';
+import { StrictMode, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { routeTree } from './routeTree.gen';
-import { ThemeProvider } from './ThemeProvider';
-import BackgroundAnimation from './components/BackgroundAnimation';
+import { routeTree } from '@/routeTree.gen';
+import { ThemeProvider } from '@/ThemeProvider';
+import BackgroundAnimation from '@/components/BackgroundAnimation';
 
 import './main.css';
 import '../index.scss';
@@ -25,7 +25,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <ThemeProvider>
         <BackgroundAnimation />
-        <RouterProvider router={router} />
+        <Suspense fallback='...is loading'>
+          <RouterProvider router={router} />
+        </Suspense>
       </ThemeProvider>
     </StrictMode>
   );

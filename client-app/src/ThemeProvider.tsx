@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
-import { useAppSelector } from './redux/hooks';
+import { store } from '@/redux/store';
+import { useAppSelector } from '@/redux/hooks';
 
 const ThemeListener: React.FC = () => {
   const theme = useAppSelector((state) => state.theme.theme);

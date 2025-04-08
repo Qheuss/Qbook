@@ -1,13 +1,11 @@
-import { useNavigate } from '@tanstack/react-router';
+import { Link } from '@/i18n/Link';
 import styles from './Logo.module.scss';
 
 const Logo = () => {
-  const navigate = useNavigate();
-
   return (
-    <button className={styles.logo} onClick={() => navigate({ to: '/' })}>
+    <Link className={styles.logo} to='/'>
       <img src='/images/Q.svg' />
-    </button>
+    </Link>
   );
 };
 

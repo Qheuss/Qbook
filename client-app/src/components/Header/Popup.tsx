@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MdClose } from 'react-icons/md';
 import styles from './Popup.module.scss';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 
 const Popup = () => {
   const [popupClosed, setPopupClosed] = useState<boolean>(false);

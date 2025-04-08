@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { Engine, ISourceOptions, Container } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
-import { useAppSelector } from '../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 
 const ParticleBackground = () => {
   const [init, setInit] = useState(false);

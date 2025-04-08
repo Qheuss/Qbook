@@ -2,7 +2,7 @@ import { TbMessageCircle, TbShare3 } from 'react-icons/tb';
 import styles from './PostActions.module.scss';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { useState } from 'react';
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 
 const PostActions = () => {
   const [likes, setLikes] = useState(0);

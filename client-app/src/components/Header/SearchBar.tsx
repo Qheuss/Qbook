@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import styles from './SearchBar.module.scss';
 import { HiX } from 'react-icons/hi';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -81,7 +81,7 @@ const SearchBar = () => {
         ' md:w-[250px] w-[180px]' +
         (theme === 'dark'
           ? ' bg-searchDark text-fontDarker'
-          : ' bg-commentsLight text-fontLighter')
+          : ' bg-searchLight text-fontLighter')
       }
     >
       <label htmlFor='search'>

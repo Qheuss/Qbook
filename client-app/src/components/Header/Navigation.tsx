@@ -4,7 +4,7 @@ import { HiMiniHome } from 'react-icons/hi2';
 import { IoIosMail } from 'react-icons/io';
 // import { GiCalculator } from 'react-icons/gi';
 import styles from './Navigation.module.scss';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 
 interface Navigation {
   className?: string;

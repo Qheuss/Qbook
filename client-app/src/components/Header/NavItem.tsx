@@ -1,6 +1,6 @@
-import { Link } from '@tanstack/react-router';
 import styles from './NavItem.module.scss';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
+import { Link } from '@/i18n/Link';
 
 interface NavItemProps {
   icon: React.ElementType;
@@ -10,7 +10,6 @@ interface NavItemProps {
 
 export const NavItem = ({ icon: Icon, path, selected }: NavItemProps) => {
   const theme = useAppSelector((state) => state.theme.theme);
-
   return (
     <li
       className={

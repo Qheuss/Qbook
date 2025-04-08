@@ -1,7 +1,8 @@
 import { useState, useRef, useCallback } from 'react';
 import styles from './Modal.module.scss';
 import { MdClose, MdZoomIn, MdZoomOut } from 'react-icons/md';
-import { useAppSelector } from '../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
+import { useTranslation } from 'react-i18next';
 
 interface ModalProps {
   isOpen: boolean;
@@ -18,6 +19,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const theme = useAppSelector((state) => state.theme.theme);
+
+  const { t } = useTranslation();
 
   const getBoundedPosition = useCallback(
     (x: number, y: number) => {
@@ -177,7 +180,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
             }
             disabled={scale === 1 && position.x === 0 && position.y === 0}
           >
-            Reset
+            {t('reset')}
           </button>
           <button
             className={

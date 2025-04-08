@@ -1,5 +1,5 @@
 import styles from './Footer.module.scss';
-import { useAppSelector } from '../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 
 const Footer = () => {
   const theme = useAppSelector((state) => state.theme.theme);

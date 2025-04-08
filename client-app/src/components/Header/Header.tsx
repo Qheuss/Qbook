@@ -3,7 +3,7 @@ import SearchBar from './SearchBar';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import ProfileSection from './ProfileSection';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 
 const Header = () => {
   const theme = useAppSelector((state) => state.theme.theme);

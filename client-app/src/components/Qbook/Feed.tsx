@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 import Carousel from './Carousel';
 import Post from './Post/Post';
 import Title from './Title';
