@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import styles from './ContactForm.module.scss';
 import { useAppSelector } from '@/redux/hooks';
+import { useTranslation } from 'react-i18next';
 
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
@@ -15,6 +16,7 @@ const ContactForm: React.FC = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const theme = useAppSelector((state) => state.theme.theme);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -30,7 +32,7 @@ const ContactForm: React.FC = () => {
     e.preventDefault();
 
     if (honeypot) {
-      setStatus('Bot detecté, message non envoyé.');
+      setStatus(t('Contact.send.bot'));
       setStatusVisible(true);
       setTimeout(() => setStatusVisible(false), 10000);
       return;
@@ -50,18 +52,14 @@ const ContactForm: React.FC = () => {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string
       )
       .then((response) => {
-        console.log(
-          'Message sent successfully!',
-          response.status,
-          response.text
-        );
-        setStatus('Message envoyé!');
+        console.log(t('Contact.send.success'), response.status, response.text);
+        setStatus(t('Contact.send.success'));
         setStatusVisible(true);
         setTimeout(() => setStatusVisible(false), 10000);
       })
       .catch((error) => {
-        console.error('Failed to send message. Error:', error);
-        setStatus("Erreur lors de l'envoi du message.");
+        console.error(`${t('Contact.send.error')} :`, error);
+        setStatus(t('Contact.send.error'));
         setStatusVisible(true);
         setTimeout(() => setStatusVisible(false), 10000);
       });
@@ -99,7 +97,8 @@ const ContactForm: React.FC = () => {
         }
       >
         <h1 className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}>
-          Laissez moi un <span>message</span> !
+          {t('Contact.title.prefix')}
+          <span>{t('Contact.title.emphasis')}</span> !
         </h1>
         <div>
           <label
@@ -109,7 +108,7 @@ const ContactForm: React.FC = () => {
             htmlFor='name'
             data-test='name-label'
           >
-            Nom:
+            {t('Contact.name')}:
           </label>
           <input
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
@@ -131,7 +130,7 @@ const ContactForm: React.FC = () => {
             htmlFor='email'
             data-test='email-label'
           >
-            Adresse email:
+            {t('Contact.email')}:
           </label>
           <input
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
@@ -153,7 +152,7 @@ const ContactForm: React.FC = () => {
             htmlFor='message'
             data-test='message-label'
           >
-            Message:
+            {t('Contact.message')}:
           </label>
           <textarea
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
@@ -203,7 +202,7 @@ const ContactForm: React.FC = () => {
           }}
           data-test='submit-button'
         >
-          Envoyer le message
+          {t('Contact.send.title')}
         </button>
       </form>
 

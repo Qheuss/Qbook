@@ -1,3 +1,26 @@
 {
-  "reset": "Reset"
+  "Header": {
+    "popup": "Download my CV by clicking on the photo above.",
+    "search": "Search"
+  },
+
+  "Modal": {
+    "reset": "Reset"
+  },
+
+  "Contact": {
+    "title": {
+      "prefix": "Leave me a ",
+      "emphasis": "message"
+    },
+    "name": "Name",
+    "email": "Email address",
+    "message": "Message",
+    "send": {
+      "title": "Send message",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message.",
+      "bot": "The message could not be sent because you are a robot."
+    }
+  }
 }

@@ -27,7 +27,7 @@ i18n
     fallbackLng: 'fr',
     detection: {
       order: ['querystring', 'localStorage', 'navigator'],
-      lookupQuerystring: 'lang', // ?lang=fr in URLs
+      lookupQuerystring: 'lang',
       caches: ['localStorage'],
     },
     interpolation: {

@@ -1,3 +1,26 @@
 {
-  "reset": "Recentrer"
+  "Header": {
+    "popup": "Téléchargez mon cv en cliquant sur la photo au dessus.",
+    "search": "Rechercher"
+  },
+
+  "Modal": {
+    "reset": "Recentrer"
+  },
+
+  "Contact": {
+    "title": {
+      "prefix": "Laissez moi un ",
+      "emphasis": "message"
+    },
+    "name": "Nom",
+    "email": "Adresse email",
+    "message": "Message",
+    "send": {
+      "title": "Envoyer le message",
+      "success": "Message envoyé avec succès!",
+      "error": "Erreur lors de l'envoi du message.",
+      "bot": "Le message n'a pas pu être envoyé car vous êtes un robot."
+    }
+  }
 }

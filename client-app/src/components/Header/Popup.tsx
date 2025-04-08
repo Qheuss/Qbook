@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { MdClose } from 'react-icons/md';
 import styles from './Popup.module.scss';
 import { useAppSelector } from '@/redux/hooks';
+import { useTranslation } from 'react-i18next';
 
 const Popup = () => {
   const [popupClosed, setPopupClosed] = useState<boolean>(false);
   const theme = useAppSelector((state) => state.theme.theme);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -26,7 +28,7 @@ const Popup = () => {
             <span
               className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
             >
-              Téléchargez mon cv en cliquant sur la photo au dessus.
+              {t('Header.popup')}
             </span>
             <button
               className={styles.popup__close}

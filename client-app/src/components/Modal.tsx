@@ -96,7 +96,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.modal} aria-modal='true'>
+    <div className={styles.modal} aria-modal='true' onClick={onClose}>
       <div
         className={styles.modal__content}
         onClick={(e) => e.stopPropagation()}
@@ -180,7 +180,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
             }
             disabled={scale === 1 && position.x === 0 && position.y === 0}
           >
-            {t('reset')}
+            {t('Modal.reset')}
           </button>
           <button
             className={

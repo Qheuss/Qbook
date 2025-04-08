@@ -3,12 +3,14 @@ import { IoMdSearch } from 'react-icons/io';
 import styles from './SearchBar.module.scss';
 import { HiX } from 'react-icons/hi';
 import { useAppSelector } from '@/redux/hooks';
+import { useTranslation } from 'react-i18next';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [triggerSearch, setTriggerSearch] = useState(false);
   const [highlightedWordsExist, setHighlightedWordsExist] = useState(false);
   const theme = useAppSelector((state) => state.theme.theme);
+  const { t } = useTranslation();
 
   const removeHighlights = () => {
     document.querySelectorAll('mark').forEach((mark) => {
@@ -98,7 +100,7 @@ const SearchBar = () => {
       <input
         id='search'
         type='text'
-        placeholder='Rechercher'
+        placeholder={t('Header.search')}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         onKeyDown={(event) => event.key === 'Enter' && setTriggerSearch(true)}
