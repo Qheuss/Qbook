@@ -41,7 +41,6 @@ export const changeLanguage = (lng: string) => {
   if (lng === i18n.language) return;
 
   i18n.changeLanguage(lng);
-  localStorage.setItem('preferredLanguage', lng);
 
   const newUrl = new URL(window.location.href);
   newUrl.searchParams.set('lang', lng);

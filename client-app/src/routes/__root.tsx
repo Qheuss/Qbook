@@ -24,12 +24,12 @@ function RootComponent() {
     ) {
       if (i18n.language !== langParam) {
         i18n.changeLanguage(langParam);
-        localStorage.setItem('preferredLanguage', langParam);
       }
     } else {
-      const preferredLanguage =
-        localStorage.getItem('preferredLanguage') ||
-        navigator.language.split('-')[0];
+      const currentLang = i18n.language.split('-')[0];
+      const browserLanguage = navigator.language.split('-')[0];
+
+      const preferredLanguage = currentLang || browserLanguage;
 
       const targetLang = SUPPORTED_LANGUAGES.includes(
         preferredLanguage as SupportedLanguage
