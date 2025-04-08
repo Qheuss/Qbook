@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styles from './Carousel.module.scss';
 import Modal from '../Modal';
 import {
@@ -19,10 +19,37 @@ const images: string[] = [
 const Carousel: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const theme = useAppSelector((state) => state.theme.theme);
 
   const scrollAmount = 200;
+
+  const checkScrollPosition = () => {
+    if (trackRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = trackRef.current;
+      setIsAtStart(scrollLeft <= 0);
+      setIsAtEnd(Math.ceil(scrollLeft + clientWidth) >= scrollWidth);
+    }
+  };
+
+  useEffect(() => {
+    checkScrollPosition();
+    const trackElement = trackRef.current;
+    if (trackElement) {
+      trackElement.addEventListener('scroll', checkScrollPosition);
+    }
+
+    window.addEventListener('resize', checkScrollPosition);
+
+    return () => {
+      if (trackElement) {
+        trackElement.removeEventListener('scroll', checkScrollPosition);
+      }
+      window.removeEventListener('resize', checkScrollPosition);
+    };
+  }, []);
 
   const scrollLeft = () => {
     if (trackRef.current) {
@@ -50,19 +77,21 @@ const Carousel: React.FC = () => {
 
   return (
     <div className={styles.carousel}>
-      <button
-        className={
-          styles.carousel__button +
-          ' ' +
-          styles.left +
-          (theme === 'dark'
-            ? ' bg-[#00000099] text-[#fff]'
-            : ' bg-[#fff] text-[#00000099] shadow-md')
-        }
-        onClick={scrollLeft}
-      >
-        <MdOutlineArrowBackIosNew />
-      </button>
+      {!isAtStart && (
+        <button
+          className={
+            styles.carousel__button +
+            ' ' +
+            styles.left +
+            (theme === 'dark'
+              ? ' bg-[#00000099] text-[#fff]'
+              : ' bg-[#fff] text-[#00000099] shadow-md')
+          }
+          onClick={scrollLeft}
+        >
+          <MdOutlineArrowBackIosNew />
+        </button>
+      )}
 
       <div className={styles.track} ref={trackRef}>
         {images.map((image, index) => (
@@ -76,21 +105,22 @@ const Carousel: React.FC = () => {
         ))}
       </div>
 
-      <button
-        className={
-          styles.carousel__button +
-          ' ' +
-          styles.right +
-          (theme === 'dark'
-            ? ' bg-[#00000099] text-[#fff]'
-            : ' bg-[#fff] text-[#00000099] shadow-md')
-        }
-        onClick={scrollRight}
-      >
-        <MdOutlineArrowForwardIos />
-      </button>
+      {!isAtEnd && (
+        <button
+          className={
+            styles.carousel__button +
+            ' ' +
+            styles.right +
+            (theme === 'dark'
+              ? ' bg-[#00000099] text-[#fff]'
+              : ' bg-[#fff] text-[#00000099] shadow-md')
+          }
+          onClick={scrollRight}
+        >
+          <MdOutlineArrowForwardIos />
+        </button>
+      )}
 
-      {/* Modal */}
       {isModalOpen && (
         <Modal
           isOpen={isModalOpen}
