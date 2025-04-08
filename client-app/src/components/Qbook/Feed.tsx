@@ -57,11 +57,7 @@ const Feed = () => {
           </li>
         </ul>
         <a
-          className={
-            theme === 'dark'
-              ? 'text-fontDark'
-              : 'text-fontLight' + ' text-center'
-          }
+          className={'text-accent'}
           target='_blank'
           href='https://velo-francorchamps.vercel.app/'
         >
@@ -78,7 +74,7 @@ const Feed = () => {
           {t('Aviron.description')}
         </p>
         <a
-          className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+          className={'text-accent'}
           target='_blank'
           href='https://www.aviron-uliege.be/'
         >
