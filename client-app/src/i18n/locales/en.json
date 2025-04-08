@@ -8,6 +8,29 @@
     "reset": "Reset"
   },
 
+  "Title": {
+    "clickHere": "Click here to contact me!",
+    "dialog": {
+      "title": "Hello!",
+      "description": "Would you like to contact me? I will respond as soon as possible.",
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+
+  "Post": {
+    "comments": "comments",
+    "shares": "shares",
+    "like": "Like",
+    "comment": "Comment",
+    "share": "Share",
+    "shareAction": {
+      "title": "Share my portfolio!",
+      "text": "Feel free to share my portfolio with others!",
+      "error": "Your browser does not support the 'share' function."
+    }
+  },
+
   "Contact": {
     "title": {
       "prefix": "Leave me a ",

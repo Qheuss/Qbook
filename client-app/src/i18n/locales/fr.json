@@ -8,6 +8,29 @@
     "reset": "Recentrer"
   },
 
+  "Title": {
+    "clickHere": "Cliquez ici pour me contacter!",
+    "dialog": {
+      "title": "Bonjour!",
+      "description": "Souhaitez-vous me contacter? Je vous répondrai dans les plus brefs délais.",
+      "yes": "Oui",
+      "no": "Non"
+    }
+  },
+
+  "Post": {
+    "comments": "commentaires",
+    "shares": "partages",
+    "like": "Aimer",
+    "comment": "Commenter",
+    "share": "Partager",
+    "shareAction": {
+      "title": "Partagez mon portfolio!",
+      "text": "N'hésitez pas à partager mon portfolio autour de vous!",
+      "error": "Votre navigateur ne supporte pas la fonction 'share'"
+    }
+  },
+
   "Contact": {
     "title": {
       "prefix": "Laissez moi un ",

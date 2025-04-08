@@ -3,12 +3,15 @@ import styles from './PostActions.module.scss';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { useState } from 'react';
 import { useAppSelector } from '@/redux/hooks';
+import { useTranslation } from 'react-i18next';
 
 const PostActions = () => {
   const [likes, setLikes] = useState(0);
   const [shares, setShares] = useState(0);
 
   const theme = useAppSelector((state) => state.theme.theme);
+
+  const { t } = useTranslation();
 
   return (
     <div className={styles.actions}>
@@ -23,8 +26,12 @@ const PostActions = () => {
           <span>{likes}</span>
         </div>
         <div>
-          <span>{0} commentaires</span>
-          <span>{shares} partages</span>
+          <span>
+            {0} {t('Post.comments')}
+          </span>
+          <span>
+            {shares} {t('Post.shares')}
+          </span>
         </div>
       </div>
       <hr />
@@ -38,7 +45,7 @@ const PostActions = () => {
           onClick={() => setLikes(likes + 1)}
         >
           <AiOutlineLike />
-          Like
+          <span>{t('Post.like')}</span>
         </button>
         <button
           className={
@@ -48,7 +55,7 @@ const PostActions = () => {
           }
         >
           <TbMessageCircle />
-          Commenter
+          <span>{t('Post.comment')}</span>
         </button>
         <button
           className={
@@ -61,8 +68,8 @@ const PostActions = () => {
             if (navigator.share) {
               try {
                 await navigator.share({
-                  title: 'Partagez mon site web!',
-                  text: "N'hésitez pas à partager mon site web autour de vous!",
+                  title: t('Post.shareAction.title'),
+                  text: t('Post.shareAction.text'),
                   url: window.location.href,
                 });
                 console.log('Shared successfully!');
@@ -70,12 +77,12 @@ const PostActions = () => {
                 console.error('Error sharing:', error);
               }
             } else {
-              alert('Votre navigateur ne supporte pas la fonction "share"');
+              alert(t('Post.shareAction.error'));
             }
           }}
         >
           <TbShare3 />
-          Partager
+          <span>{t('Post.share')}</span>
         </button>
       </div>
     </div>

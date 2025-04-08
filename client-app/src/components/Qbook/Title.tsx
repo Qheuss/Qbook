@@ -5,10 +5,12 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import Socials from './Socials';
 import { useNavigate } from '@tanstack/react-router';
 import { useAppSelector } from '@/redux/hooks';
+import { useTranslation } from 'react-i18next';
 
 const Title = () => {
   const navigate = useNavigate();
   const theme = useAppSelector((state) => state.theme.theme);
+  const { t } = useTranslation();
 
   const socials = [
     {
@@ -44,12 +46,9 @@ const Title = () => {
                 theme === 'dark' ? ' text-fontDark' : ' text-fontLight'
               }
             >
-              Me contacter
+              {t('Title.dialog.title')}
             </h4>
-            <p>
-              Souhaitez-vous me contacter? Je vous répondrai dans les plus brefs
-              délais.
-            </p>
+            <p>{t('Title.dialog.description')}</p>
           </section>
           <div>
             <button
@@ -59,7 +58,7 @@ const Title = () => {
                 (theme === 'dark' ? ' bg-searchDark' : ' bg-searchLight')
               }
             >
-              Oui
+              {t('Title.dialog.yes')}
             </button>
             <button
               onClick={reject}
@@ -69,7 +68,7 @@ const Title = () => {
                   : ' bg-searchLight text-fontLighter'
               }
             >
-              Non
+              {t('Title.dialog.no')}
             </button>
           </div>
         </div>
@@ -80,7 +79,7 @@ const Title = () => {
         () => {}
       );
     };
-  }, [navigate, theme]);
+  }, [navigate, t, theme]);
 
   return (
     <div
@@ -98,7 +97,7 @@ const Title = () => {
               : ' bg-commentsLight text-fontLighter'
           }
         >
-          <h1 data-test='cliquezici'>Cliquez ici pour me contacter!</h1>
+          <h1 data-test='cliquezici'>{t('Title.clickHere')}</h1>
         </button>
       </div>
       <div
