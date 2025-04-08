@@ -35,7 +35,7 @@ const LanguageSwitcher: React.FC = () => {
         }  text-accent pr-1 pl-2 md:pr-2 md:pl-3`}
         aria-expanded={isDrawerOpen}
         aria-controls='language-drawer'
-        onBlur={() => setIsDrawerOpen(false)}
+        onBlur={() => setTimeout(() => setIsDrawerOpen(false), 150)}
       >
         <span className={styles.languageCode + ' text-sm'}>
           {currentLang.code.toUpperCase()}
