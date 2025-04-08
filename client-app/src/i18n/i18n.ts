@@ -48,5 +48,5 @@ export const changeLanguage = (lng: string) => {
 };
 
 export const getCurrentLanguage = () => {
-  return i18n.language || i18n.options.fallbackLng;
+  return i18n.language.split('-')[0] || i18n.options.fallbackLng;
 };
