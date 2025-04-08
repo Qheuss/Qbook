@@ -21,24 +21,72 @@ const Feed = () => {
       <Post>
         <ul>
           <li>
-            <a
+            <p
               className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
-              target='_blank'
-              href='https://www.aviron-uliege.be/'
             >
-              https://www.aviron-uliege.be/
-            </a>
+              {t('Francorchamps.description1')}
+            </p>
           </li>
           <li>
-            <a
+            <p
               className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
-              target='_blank'
-              href='https://velo-francorchamps.vercel.app/'
             >
-              https://velo-francorchamps.vercel.app/
-            </a>
+              {t('Francorchamps.description2')}
+            </p>
+          </li>
+          <li>
+            <p
+              className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+            >
+              {t('Francorchamps.description3')}
+            </p>
+          </li>
+          <li>
+            <p
+              className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+            >
+              {t('Francorchamps.description4')}
+            </p>
+          </li>
+          <li>
+            <p
+              className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+            >
+              {t('Francorchamps.description5')}
+            </p>
           </li>
         </ul>
+        <a
+          className={
+            theme === 'dark'
+              ? 'text-fontDark'
+              : 'text-fontLight' + ' text-center'
+          }
+          target='_blank'
+          href='https://velo-francorchamps.vercel.app/'
+        >
+          velo-francorchamps.vercel.app
+        </a>
+        <p></p>
+        <section>
+          <img src='images/Fun&WorkBikeFrancorchamps.png' alt='aviron' />
+        </section>
+      </Post>
+
+      <Post>
+        <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
+          {t('Aviron.description')}
+        </p>
+        <a
+          className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+          target='_blank'
+          href='https://www.aviron-uliege.be/'
+        >
+          www.aviron-uliege.be
+        </a>
+        <section>
+          <img src='images/aviron1.png' alt='aviron' />
+        </section>
       </Post>
 
       <Post>

@@ -31,6 +31,18 @@
     }
   },
 
+  "Francorchamps": {
+    "description1": "During my free time, I developed a website for the Rotary Club in my city. The site allows users to register for an event that has been taking place every year since 2024. It is built with NextJs for the frontend and Prisma for the backend.",
+    "description2": "I used SASS extensively for the design and Tailwind CSS for responsiveness.",
+    "description3": "I use the Stripe API for payments and Resend for confirmation emails.",
+    "description4": "The form was created with react-hook-form and field validation with Zod.",
+    "description5": "The language switch is handled with next-intl, and the site is hosted on Vercel."
+  },
+
+  "Aviron": {
+    "description": "As a final project at BeCode, I developed the redesign of the rowing club's website at ULiège with three other colleagues. The site allows admins to manage members and display the latest events and photos. Our team consisted of two frontend developers (including me) and two backend developers. It is built with NextJs for the frontend and Laravel for the backend."
+  },
+
   "Introduction": {
     "description": "Having recently completed the Junior Developer training at BeCode and complemented it with an enriching internship at EVS Broadcast, I am looking for an opportunity to leverage my skills in a professional environment. I am punctual, dedicated, comfortable in collaborative environments, and eager to contribute to a team while continuing to develop my skills.",
     "help": "Eligible for the PFI scheme and access to Impulsion 12 months +"
