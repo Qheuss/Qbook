@@ -56,7 +56,6 @@ const Feed = () => {
         >
           velo-francorchamps.vercel.app
         </a>
-        <p></p>
         <section>
           <img src='images/Fun&WorkBikeFrancorchamps.png' alt='aviron' />
         </section>
