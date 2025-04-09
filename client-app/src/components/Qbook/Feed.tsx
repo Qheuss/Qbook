@@ -48,13 +48,6 @@ const Feed = () => {
               {t('Francorchamps.description4')}
             </p>
           </li>
-          <li>
-            <p
-              className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
-            >
-              {t('Francorchamps.description5')}
-            </p>
-          </li>
         </ul>
         <a
           className={'text-accent'}

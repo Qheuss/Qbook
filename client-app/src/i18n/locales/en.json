@@ -35,8 +35,7 @@
     "description1": "During my free time, I developed a website for the Rotary Club in my city. The site allows users to register for an event that has been taking place every year since 2024. It is built with Next.js for the frontend, Node.js for the backend and Prisma as ORM.",
     "description2": "I used SASS extensively for the design and Tailwind CSS for responsiveness.",
     "description3": "I use the Stripe API for payments and Resend for confirmation emails.",
-    "description4": "The form was created with react-hook-form and field validation with Zod.",
-    "description5": "The language switch is handled with next-intl, and the site is hosted on Vercel."
+    "description4": "The form was created with react-hook-form and field validation with Zod."
   },
 
   "Aviron": {
