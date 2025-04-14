@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/Link';
+import { Link } from '@tanstack/react-router';
 import styles from './Logo.module.scss';
 
 const Logo = () => {

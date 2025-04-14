@@ -1,6 +1,6 @@
+import { Link } from '@tanstack/react-router';
 import styles from './NavItem.module.scss';
 import { useAppSelector } from '@/redux/hooks';
-import { Link } from '@/i18n/Link';
 
 interface NavItemProps {
   icon: React.ElementType;

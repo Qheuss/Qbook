@@ -27,7 +27,6 @@ i18n
     fallbackLng: 'fr',
     detection: {
       order: ['querystring', 'localStorage', 'navigator'],
-      lookupQuerystring: 'lang',
       caches: ['localStorage'],
     },
     interpolation: {
@@ -41,10 +40,6 @@ export const changeLanguage = (lng: string) => {
   if (lng === i18n.language) return;
 
   i18n.changeLanguage(lng);
-
-  const newUrl = new URL(window.location.href);
-  newUrl.searchParams.set('lang', lng);
-  window.history.replaceState({}, '', newUrl);
 };
 
 export const getCurrentLanguage = () => {

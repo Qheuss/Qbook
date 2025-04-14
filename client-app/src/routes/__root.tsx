@@ -15,35 +15,19 @@ function RootComponent() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const langParam = urlParams.get('lang');
+    const currentLang = i18n.language.split('-')[0];
+    const browserLanguage = navigator.language.split('-')[0];
 
-    if (
-      langParam &&
-      SUPPORTED_LANGUAGES.includes(langParam as SupportedLanguage)
-    ) {
-      if (i18n.language !== langParam) {
-        i18n.changeLanguage(langParam);
-      }
-    } else {
-      const currentLang = i18n.language.split('-')[0];
-      const browserLanguage = navigator.language.split('-')[0];
+    const preferredLanguage = currentLang || browserLanguage;
 
-      const preferredLanguage = currentLang || browserLanguage;
+    const targetLang = SUPPORTED_LANGUAGES.includes(
+      preferredLanguage as SupportedLanguage
+    )
+      ? preferredLanguage
+      : 'fr';
 
-      const targetLang = SUPPORTED_LANGUAGES.includes(
-        preferredLanguage as SupportedLanguage
-      )
-        ? preferredLanguage
-        : 'fr';
-
-      if (i18n.language !== targetLang) {
-        i18n.changeLanguage(targetLang);
-      }
-
-      const newUrl = new URL(window.location.href);
-      newUrl.searchParams.set('lang', targetLang);
-      window.history.replaceState({}, '', newUrl);
+    if (i18n.language !== targetLang) {
+      i18n.changeLanguage(targetLang);
     }
   }, [i18n, navigate]);
 

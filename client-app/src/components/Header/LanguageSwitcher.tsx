@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { changeLanguage, getCurrentLanguage } from '@/i18n/i18n';
+import {
+  changeLanguage,
+  getCurrentLanguage,
+  SUPPORTED_LANGUAGES,
+} from '@/i18n/i18n';
 import styles from './LanguageSwitcher.module.scss';
 import { useAppSelector } from '@/redux/hooks';
 
@@ -12,7 +16,9 @@ const LanguageSwitcher: React.FC = () => {
   const currentLanguage = getCurrentLanguage();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const languages: Language[] = [{ code: 'en' }, { code: 'fr' }];
+  const languages: Language[] = SUPPORTED_LANGUAGES.map((lang) => ({
+    code: lang,
+  }));
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
