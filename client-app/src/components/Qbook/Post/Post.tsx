@@ -2,6 +2,7 @@ import styles from './Post.module.scss';
 import { useAppSelector } from '@/redux/hooks';
 import PostHeader from './PostHeader';
 import PostActions from './PostActions';
+import { motion } from 'motion/react';
 
 interface PostProps {
   children?: React.ReactNode;
@@ -10,16 +11,41 @@ interface PostProps {
 const Post = ({ children }: PostProps) => {
   const theme = useAppSelector((state) => state.theme.theme);
 
+  const animations = {
+    container: {
+      hidden: { opacity: 0 },
+      show: {
+        opacity: 1,
+        transition: {
+          staggerChildren: 0.1,
+        },
+      },
+    },
+    item: {
+      hidden: { opacity: 0, y: 20 },
+      show: { opacity: 1, y: 0 },
+    },
+  };
+
   return (
-    <div
+    <motion.div
       className={
         styles.post + (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
       }
+      variants={animations.container}
+      initial='hidden'
+      animate='show'
     >
-      <PostHeader />
-      <div className={styles.content}>{children && children}</div>
-      <PostActions />
-    </div>
+      <motion.div variants={animations.item}>
+        <PostHeader />
+      </motion.div>
+      <motion.div className={styles.content} variants={animations.item}>
+        {children && children}
+      </motion.div>
+      <motion.div variants={animations.item}>
+        <PostActions />
+      </motion.div>
+    </motion.div>
   );
 };
 

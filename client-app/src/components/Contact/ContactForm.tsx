@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import styles from './ContactForm.module.scss';
 import { useAppSelector } from '@/redux/hooks';
 import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'motion/react';
 
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
@@ -17,6 +18,22 @@ const ContactForm: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const theme = useAppSelector((state) => state.theme.theme);
   const { t } = useTranslation();
+
+  const formAnimations = {
+    container: {
+      hidden: { opacity: 0 },
+      show: {
+        opacity: 1,
+        transition: {
+          staggerChildren: 0.2,
+        },
+      },
+    },
+    item: {
+      hidden: { y: 20, opacity: 0 },
+      show: { y: 0, opacity: 1 },
+    },
+  };
 
   useEffect(() => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -87,7 +104,10 @@ const ContactForm: React.FC = () => {
 
   return (
     <div className={styles.contactForm}>
-      <form
+      <motion.form
+        initial='hidden'
+        animate='show'
+        variants={formAnimations.container}
         onSubmit={handleSubmit}
         id='contact-form'
         name='contact-form'
@@ -96,11 +116,15 @@ const ContactForm: React.FC = () => {
           (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
         }
       >
-        <h1 className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}>
+        <motion.h1
+          variants={formAnimations.item}
+          className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
+        >
           {t('Contact.title.prefix')}
           <span>{t('Contact.title.emphasis')}</span> !
-        </h1>
-        <div>
+        </motion.h1>
+
+        <motion.div variants={formAnimations.item}>
           <label
             className={
               theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
@@ -110,7 +134,8 @@ const ContactForm: React.FC = () => {
           >
             {t('Contact.name')}:
           </label>
-          <input
+          <motion.input
+            whileFocus={{ scale: 1.01 }}
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
             type='text'
             value={name}
@@ -121,8 +146,9 @@ const ContactForm: React.FC = () => {
             required
             data-test='name-input'
           />
-        </div>
-        <div>
+        </motion.div>
+
+        <motion.div variants={formAnimations.item}>
           <label
             className={
               theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
@@ -132,7 +158,8 @@ const ContactForm: React.FC = () => {
           >
             {t('Contact.email')}:
           </label>
-          <input
+          <motion.input
+            whileFocus={{ scale: 1.01 }}
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
             type='email'
             value={email}
@@ -143,8 +170,9 @@ const ContactForm: React.FC = () => {
             required
             data-test='email-input'
           />
-        </div>
-        <div>
+        </motion.div>
+
+        <motion.div variants={formAnimations.item}>
           <label
             className={
               theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
@@ -154,7 +182,8 @@ const ContactForm: React.FC = () => {
           >
             {t('Contact.message')}:
           </label>
-          <textarea
+          <motion.textarea
+            whileFocus={{ scale: 1.01 }}
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
             ref={textareaRef}
             value={message}
@@ -171,7 +200,7 @@ const ContactForm: React.FC = () => {
             required
             data-test='message-textarea'
           />
-        </div>
+        </motion.div>
 
         {/* Honeypot */}
         <div style={{ display: 'none' }}>
@@ -189,7 +218,10 @@ const ContactForm: React.FC = () => {
         </div>
         {/* Honeypot */}
 
-        <button
+        <motion.button
+          variants={formAnimations.item}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className={
             theme === 'dark'
               ? ' bg-searchDark text-fontDarker'
@@ -203,10 +235,22 @@ const ContactForm: React.FC = () => {
           data-test='submit-button'
         >
           {t('Contact.send.title')}
-        </button>
-      </form>
+        </motion.button>
+      </motion.form>
 
-      {statusVisible && <p className={styles.status}>{status}</p>}
+      <AnimatePresence>
+        {statusVisible && (
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className={styles.status}
+          >
+            {status}
+          </motion.p>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

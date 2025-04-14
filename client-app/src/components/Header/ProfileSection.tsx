@@ -1,20 +1,27 @@
+import Popup from './Popup';
+import styles from './ProfileSection.module.scss';
 import { FaMoon } from 'react-icons/fa';
 import { HiOutlineDownload } from 'react-icons/hi';
 import { LuSunMedium } from 'react-icons/lu';
-
-import Popup from './Popup';
-import styles from './ProfileSection.module.scss';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { toggleTheme } from '@/redux/themeSlice';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useState } from 'react';
+import { motion } from 'motion/react';
 
 const ProfileSection = () => {
+  const [isAnimating, setIsAnimating] = useState(false);
+
   const theme = useAppSelector((state) => state.theme.theme);
 
   const dispatch = useAppDispatch();
 
   const handleToggleTheme = () => {
-    dispatch(toggleTheme());
+    setIsAnimating(true);
+    setTimeout(() => {
+      dispatch(toggleTheme());
+      setIsAnimating(false);
+    }, 300);
   };
 
   return (
@@ -25,13 +32,19 @@ const ProfileSection = () => {
       <li
         className={
           theme === 'dark'
-            ? 'bg-searchDark text-white text-2xl hover:text-yellow-500'
-            : 'bg-searchLight text-yellow-500 text-2xl hover:text-white'
+            ? 'bg-searchDark text-white text-2xl'
+            : 'bg-searchLight text-yellow-500 text-2xl'
         }
       >
-        <button onClick={handleToggleTheme}>
+        <motion.button
+          onClick={handleToggleTheme}
+          animate={isAnimating ? { rotate: 360 } : {}}
+          transition={{ duration: 0.5 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
           {theme === 'dark' ? <FaMoon /> : <LuSunMedium />}
-        </button>
+        </motion.button>
       </li>
       <li>
         <a
