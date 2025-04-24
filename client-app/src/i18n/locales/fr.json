@@ -32,7 +32,7 @@
   },
 
   "Francorchamps": {
-    "description1": "Lors de mon temps libre, j'ai développé un site web pour le Rotary de ma ville. Le site permet aux utilisateurs de s'inscrire à un évênement qui se déroule chaque année depuis 2024. Il est construit avec Next.js pour le frontend, Node.js pour le backend et Prisma comme ORM.",
+    "description1": "Lors de mon temps libre, j'ai développé un site web pour le Rotary de la ville de Herve. Le site permet aux utilisateurs de s'inscrire à un évènement qui se déroule chaque année depuis 2024. Il est construit avec Next.js pour le frontend, Node.js pour le backend et Prisma comme ORM.",
     "description2": "J'ai utilisé SASS en grande partie pour le design et Tailwind CSS pour le responsive.",
     "description3": "J'utilise l'api Stripe pour le paiement et Resend pour l'email de confirmation.",
     "description4": "Le formulaire a été réalisé avec react-hook-form et la validation des champs avec Zod."
