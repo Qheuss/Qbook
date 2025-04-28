@@ -15,9 +15,9 @@ const Navigation = ({ className }: Navigation) => {
   const theme = useAppSelector((state) => state.theme.theme);
 
   const navItems = [
-    { icon: HiMiniHome, path: '/', index: 0 },
-    { icon: IoIosMail, path: '/contact', index: 1 },
-    // { icon: GiCalculator, path: '/calculator', index: 2 },
+    { icon: HiMiniHome, path: '/' },
+    { icon: IoIosMail, path: '/contact' },
+    // { icon: GiCalculator, path: '/calculator'},
   ];
   return (
     <nav
@@ -31,9 +31,9 @@ const Navigation = ({ className }: Navigation) => {
         className
       }
     >
-      {navItems.map((item) => (
+      {navItems.map((item, index) => (
         <NavItem
-          key={item.index}
+          key={index}
           {...item}
           selected={location.pathname === item.path}
         />
