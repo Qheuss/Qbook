@@ -12,6 +12,7 @@
     scroll-behavior: smooth;
     padding: 10px 0;
     white-space: nowrap;
+    scroll-snap-type: x mandatory;
 
     &::-webkit-scrollbar {
       display: none;
@@ -27,6 +28,7 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.3s ease;
+    scroll-snap-align: start;
 
     img {
       width: 100%;
