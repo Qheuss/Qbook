@@ -8,16 +8,14 @@ describe('QBook', () => {
   });
 
   it('the h1 contains the correct text', () => {
-    cy.get('h1').contains('Cliquez ici pour me contacter!');
+    cy.get('h1').contains('Click here to contact me!');
   });
 
   it('the h1 contains the correct text (with data-test)', () => {
-    cy.getByData('cliquezici').contains('Cliquez ici pour me contacter!');
+    cy.getByData('cliquezici').contains('Click here to contact me!');
   });
 
   it('testing the paragraphs', () => {
-    cy.get('p').eq(0).contains('Ayant récemment terminé');
-    cy.get('p').eq(1).contains('Réalisations:');
-    cy.get('p').eq(2).contains('COMPÉTENCES');
+    cy.get('p').eq(0).contains('During my free time');
   });
 });

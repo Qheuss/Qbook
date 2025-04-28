@@ -4,7 +4,7 @@ describe('QBookContact', () => {
   });
 
   it('name-label', () => {
-    cy.getByData('name-label').contains('Nom:');
+    cy.getByData('name-label').contains('Name:');
   });
 
   it('name-input', () => {
@@ -12,7 +12,7 @@ describe('QBookContact', () => {
   });
 
   it('email-label', () => {
-    cy.getByData('email-label').contains('Adresse email:');
+    cy.getByData('email-label').contains('Email address:');
   });
 
   it('email-input', () => {
@@ -44,7 +44,7 @@ describe('QBookContact', () => {
 
   it('submit-button', () => {
     cy.getByData('submit-button')
-      .contains('Envoyer le message')
+      .contains('Send message')
       .should('have.class', 'text-fontDarker')
       .should('have.class', 'bg-searchDark');
   });
@@ -54,7 +54,7 @@ describe('QBookContact', () => {
     cy.getByData('email-input').type('tom@aol.com');
     cy.getByData('message-textarea').type('Salut comment ça va?');
     cy.getByData('submit-button')
-      .contains('Envoyer le message')
+      .contains('Send message')
       .should('have.css', 'color', 'rgb(0, 0, 0)')
       .should('have.css', 'background-color', 'rgb(84, 192, 120)');
   });
