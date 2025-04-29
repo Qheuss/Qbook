@@ -51,13 +51,13 @@ const Feed = () => {
         </ul>
         <a
           className={'text-accent'}
-          target='_blank'
-          href='https://velo-francorchamps.vercel.app/'
+          target="_blank"
+          href="https://francorchamps.bike/"
         >
-          velo-francorchamps.vercel.app
+          francorchamps.bike
         </a>
         <section>
-          <img src='images/Fun&WorkBikeFrancorchamps.png' alt='aviron' />
+          <img src="images/Fun&WorkBikeFrancorchamps.png" alt="aviron" />
         </section>
       </Post>
 
@@ -67,13 +67,13 @@ const Feed = () => {
         </p>
         <a
           className={'text-accent'}
-          target='_blank'
-          href='https://www.aviron-uliege.be/'
+          target="_blank"
+          href="https://www.aviron-uliege.be/"
         >
           www.aviron-uliege.be
         </a>
         <section>
-          <img src='images/aviron1.png' alt='aviron' />
+          <img src="images/aviron1.png" alt="aviron" />
         </section>
       </Post>
 
@@ -90,7 +90,7 @@ const Feed = () => {
           {t('Introduction.help')}
         </p>
         <section>
-          <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
+          <img src="images/QuentinHeusse.jpg" alt="Quentin Heusse" />
         </section>
       </Post>
 
