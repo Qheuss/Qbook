@@ -181,7 +181,7 @@ const ContactForm: React.FC = () => {
           <motion.textarea
             whileFocus={{ scale: 1.01 }}
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
-            maxLength={1201}
+            maxLength={1200}
             {...register('message')}
             id='message'
             data-test='message-textarea'

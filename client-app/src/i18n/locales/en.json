@@ -61,13 +61,16 @@
       "title": "Send message",
       "success": "Message sent successfully!",
       "error": "Failed to send message.",
-      "bot": "The message could not be sent because you are a robot."
+      "bot": "Validation error. Are you a robot?"
     },
     "error": {
       "name": "Please enter your name",
+      "nameMax": "Name cannot exceed 70 characters",
       "email": "Please enter a valid email address",
       "emailRequired": "Please enter an email address",
-      "message": "Please enter a message"
+      "emailMax": "Email cannot exceed 320 characters",
+      "message": "Please enter a message",
+      "messageMax": "Message cannot exceed 1200 characters"
     }
   }
 }

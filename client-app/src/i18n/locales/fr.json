@@ -61,13 +61,16 @@
       "title": "Envoyer le message",
       "success": "Message envoyé avec succès!",
       "error": "Erreur lors de l'envoi du message.",
-      "bot": "Le message n'a pas pu être envoyé car vous êtes un robot."
+      "bot": "Erreur de validation. Êtes-vous un robot ?"
     },
     "error": {
       "name": "Veuillez saisir votre nom",
+      "nameMax": "Le nom ne peut pas dépasser 70 caractères",
       "email": "Veuillez saisir une adresse email valide",
       "emailRequired": "Veuillez saisir une adresse email",
-      "message": "Veuillez saisir un message"
+      "emailMax": "L'email ne peut pas dépasser 320 caractères",
+      "message": "Veuillez saisir un message",
+      "messageMax": "Le message ne peut pas dépasser 1200 caractères"
     }
   }
 }
