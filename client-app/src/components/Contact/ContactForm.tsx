@@ -1,23 +1,46 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import styles from './ContactForm.module.scss';
 import { useAppSelector } from '@/redux/hooks';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
+import { createContactSchema } from '@/schemas/contact';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Contact } from '@/interfaces/contact';
 
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
 const ContactForm: React.FC = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
-  const [honeypot, setHoneypot] = useState('');
   const [statusVisible, setStatusVisible] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [statusType, setStatusType] = useState<'success' | 'error'>('success');
+
   const theme = useAppSelector((state) => state.theme.theme);
   const { t } = useTranslation();
+  const contactSchema = createContactSchema(t);
+
+  const defaultValues: Contact = {
+    name: '',
+    email: '',
+    message: '',
+    honeypot: '',
+  };
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<Contact>({
+    resolver: zodResolver(contactSchema),
+    defaultValues,
+    mode: 'onSubmit',
+  });
+
+  const watchedFields = watch(['name', 'email', 'message']);
+  const allFieldsFilled = watchedFields.every((field) => field !== '');
 
   const formAnimations = {
     container: {
@@ -33,32 +56,22 @@ const ContactForm: React.FC = () => {
       hidden: { y: 20, opacity: 0 },
       show: { y: 0, opacity: 1 },
     },
+    nothing: {},
   };
 
-  useEffect(() => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (name && emailRegex.test(email) && message) {
-      setIsFormValid(true);
-    } else {
-      setIsFormValid(false);
-    }
-  }, [name, email, message]);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (honeypot) {
-      setStatus(t('Contact.send.bot'));
+  const onSubmit = (data: Contact) => {
+    if (errors.honeypot) {
+      setStatus(errors.honeypot?.message || t('Contact.send.bot'));
+      setStatusType('error');
       setStatusVisible(true);
       setTimeout(() => setStatusVisible(false), 10000);
       return;
     }
 
     const templateParams = {
-      from_name: name,
-      user_email: email,
-      message: message,
+      from_name: data.name,
+      user_email: data.email,
+      message: data.message,
     };
 
     emailjs
@@ -71,36 +84,22 @@ const ContactForm: React.FC = () => {
       .then((response) => {
         console.log(t('Contact.send.success'), response.status, response.text);
         setStatus(t('Contact.send.success'));
+        setStatusType('success');
         setStatusVisible(true);
         setTimeout(() => setStatusVisible(false), 10000);
       })
       .catch((error) => {
         console.error(`${t('Contact.send.error')} :`, error);
         setStatus(t('Contact.send.error'));
+        setStatusType('error');
         setStatusVisible(true);
         setTimeout(() => setStatusVisible(false), 10000);
       });
 
-    setName('');
-    setEmail('');
-    setMessage('');
+    setValue('name', '');
+    setValue('email', '');
+    setValue('message', '');
   };
-
-  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.target.value);
-    resizeTextarea();
-  };
-
-  const resizeTextarea = () => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-    }
-  };
-
-  useEffect(() => {
-    resizeTextarea();
-  }, []);
 
   return (
     <div className={styles.contactForm}>
@@ -108,7 +107,7 @@ const ContactForm: React.FC = () => {
         initial='hidden'
         animate='show'
         variants={formAnimations.container}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         id='contact-form'
         name='contact-form'
         className={
@@ -138,14 +137,13 @@ const ContactForm: React.FC = () => {
             whileFocus={{ scale: 1.01 }}
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
             type='text'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
             maxLength={70}
+            {...register('name')}
             id='name'
             autoComplete='name'
-            required
             data-test='name-input'
           />
+          {errors.name && <p className='error-text'>{errors.name.message}</p>}
         </motion.div>
 
         <motion.div variants={formAnimations.item}>
@@ -161,16 +159,14 @@ const ContactForm: React.FC = () => {
           <motion.input
             whileFocus={{ scale: 1.01 }}
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             maxLength={320}
+            {...register('email')}
             id='email'
             autoComplete='email'
-            required
             data-test='email-input'
           />
         </motion.div>
+        {errors.email && <p className='error-text'>{errors.email.message}</p>}
 
         <motion.div variants={formAnimations.item}>
           <label
@@ -185,21 +181,14 @@ const ContactForm: React.FC = () => {
           <motion.textarea
             whileFocus={{ scale: 1.01 }}
             className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
-            ref={textareaRef}
-            value={message}
-            onChange={handleTextareaChange}
             maxLength={1201}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                setMessage((prev) => prev + '\n');
-                resizeTextarea();
-              }
-            }}
+            {...register('message')}
             id='message'
-            required
             data-test='message-textarea'
           />
+          {errors.message && (
+            <p className='error-text'>{errors.message.message}</p>
+          )}
         </motion.div>
 
         {/* Honeypot */}
@@ -209,9 +198,7 @@ const ContactForm: React.FC = () => {
           </label>
           <input
             type='text'
-            name='honey'
-            value={honeypot}
-            onChange={(e) => setHoneypot(e.target.value)}
+            {...register('honeypot')}
             id='honey'
             data-test='honey-input'
           />
@@ -219,9 +206,11 @@ const ContactForm: React.FC = () => {
         {/* Honeypot */}
 
         <motion.button
-          variants={formAnimations.item}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          variants={
+            allFieldsFilled ? formAnimations.item : formAnimations.nothing
+          }
+          whileHover={{ scale: allFieldsFilled ? 1.02 : 1 }}
+          whileTap={{ scale: allFieldsFilled ? 0.98 : 1 }}
           className={
             theme === 'dark'
               ? ' bg-searchDark text-fontDarker'
@@ -229,10 +218,16 @@ const ContactForm: React.FC = () => {
           }
           type='submit'
           style={{
-            backgroundColor: isFormValid ? '#54c078' : '',
-            color: isFormValid ? (theme === 'dark' ? 'black' : 'white') : '',
+            backgroundColor: allFieldsFilled ? '#54c078' : '',
+
+            color: allFieldsFilled
+              ? theme === 'dark'
+                ? 'black'
+                : 'white'
+              : '',
           }}
           data-test='submit-button'
+          disabled={!allFieldsFilled}
         >
           {t('Contact.send.title')}
         </motion.button>
@@ -245,7 +240,9 @@ const ContactForm: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className={styles.status}
+            className={`${styles.status} ${
+              statusType === 'error' ? styles.errorStatus : ''
+            }`}
           >
             {status}
           </motion.p>

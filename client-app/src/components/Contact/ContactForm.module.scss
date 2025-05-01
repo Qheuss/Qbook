@@ -20,10 +20,6 @@
       flex-direction: column;
       gap: 0.5rem;
 
-      // label {
-      //   cursor: grab;
-      // }
-
       input,
       textarea {
         padding: 7px 10px;
@@ -53,5 +49,9 @@
     text-align: center;
     padding: 10px 0;
     cursor: default;
+  }
+
+  .errorStatus {
+    color: var(--color-error);
   }
 }

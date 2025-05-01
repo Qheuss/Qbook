@@ -4,6 +4,7 @@
   --color-accent: #54c078;
   --color-accent-50: #54c07850;
   --color-accent-30: #54c07820;
+  --color-error: #ff5252;
 
   /* theme dark */
   --color-fontDark: #e2e5e9;
@@ -33,4 +34,10 @@
   --backgroundLight: var(--color-backgroundLight);
   --colorDark: var(--color-fontDarker);
   --colorLight: var(--color-fontLighter);
+}
+
+.error-text {
+  color: var(--color-error);
+  font-size: 0.8rem;
+  font-weight: 500;
 }

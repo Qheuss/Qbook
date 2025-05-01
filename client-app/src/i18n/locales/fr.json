@@ -62,6 +62,12 @@
       "success": "Message envoyé avec succès!",
       "error": "Erreur lors de l'envoi du message.",
       "bot": "Le message n'a pas pu être envoyé car vous êtes un robot."
+    },
+    "error": {
+      "name": "Veuillez saisir votre nom",
+      "email": "Veuillez saisir une adresse email valide",
+      "emailRequired": "Veuillez saisir une adresse email",
+      "message": "Veuillez saisir un message"
     }
   }
 }
