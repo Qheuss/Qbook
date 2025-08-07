@@ -11,7 +11,7 @@ const Footer = () => {
         (theme === 'dark' ? ' text-fontDark' : ' text-fontLight')
       }
     >
-      <span>Quentin Heusse | 2025</span>
+      <span>Quentin Heusse | {new Date().getFullYear()}</span>
     </footer>
   );
 };
