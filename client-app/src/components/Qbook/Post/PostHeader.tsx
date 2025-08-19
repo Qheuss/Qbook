@@ -1,7 +1,11 @@
 import { useAppSelector } from '@/redux/hooks';
 import styles from './PostHeader.module.scss';
 
-const PostHeader = () => {
+interface PostHeaderProps {
+  date?: string;
+}
+
+const PostHeader = ({ date }: PostHeaderProps) => {
   const now = new Date();
 
   const theme = useAppSelector((state) => state.theme.theme);
@@ -16,7 +20,7 @@ const PostHeader = () => {
         <h3
           className={theme === 'dark' ? 'text-fontDarker' : 'text-fontLighter'}
         >
-          {now.toLocaleDateString()}
+          {date ? date : now.toLocaleDateString()}
         </h3>
       </div>
     </div>

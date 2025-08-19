@@ -6,9 +6,10 @@ import { motion } from 'motion/react';
 
 interface PostProps {
   children?: React.ReactNode;
+  date?: string;
 }
 
-const Post = ({ children }: PostProps) => {
+const Post = ({ children, date }: PostProps) => {
   const theme = useAppSelector((state) => state.theme.theme);
 
   const animations = {
@@ -37,7 +38,7 @@ const Post = ({ children }: PostProps) => {
       animate='show'
     >
       <motion.div variants={animations.item}>
-        <PostHeader />
+        <PostHeader date={date} />
       </motion.div>
       <motion.div className={styles.content} variants={animations.item}>
         {children && children}

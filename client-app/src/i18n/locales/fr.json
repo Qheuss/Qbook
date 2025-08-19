@@ -31,6 +31,10 @@
     }
   },
 
+  "Toolbox": {
+    "description1": "J'ai développé cette boîte à outils avec Next.js et je la fais évoluer progressivement. Mon objectif est d'y rassembler différentes fonctionnalités utiles et d'y ajouter de nouveaux outils au fil du temps. Ce projet est aussi pour moi un terrain d'expérimentation pour explorer des technologies web modernes et améliorer mes compétences en développement front-end."
+  },
+
   "Francorchamps": {
     "description1": "Lors de mon temps libre, j'ai développé un site web pour le Rotary de la ville de Herve. Le site permet aux utilisateurs de s'inscrire à un évènement qui se déroule chaque année depuis 2024. Il est construit avec Next.js pour le frontend, Node.js pour le backend et Prisma comme ORM.",
     "description2": "J'ai utilisé SASS en grande partie pour le design et Tailwind CSS pour le responsive.",

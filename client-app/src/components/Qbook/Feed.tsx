@@ -17,8 +17,28 @@ const Feed = () => {
     >
       <Title />
       <Carousel />
-
-      <Post>
+      <Post date='8/19/2025'>
+        <ul>
+          <li>
+            <p
+              className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+            >
+              {t('Toolbox.description1')}
+            </p>
+          </li>
+        </ul>
+        <a
+          className={'text-accent'}
+          target='_blank'
+          href='https://toolboxqh.netlify.app/'
+        >
+          toolboxqh.netlify.app
+        </a>
+        <section>
+          <img src='images/toolbox1.png' alt='toolbox' />
+        </section>
+      </Post>
+      <Post date='8/7/2025'>
         <ul>
           <li>
             <p
@@ -51,32 +71,33 @@ const Feed = () => {
         </ul>
         <a
           className={'text-accent'}
-          target="_blank"
-          href="https://francorchamps.bike/"
+          target='_blank'
+          href='https://francorchamps.bike/'
         >
           francorchamps.bike
         </a>
         <section>
-          <img src="images/Fun&WorkBikeFrancorchamps.png" alt="aviron" />
+          <img
+            src='images/Fun&WorkBikeFrancorchamps.png'
+            alt='WorkBikeFrancorchamps'
+          />
         </section>
       </Post>
-
-      <Post>
+      <Post date='7/30/2024'>
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
           {t('Aviron.description')}
         </p>
         <a
           className={'text-accent'}
-          target="_blank"
-          href="https://www.aviron-uliege.be/"
+          target='_blank'
+          href='https://www.aviron-uliege.be/'
         >
           www.aviron-uliege.be
         </a>
         <section>
-          <img src="images/aviron1.png" alt="aviron" />
+          <img src='images/aviron1.png' alt='aviron' />
         </section>
       </Post>
-
       <Post>
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
           {t('Introduction.description')}
@@ -90,10 +111,9 @@ const Feed = () => {
           {t('Introduction.help')}
         </p>
         <section>
-          <img src="images/QuentinHeusse.jpg" alt="Quentin Heusse" />
+          <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
         </section>
       </Post>
-
       <Post>
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
           {t('Skills')}: React.js | Next.js | HTML | Figma | Linux | C# |

@@ -31,6 +31,10 @@
     }
   },
 
+  "Toolbox": {
+    "description1": "I built this toolbox with Next.js, and I'm continuously improving it. My goal is to gather different useful features and keep expanding it with new tools over time. This project also serves as a playground for me to explore modern web technologies and strengthen my front-end development skills."
+  },
+
   "Francorchamps": {
     "description1": "During my free time, I developed a website for the Rotary Club in my city. The site allows users to register for an event that has been taking place every year since 2024. It is built with Next.js for the frontend, Node.js for the backend and Prisma as ORM.",
     "description2": "I used SASS extensively for the design and Tailwind CSS for responsiveness.",
