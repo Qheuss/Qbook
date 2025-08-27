@@ -6,6 +6,7 @@ import { LuSunMedium } from 'react-icons/lu';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { toggleTheme } from '@/redux/themeSlice';
 import LanguageSwitcher from './LanguageSwitcher';
+import { getCurrentLanguage } from '@/i18n/i18n';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 
@@ -48,7 +49,11 @@ const ProfileSection = () => {
       </li>
       <li>
         <a
-          href='CV-Quentin_Heusse.pdf'
+          href={
+            getCurrentLanguage() === 'fr'
+              ? 'CV-Quentin_Heusse.pdf'
+              : 'CV-Quentin_Heusse-en.pdf'
+          }
           target='_blank'
           rel='noopener noreferrer'
         >

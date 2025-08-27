@@ -70,7 +70,7 @@ const Feed = () => {
           </li>
         </ul>
         <a
-          className={'text-accent'}
+          className='text-accent'
           target='_blank'
           href='https://francorchamps.bike/'
         >
