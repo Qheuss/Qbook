@@ -20,7 +20,7 @@ const PostHeader = ({ date }: PostHeaderProps) => {
         <h3
           className={theme === 'dark' ? 'text-fontDarker' : 'text-fontLighter'}
         >
-          {date ? date : now.toLocaleDateString()}
+          {date ? date : now.toLocaleDateString('en-GB')}
         </h3>
       </div>
     </div>
