@@ -17,7 +17,7 @@ const Feed = () => {
     >
       <Title />
       <Carousel />
-      <Post date='9/03/2025'>
+      <Post date='03/09/2025'>
         <ul>
           <li>
             <p
@@ -38,7 +38,7 @@ const Feed = () => {
           <img src='images/YouteTube1.png' alt='Youte Tube' />
         </section>
       </Post>
-      <Post date='8/19/2025'>
+      <Post date='19/08/2025'>
         <ul>
           <li>
             <p
@@ -59,7 +59,7 @@ const Feed = () => {
           <img src='images/toolbox1.png' alt='toolbox' />
         </section>
       </Post>
-      <Post date='8/7/2025'>
+      <Post date='07/08/2025'>
         <ul>
           <li>
             <p
@@ -104,7 +104,7 @@ const Feed = () => {
           />
         </section>
       </Post>
-      <Post date='7/30/2024'>
+      <Post date='30/07/2024'>
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
           {t('Aviron.description')}
         </p>
@@ -122,14 +122,6 @@ const Feed = () => {
       <Post>
         <p className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}>
           {t('Introduction.description')}
-        </p>
-        <br />
-        <p
-          className={
-            theme === 'dark' ? 'text-fontDark' : 'text-fontLight' + ' font-bold'
-          }
-        >
-          {t('Introduction.help')}
         </p>
         <section>
           <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
