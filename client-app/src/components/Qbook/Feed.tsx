@@ -17,6 +17,27 @@ const Feed = () => {
     >
       <Title />
       <Carousel />
+      <Post date='9/03/2025'>
+        <ul>
+          <li>
+            <p
+              className={theme === 'dark' ? 'text-fontDark' : 'text-fontLight'}
+            >
+              {t('YouteTube.description1')}
+            </p>
+          </li>
+        </ul>
+        <a
+          className='text-accent'
+          target='_blank'
+          href='https://github.com/Qheuss/youtube-clone'
+        >
+          github.com/Qheuss/youtube-clone
+        </a>
+        <section>
+          <img src='images/YouteTube1.png' alt='Youte Tube' />
+        </section>
+      </Post>
       <Post date='8/19/2025'>
         <ul>
           <li>
@@ -28,11 +49,11 @@ const Feed = () => {
           </li>
         </ul>
         <a
-          className={'text-accent'}
+          className='text-accent'
           target='_blank'
-          href='https://toolboxqh.netlify.app/'
+          href='https://github.com/Qheuss/toolbox'
         >
-          toolboxqh.netlify.app
+          github.com/Qheuss/toolbox
         </a>
         <section>
           <img src='images/toolbox1.png' alt='toolbox' />

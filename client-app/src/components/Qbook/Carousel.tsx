@@ -8,6 +8,10 @@ import {
 import { useAppSelector } from '@/redux/hooks';
 
 const images: string[] = [
+  'images/YouteTube1.png',
+  'images/YouteTube2.png',
+  'images/YouteTube3.png',
+  'images/YouteTube4.png',
   'images/toolbox1.png',
   'images/toolbox2.png',
   'images/toolbox3.png',

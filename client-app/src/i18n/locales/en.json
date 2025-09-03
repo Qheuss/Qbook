@@ -31,6 +31,10 @@
     }
   },
 
+  "YouteTube": {
+    "description1": "I built a YouTube clone using React, TypeScript, and Vite. For handling dates and time formatting, I integrated Moment.js. To manage routing within the application, I utilized React Router. The project is styled using Tailwind CSS, which allowed for a responsive and modern design. This project served as a great opportunity for me to enhance my skills in front-end development and work with popular libraries and frameworks."
+  },
+
   "Toolbox": {
     "description1": "I built this toolbox with Next.js, and I'm continuously improving it. My goal is to gather different useful features and keep expanding it with new tools over time. This project also serves as a playground for me to explore modern web technologies and strengthen my front-end development skills."
   },
