@@ -111,7 +111,7 @@ const ContactForm: React.FC = () => {
         id='contact-form'
         name='contact-form'
         className={
-          'w-[100%] md:w-[680px] md:rounded-lg' +
+          'w-full md:w-feed md:rounded-lg' +
           (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
         }
       >

@@ -1,5 +1,5 @@
 import '@/i18n/i18n';
-import { createRootRoute, Outlet, useNavigate } from '@tanstack/react-router';
+import { createRootRoute, Navigate, Outlet } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SUPPORTED_LANGUAGES, SupportedLanguage } from '@/i18n/i18n';
@@ -8,11 +8,15 @@ import Footer from '@/components/Footer';
 
 export const Route = createRootRoute({
   component: RootComponent,
+  notFoundComponent: NotFound,
 });
+
+function NotFound() {
+  return Navigate({ to: '/notFound' });
+}
 
 function RootComponent() {
   const { i18n } = useTranslation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const currentLang = i18n.language.split('-')[0];
@@ -29,7 +33,7 @@ function RootComponent() {
     if (i18n.language !== targetLang) {
       i18n.changeLanguage(targetLang);
     }
-  }, [i18n, navigate]);
+  }, [i18n]);
 
   return (
     <>

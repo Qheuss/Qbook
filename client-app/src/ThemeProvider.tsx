@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
 import { useAppSelector } from '@/redux/hooks';
@@ -17,9 +17,11 @@ const ThemeListener: React.FC = () => {
   return null;
 };
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   return (
     <Provider store={store}>
       <ThemeListener />

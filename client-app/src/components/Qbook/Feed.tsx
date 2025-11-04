@@ -12,7 +12,7 @@ const Feed = () => {
   return (
     <main
       className={
-        ' md:mt-[75px] md:mb-[15px] md:mx-auto md:w-[680px] mt-4 mb-0 mx-1'
+        ' md:mt-[75px] md:mb-[15px] md:mx-auto md:w-feed mt-4 mb-0 mx-1'
       }
     >
       <Title />
