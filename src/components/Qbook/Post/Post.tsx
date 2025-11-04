@@ -29,7 +29,7 @@ const Post = ({ children, date }: PostProps) => {
   };
 
   return (
-    <motion.div
+    <motion.article
       className={
         styles.post + (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
       }
@@ -46,7 +46,7 @@ const Post = ({ children, date }: PostProps) => {
       <motion.div variants={animations.item}>
         <PostActions />
       </motion.div>
-    </motion.div>
+    </motion.article>
   );
 };
 
