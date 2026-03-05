@@ -1,20 +1,14 @@
 import { TbMessageCircle, TbShare3 } from 'react-icons/tb';
 import styles from './PostActions.module.scss';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAppSelector } from '@/redux/hooks';
 import { useTranslation } from 'react-i18next';
 
 const PostActions = () => {
-  const [likes, setLikes] = useState(0);
-  const [shares, setShares] = useState(0);
-  const [comments, setComments] = useState(0);
-
-  useEffect(() => {
-    setLikes(Math.floor(Math.random() * 1001));
-    setShares(Math.floor(Math.random() * 1001));
-    setComments(Math.floor(Math.random() * 1001));
-  }, []);
+  const [likes, setLikes] = useState(() => Math.floor(Math.random() * 1001));
+  const [shares, setShares] = useState(() => Math.floor(Math.random() * 1001));
+  const [comments] = useState(() => Math.floor(Math.random() * 1001));
 
   const theme = useAppSelector((state) => state.theme.theme);
 

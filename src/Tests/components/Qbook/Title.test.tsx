@@ -20,13 +20,13 @@ describe('Title', () => {
       <ThemeProvider>
         <RouterProvider router={router} />
         <Title />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
   test('Check the social buttons redirections', async () => {
     const openUrl = vi.fn();
-    global.open = openUrl;
+    (globalThis as Window & typeof globalThis).open = openUrl;
 
     renderComponent();
 
@@ -40,7 +40,7 @@ describe('Title', () => {
     await userEvent.click(buttonGithub);
 
     expect(openUrl).toHaveBeenCalledWith(
-      'https://www.linkedin.com/in/quentin-heusse'
+      'https://www.linkedin.com/in/quentin-heusse',
     );
     expect(openUrl).toHaveBeenCalledWith('https://github.com/Qheuss');
 

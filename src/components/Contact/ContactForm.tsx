@@ -40,7 +40,7 @@ const ContactForm: React.FC = () => {
   });
 
   const watchedFields = watch(['name', 'email', 'message']);
-  const allFieldsFilled = watchedFields.every((field) => field !== '');
+  const allFieldsFilled = watchedFields.every((field) => field?.trim() !== '');
 
   const formAnimations = {
     container: {
@@ -79,7 +79,7 @@ const ContactForm: React.FC = () => {
         import.meta.env.VITE_EMAILJS_SERVICE_ID as string,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string,
         templateParams,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string,
       )
       .then((response) => {
         console.log(t('Contact.send.success'), response.status, response.text);
