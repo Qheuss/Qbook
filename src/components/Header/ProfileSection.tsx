@@ -1,12 +1,12 @@
-import Popup from './Popup';
+// import Popup from './Popup';
 import styles from './ProfileSection.module.scss';
 import { FaMoon } from 'react-icons/fa';
-import { HiOutlineDownload } from 'react-icons/hi';
+// import { HiOutlineDownload } from 'react-icons/hi';
 import { LuSunMedium } from 'react-icons/lu';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { toggleTheme } from '@/redux/themeSlice';
 import LanguageSwitcher from './LanguageSwitcher';
-import { getCurrentLanguage } from '@/i18n/i18n';
+// import { getCurrentLanguage } from '@/i18n/i18n';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 
@@ -50,23 +50,24 @@ const ProfileSection = () => {
       <li>
         <a
           href={
-            getCurrentLanguage() === 'fr'
-              ? 'CV-Quentin_Heusse.pdf'
-              : 'CV-Quentin_Heusse-en.pdf'
+            '#'
+            // getCurrentLanguage() === 'fr'
+            //   ? 'CV-Quentin_Heusse.pdf'
+            //   : 'CV-Quentin_Heusse-en.pdf'
           }
-          target='_blank'
-          rel='noopener noreferrer'
+          // target='_blank'
+          // rel='noopener noreferrer'
         >
           <img src='images/QuentinHeusse.jpg' alt='Profile' />
-          <HiOutlineDownload
+          {/* <HiOutlineDownload
             className={
               theme === 'dark'
                 ? 'bg-iconsDark text-iconsLight'
                 : 'bg-iconsLight text-iconsDark'
             }
-          />
+          /> */}
         </a>
-        <Popup />
+        {/* <Popup /> */}
       </li>
     </ul>
   );

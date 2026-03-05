@@ -11,9 +11,7 @@ const Feed = () => {
 
   return (
     <main
-      className={
-        ' md:mt-[75px] md:mb-[15px] md:mx-auto md:w-feed mt-4 mb-0 mx-1'
-      }
+      className={' md:mt-18.75 md:mb-3.75 md:mx-auto md:w-feed mt-4 mb-0 mx-1'}
     >
       <Title />
       <Carousel />
