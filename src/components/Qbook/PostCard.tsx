@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { getTextColor } from '@/utils/cn';
+import Carousel from './Carousel';
 
 interface PostCardProps {
   items?: string[];
@@ -13,6 +14,7 @@ interface PostCardProps {
     src: string;
     alt: string;
   };
+  images?: string[];
   t: (key: string) => string;
   theme: 'light' | 'dark';
 }
@@ -26,6 +28,7 @@ export function PostCard({
   description,
   link,
   image,
+  images,
   t,
   theme,
 }: PostCardProps): ReactNode {
@@ -57,7 +60,13 @@ export function PostCard({
         </a>
       )}
 
-      {image && (
+      {images && images.length > 0 && (
+        <section className={POST_SECTION_CLASSES}>
+          <Carousel images={images} singleImage />
+        </section>
+      )}
+
+      {image && !images && (
         <section className={POST_SECTION_CLASSES}>
           <img src={image.src} alt={image.alt} className={POST_IMAGE_CLASSES} />
         </section>
