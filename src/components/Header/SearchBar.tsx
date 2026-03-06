@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [highlightedWordsExist, setHighlightedWordsExist] = useState(false);
   const theme = useAppSelector((state) => state.theme.theme);
   const { t } = useTranslation();
 
@@ -19,20 +18,19 @@ const SearchBar = () => {
           document.createTextNode(mark.textContent || ''),
           mark,
         );
+        // Normalize to merge adjacent text nodes
+        parent.normalize();
       }
     });
   };
 
   const removeHighlights = () => {
     removeHighlightElements();
-    setHighlightedWordsExist(false);
   };
 
   useEffect(() => {
     if (!searchQuery.trim()) {
       removeHighlightElements();
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setHighlightedWordsExist(false);
       return;
     }
 
@@ -42,35 +40,79 @@ const SearchBar = () => {
       const content = document.querySelector('main');
       if (!content) return;
 
-      const walker = document.createTreeWalker(
-        content,
-        NodeFilter.SHOW_TEXT,
-        null,
-      );
-      const regex = new RegExp(searchQuery, 'gi');
+      // Create a tree walker to find all text nodes
+      const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
+        acceptNode: (node) => {
+          // Skip if parent is already a mark, script, style, input, or textarea
+          const parent = node.parentNode;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          const tagName = parent.nodeName.toUpperCase();
+          if (
+            ['MARK', 'SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA'].includes(tagName)
+          ) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        },
+      });
 
+      // Collect all text nodes first to avoid issues with DOM manipulation during traversal
+      const textNodes: Node[] = [];
       let node;
       while ((node = walker.nextNode())) {
-        if (node.parentNode && node.parentNode.nodeName !== 'INPUT') {
-          const text = node.nodeValue;
-          if (text && regex.test(text)) {
-            const span = document.createElement('span');
-            span.innerHTML = text.replace(
-              regex,
-              (match) =>
-                `<mark style='background-color: #54c078;'>${match}</mark>`,
-            );
-            node.parentNode.replaceChild(span, node);
-          }
-        }
+        textNodes.push(node);
       }
+
+      const regex = new RegExp(
+        searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+        'gi',
+      );
+
+      // Process each text node
+      textNodes.forEach((textNode) => {
+        const text = textNode.nodeValue;
+        if (!text) return;
+
+        // Reset regex and check if there are matches
+        regex.lastIndex = 0;
+        if (!regex.test(text)) return;
+        regex.lastIndex = 0;
+
+        const fragment = document.createDocumentFragment();
+        let lastIndex = 0;
+        let match;
+
+        // Find all matches in the text
+        while ((match = regex.exec(text)) !== null) {
+          // Add text before match
+          if (match.index > lastIndex) {
+            fragment.appendChild(
+              document.createTextNode(text.substring(lastIndex, match.index)),
+            );
+          }
+
+          // Add highlighted match
+          const mark = document.createElement('mark');
+          mark.style.backgroundColor = '#54c078';
+          mark.textContent = match[0];
+          fragment.appendChild(mark);
+
+          lastIndex = match.index + match[0].length;
+        }
+
+        // Add remaining text after last match
+        if (lastIndex < text.length) {
+          fragment.appendChild(
+            document.createTextNode(text.substring(lastIndex)),
+          );
+        }
+
+        // Replace the text node with the fragment
+        textNode.parentNode?.replaceChild(fragment, textNode);
+      });
     };
 
     highlightMatches();
-
-    // Check if there are highlighted elements after highlighting
-    const highlightedElements = document.querySelectorAll('mark');
-    setHighlightedWordsExist(highlightedElements.length > 0);
   }, [searchQuery]);
 
   const clearSearch = () => {
@@ -91,11 +133,10 @@ const SearchBar = () => {
         <button
           onClick={clearSearch}
           style={{
-            cursor:
-              searchQuery || highlightedWordsExist ? 'pointer' : 'default',
+            cursor: searchQuery ? 'pointer' : 'default',
           }}
         >
-          {searchQuery || highlightedWordsExist ? <HiX /> : <IoMdSearch />}
+          {searchQuery ? <HiX /> : <IoMdSearch />}
         </button>
       </label>
       <input
