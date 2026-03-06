@@ -67,7 +67,6 @@ const LanguageSwitcher: React.FC = () => {
         </svg>
       </button>
 
-      {/* Drawer */}
       <div
         id='language-drawer'
         className={cn(

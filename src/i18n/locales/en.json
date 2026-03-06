@@ -31,6 +31,10 @@
     }
   },
 
+  "Starter": {
+    "description1": "I built a Next.js starter project with Better Auth authentication and Prisma integration. This starter project is designed to provide a solid foundation for developers looking to create web applications with Next.js while incorporating robust authentication and database management using Prisma. It includes pre-configured authentication flows, user management, and seamless integration with a database, making it easier for developers to get started on their projects quickly and efficiently."
+  },
+
   "YouteTube": {
     "description1": "I built a YouTube clone using React, TypeScript, and Vite. For handling dates and time formatting, I integrated Moment.js. To manage routing within the application, I utilized React Router. The project is styled using Tailwind CSS, which allowed for a responsive and modern design. This project served as a great opportunity for me to enhance my skills in front-end development and work with popular libraries and frameworks."
   },

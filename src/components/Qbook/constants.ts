@@ -27,6 +27,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const CAROUSEL_IMAGES: string[] = [
+  'images/starter1.png',
+  'images/starter2.png',
+  'images/starter3.png',
+  'images/starter4.png',
   'images/YouteTube1.png',
   'images/YouteTube2.png',
   'images/YouteTube3.png',

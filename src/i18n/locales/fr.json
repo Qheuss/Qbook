@@ -31,6 +31,10 @@
     }
   },
 
+  "Starter": {
+    "description1": "J'ai construit un starter avec Next.js, Better Auth et Prisma. Ce starter est conçu pour fournir une base solide aux développeurs souhaitant créer des applications web avec Next.js tout en intégrant une authentification robuste et une gestion de base de données à l'aide de Prisma. Il comprend des flux d'authentification pré-configurés, une gestion des utilisateurs et une intégration transparente avec une base de données, rendant plus facile pour les développeurs de commencer leurs projets rapidement et efficacement."
+  },
+
   "YouteTube": {
     "description1": "J'ai développé un clone de YouTube avec React, TypeScript et Vite. Pour la gestion et le formatage des dates et heures, j'ai utilisé Moment.js. La navigation au sein de l'application est assurée par React Router. Le projet est stylisé avec Tailwind CSS, ce qui permet un design moderne et réactif. Ce projet m'a offert une excellente opportunité d'améliorer mes compétences en développement front-end tout en travaillant avec des bibliothèques et frameworks populaires."
   },
