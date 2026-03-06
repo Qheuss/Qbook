@@ -1,14 +1,12 @@
-// import Popup from './Popup';
 import styles from './ProfileSection.module.scss';
 import { FaMoon } from 'react-icons/fa';
-// import { HiOutlineDownload } from 'react-icons/hi';
 import { LuSunMedium } from 'react-icons/lu';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { toggleTheme } from '@/redux/themeSlice';
 import LanguageSwitcher from './LanguageSwitcher';
-// import { getCurrentLanguage } from '@/i18n/i18n';
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import { getBgColor } from '@/utils/cn';
 
 const ProfileSection = () => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -32,9 +30,9 @@ const ProfileSection = () => {
       </li>
       <li
         className={
-          theme === 'dark'
-            ? 'bg-searchDark text-white text-2xl'
-            : 'bg-searchLight text-yellow-500 text-2xl'
+          (theme === 'dark'
+            ? `${getBgColor(theme, 'search')} text-white`
+            : `${getBgColor(theme, 'search')} text-yellow-500`) + ' text-2xl'
         }
       >
         <motion.button
@@ -48,26 +46,9 @@ const ProfileSection = () => {
         </motion.button>
       </li>
       <li>
-        <a
-          href={
-            '#'
-            // getCurrentLanguage() === 'fr'
-            //   ? 'CV-Quentin_Heusse.pdf'
-            //   : 'CV-Quentin_Heusse-en.pdf'
-          }
-          // target='_blank'
-          // rel='noopener noreferrer'
-        >
+        <a href={'/'}>
           <img src='images/QuentinHeusse.jpg' alt='Profile' />
-          {/* <HiOutlineDownload
-            className={
-              theme === 'dark'
-                ? 'bg-iconsDark text-iconsLight'
-                : 'bg-iconsLight text-iconsDark'
-            }
-          /> */}
         </a>
-        {/* <Popup /> */}
       </li>
     </ul>
   );

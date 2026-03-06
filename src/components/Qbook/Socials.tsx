@@ -1,12 +1,6 @@
 import { useAppSelector } from '@/redux/hooks';
-
-interface SocialsProps {
-  icon: React.ElementType;
-  link: string;
-  colorDark: string;
-  colorLight: string;
-  text: string;
-}
+import { cn, getHoverBg } from '@/utils/cn';
+import type { SocialLink } from './constants';
 
 const Socials = ({
   icon: Icon,
@@ -14,22 +8,34 @@ const Socials = ({
   colorDark,
   colorLight,
   text,
-}: SocialsProps) => {
+}: SocialLink) => {
   const theme = useAppSelector((state) => state.theme.theme);
+
+  const handleClick = () => {
+    window.open(link, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
+    }
+  };
 
   return (
     <li
-      className={
-        theme === 'dark'
-          ? ' text-accent hover:bg-iconsDark'
-          : ' text-accent hover:bg-iconsLight'
-      }
-      onClick={() => window.open(link)}
+      className={cn('text-accent', getHoverBg(theme))}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role='button'
+      tabIndex={0}
+      aria-label={`Visit ${text}`}
     >
       <Icon
         style={{
           color: theme === 'dark' ? colorDark : colorLight,
         }}
+        aria-hidden='true'
       />
       {text}
     </li>

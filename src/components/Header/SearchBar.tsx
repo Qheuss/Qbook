@@ -18,7 +18,6 @@ const SearchBar = () => {
           document.createTextNode(mark.textContent || ''),
           mark,
         );
-        // Normalize to merge adjacent text nodes
         parent.normalize();
       }
     });
@@ -40,10 +39,8 @@ const SearchBar = () => {
       const content = document.querySelector('main');
       if (!content) return;
 
-      // Create a tree walker to find all text nodes
       const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
         acceptNode: (node) => {
-          // Skip if parent is already a mark, script, style, input, or textarea
           const parent = node.parentNode;
           if (!parent) return NodeFilter.FILTER_REJECT;
           const tagName = parent.nodeName.toUpperCase();
@@ -56,7 +53,6 @@ const SearchBar = () => {
         },
       });
 
-      // Collect all text nodes first to avoid issues with DOM manipulation during traversal
       const textNodes: Node[] = [];
       let node;
       while ((node = walker.nextNode())) {
@@ -68,12 +64,10 @@ const SearchBar = () => {
         'gi',
       );
 
-      // Process each text node
       textNodes.forEach((textNode) => {
         const text = textNode.nodeValue;
         if (!text) return;
 
-        // Reset regex and check if there are matches
         regex.lastIndex = 0;
         if (!regex.test(text)) return;
         regex.lastIndex = 0;
@@ -82,16 +76,13 @@ const SearchBar = () => {
         let lastIndex = 0;
         let match;
 
-        // Find all matches in the text
         while ((match = regex.exec(text)) !== null) {
-          // Add text before match
           if (match.index > lastIndex) {
             fragment.appendChild(
               document.createTextNode(text.substring(lastIndex, match.index)),
             );
           }
 
-          // Add highlighted match
           const mark = document.createElement('mark');
           mark.style.backgroundColor = '#54c078';
           mark.textContent = match[0];
@@ -100,14 +91,12 @@ const SearchBar = () => {
           lastIndex = match.index + match[0].length;
         }
 
-        // Add remaining text after last match
         if (lastIndex < text.length) {
           fragment.appendChild(
             document.createTextNode(text.substring(lastIndex)),
           );
         }
 
-        // Replace the text node with the fragment
         textNode.parentNode?.replaceChild(fragment, textNode);
       });
     };
@@ -123,7 +112,7 @@ const SearchBar = () => {
     <div
       className={
         styles.searchBar +
-        ' md:w-[250px] w-[180px]' +
+        ' md:w-62.5 w-45' +
         (theme === 'dark'
           ? ' bg-searchDark text-fontDarker'
           : ' bg-searchLight text-fontLighter')

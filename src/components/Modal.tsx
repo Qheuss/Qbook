@@ -3,6 +3,13 @@ import styles from './Modal.module.scss';
 import { MdClose, MdZoomIn, MdZoomOut } from 'react-icons/md';
 import { useAppSelector } from '@/redux/hooks';
 import { useTranslation } from 'react-i18next';
+import {
+  cn,
+  getBgColor,
+  getTextColor,
+  getBorderColor,
+  getButtonHoverBg,
+} from '@/utils/cn';
 
 interface ModalProps {
   isOpen: boolean;
@@ -31,11 +38,11 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
       const scaledHeight = imageRef.current.offsetHeight * scale;
       const xLimit = Math.max(
         0,
-        (scaledWidth - containerRef.current.offsetWidth) / 2
+        (scaledWidth - containerRef.current.offsetWidth) / 2,
       );
       const yLimit = Math.max(
         0,
-        (scaledHeight - containerRef.current.offsetHeight) / 2
+        (scaledHeight - containerRef.current.offsetHeight) / 2,
       );
 
       return {
@@ -43,7 +50,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
         y: Math.min(yLimit, Math.max(-yLimit, y)),
       };
     },
-    [scale]
+    [scale],
   );
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -56,7 +63,7 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isDragging && scale > 1) {
       setPosition(
-        getBoundedPosition(e.clientX - dragStart.x, e.clientY - dragStart.y)
+        getBoundedPosition(e.clientX - dragStart.x, e.clientY - dragStart.y),
       );
     }
   };
@@ -78,8 +85,8 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
       setPosition(
         getBoundedPosition(
           e.touches[0].clientX - dragStart.x,
-          e.touches[0].clientY - dragStart.y
-        )
+          e.touches[0].clientY - dragStart.y,
+        ),
       );
     }
   };
@@ -94,6 +101,20 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
   };
 
   if (!isOpen) return null;
+
+  const controlsClassName = cn(
+    styles.modal__controls,
+    'border-t',
+    getBgColor(theme, 'search'),
+    getTextColor(theme, 'secondary'),
+    getBorderColor(theme),
+  );
+
+  const buttonClassName = cn(
+    'border',
+    getBorderColor(theme),
+    getButtonHoverBg(theme),
+  );
 
   return (
     <div className={styles.modal} aria-modal='true' onClick={onClose}>
@@ -127,70 +148,42 @@ const Modal = ({ isOpen, imageSrc, onClose }: ModalProps) => {
                 cursor: isDragging
                   ? 'grabbing'
                   : scale > 1
-                  ? 'grab'
-                  : 'default',
+                    ? 'grab'
+                    : 'default',
               }}
               draggable='false'
             />
           </div>
         </div>
 
-        <div
-          className={
-            styles.modal__controls +
-            ' border-t' +
-            (theme === 'dark'
-              ? ' bg-searchDark text-fontDarker border-iconsDark'
-              : ' bg-searchLight text-fontLighter border-iconsLight')
-          }
-        >
+        <div className={controlsClassName}>
           <button
             onClick={handleZoomOut}
-            className={
-              styles.modal__zoomButton +
-              ' border' +
-              (theme === 'dark'
-                ? ' border-iconsDark hover:bg-buttonHoverDark'
-                : ' border-iconsLight hover:bg-buttonHoverLight')
-            }
+            className={cn(styles.modal__zoomButton, buttonClassName)}
             disabled={scale === 1}
+            aria-label='Zoom out'
           >
             <MdZoomOut />
           </button>
           <button
             onClick={handleZoomIn}
-            className={
-              styles.modal__zoomButton +
-              ' border' +
-              (theme === 'dark'
-                ? ' hover:bg-buttonHoverDark border-iconsDark'
-                : ' hover:bg-buttonHoverLight border-iconsLight')
-            }
+            className={cn(styles.modal__zoomButton, buttonClassName)}
+            aria-label='Zoom in'
           >
             <MdZoomIn />
           </button>
           <button
             onClick={handleReset}
-            className={
-              styles.modal__resetButton +
-              ' border' +
-              (theme === 'dark'
-                ? ' hover:bg-buttonHoverDark border-iconsDark'
-                : ' hover:bg-buttonHoverLight border-iconsLight')
-            }
+            className={cn(styles.modal__resetButton, buttonClassName)}
             disabled={scale === 1 && position.x === 0 && position.y === 0}
+            aria-label='Reset zoom'
           >
             {t('Modal.reset')}
           </button>
           <button
-            className={
-              styles.modal__close +
-              ' border' +
-              (theme === 'dark'
-                ? ' hover:bg-buttonHoverDark border-iconsDark'
-                : ' hover:bg-buttonHoverLight border-iconsLight')
-            }
+            className={cn(styles.modal__close, buttonClassName)}
             onClick={onClose}
+            aria-label='Close modal'
           >
             <MdClose />
           </button>

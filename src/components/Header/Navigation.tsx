@@ -5,12 +5,13 @@ import { IoIosMail } from 'react-icons/io';
 // import { GiCalculator } from 'react-icons/gi';
 import styles from './Navigation.module.scss';
 import { useAppSelector } from '@/redux/hooks';
+import { cn, getBgColor, getDividerBorder } from '@/utils/cn';
 
-interface Navigation {
+interface NavigationProps {
   className?: string;
 }
 
-const Navigation = ({ className }: Navigation) => {
+const Navigation = ({ className }: NavigationProps) => {
   const location = useLocation();
   const theme = useAppSelector((state) => state.theme.theme);
 
@@ -19,21 +20,20 @@ const Navigation = ({ className }: Navigation) => {
     { icon: IoIosMail, path: '/contact' },
     // { icon: GiCalculator, path: '/calculator'},
   ];
+
   return (
     <nav
-      className={
-        styles.header__nav +
-        ' border-t md:border-none' +
-        (theme === 'dark'
-          ? ' bg-headerDark border-[#ffffff13]'
-          : ' bg-headerLight border-[#e2e2e2]') +
-        ' ' +
-        className
-      }
+      className={cn(
+        styles.header__nav,
+        'border-t md:border-none',
+        getBgColor(theme, 'header'),
+        getDividerBorder(theme),
+        className,
+      )}
     >
-      {navItems.map((item, index) => (
+      {navItems.map((item) => (
         <NavItem
-          key={index}
+          key={item.path}
           {...item}
           selected={location.pathname === item.path}
         />

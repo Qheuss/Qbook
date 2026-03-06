@@ -1,15 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import emailjs from '@emailjs/browser';
 import styles from './ContactForm.module.scss';
 import { useAppSelector } from '@/redux/hooks';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
 import { createContactSchema } from '@/schemas/contact';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Contact } from '@/interfaces/contact';
+import { cn, getBgColor, getTextColor } from '@/utils/cn';
 
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
+const formAnimations = {
+  container: {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  },
+  item: {
+    hidden: { y: 20, opacity: 0 },
+    show: { y: 0, opacity: 1 },
+  },
+  nothing: {},
+};
 
 const ContactForm: React.FC = () => {
   const [status, setStatus] = useState('');
@@ -31,7 +49,7 @@ const ContactForm: React.FC = () => {
     register,
     handleSubmit,
     setValue,
-    watch,
+    control,
     formState: { errors },
   } = useForm<Contact>({
     resolver: zodResolver(contactSchema),
@@ -39,32 +57,34 @@ const ContactForm: React.FC = () => {
     mode: 'onSubmit',
   });
 
-  const watchedFields = watch(['name', 'email', 'message']);
-  const allFieldsFilled = watchedFields.every((field) => field?.trim() !== '');
+  const name = useWatch({ control, name: 'name' });
+  const email = useWatch({ control, name: 'email' });
+  const message = useWatch({ control, name: 'message' });
 
-  const formAnimations = {
-    container: {
-      hidden: { opacity: 0 },
-      show: {
-        opacity: 1,
-        transition: {
-          staggerChildren: 0.2,
-        },
-      },
-    },
-    item: {
-      hidden: { y: 20, opacity: 0 },
-      show: { y: 0, opacity: 1 },
-    },
-    nothing: {},
-  };
+  const allFieldsFilled = useMemo(
+    () => !!name?.trim() && !!email?.trim() && !!message?.trim(),
+    [name, email, message],
+  );
+
+  const buttonClassName = useMemo(
+    () =>
+      cn(
+        theme === 'dark'
+          ? getBgColor(theme, 'search')
+          : getBgColor(theme, 'comments'),
+        getTextColor(theme, 'secondary'),
+      ),
+    [theme],
+  );
+
+  const hideStatus = () => setStatusVisible(false);
 
   const onSubmit = (data: Contact) => {
     if (errors.honeypot) {
       setStatus(errors.honeypot?.message || t('Contact.send.bot'));
       setStatusType('error');
       setStatusVisible(true);
-      setTimeout(() => setStatusVisible(false), 10000);
+      setTimeout(hideStatus, 10000);
       return;
     }
 
@@ -86,14 +106,14 @@ const ContactForm: React.FC = () => {
         setStatus(t('Contact.send.success'));
         setStatusType('success');
         setStatusVisible(true);
-        setTimeout(() => setStatusVisible(false), 10000);
+        setTimeout(hideStatus, 10000);
       })
       .catch((error) => {
         console.error(`${t('Contact.send.error')} :`, error);
         setStatus(t('Contact.send.error'));
         setStatusType('error');
         setStatusVisible(true);
-        setTimeout(() => setStatusVisible(false), 10000);
+        setTimeout(hideStatus, 10000);
       });
 
     setValue('name', '');
@@ -110,14 +130,14 @@ const ContactForm: React.FC = () => {
         onSubmit={handleSubmit(onSubmit)}
         id='contact-form'
         name='contact-form'
-        className={
-          'w-full md:w-feed md:rounded-lg' +
-          (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
-        }
+        className={cn(
+          'w-full md:w-feed md:rounded-lg',
+          getBgColor(theme, 'header'),
+        )}
       >
         <motion.h1
           variants={formAnimations.item}
-          className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
+          className={getTextColor(theme, 'primary')}
         >
           {t('Contact.title.prefix')}
           <span>{t('Contact.title.emphasis')}</span> !
@@ -125,9 +145,7 @@ const ContactForm: React.FC = () => {
 
         <motion.div variants={formAnimations.item}>
           <label
-            className={
-              theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
-            }
+            className={getTextColor(theme, 'secondary')}
             htmlFor='name'
             data-test='name-label'
           >
@@ -135,7 +153,7 @@ const ContactForm: React.FC = () => {
           </label>
           <motion.input
             whileFocus={{ scale: 1.01 }}
-            className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
+            className={getTextColor(theme, 'primary')}
             type='text'
             maxLength={70}
             {...register('name')}
@@ -148,9 +166,7 @@ const ContactForm: React.FC = () => {
 
         <motion.div variants={formAnimations.item}>
           <label
-            className={
-              theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
-            }
+            className={getTextColor(theme, 'secondary')}
             htmlFor='email'
             data-test='email-label'
           >
@@ -158,7 +174,7 @@ const ContactForm: React.FC = () => {
           </label>
           <motion.input
             whileFocus={{ scale: 1.01 }}
-            className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
+            className={getTextColor(theme, 'primary')}
             maxLength={320}
             {...register('email')}
             id='email'
@@ -170,9 +186,7 @@ const ContactForm: React.FC = () => {
 
         <motion.div variants={formAnimations.item}>
           <label
-            className={
-              theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter'
-            }
+            className={getTextColor(theme, 'secondary')}
             htmlFor='message'
             data-test='message-label'
           >
@@ -180,7 +194,7 @@ const ContactForm: React.FC = () => {
           </label>
           <motion.textarea
             whileFocus={{ scale: 1.01 }}
-            className={theme === 'dark' ? ' text-fontDark' : ' text-fontLight'}
+            className={getTextColor(theme, 'primary')}
             maxLength={1200}
             {...register('message')}
             id='message'
@@ -211,15 +225,10 @@ const ContactForm: React.FC = () => {
           }
           whileHover={{ scale: allFieldsFilled ? 1.02 : 1 }}
           whileTap={{ scale: allFieldsFilled ? 0.98 : 1 }}
-          className={
-            theme === 'dark'
-              ? ' bg-searchDark text-fontDarker'
-              : ' bg-commentsLight text-fontLighter'
-          }
+          className={buttonClassName}
           type='submit'
           style={{
             backgroundColor: allFieldsFilled ? '#54c078' : '',
-
             color: allFieldsFilled
               ? theme === 'dark'
                 ? 'black'

@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import styles from './Carousel.module.scss';
 import Modal from '../Modal';
 import {
@@ -6,55 +6,32 @@ import {
   MdOutlineArrowForwardIos,
 } from 'react-icons/md';
 import { useAppSelector } from '@/redux/hooks';
-
-const images: string[] = [
-  'images/YouteTube1.png',
-  'images/YouteTube2.png',
-  'images/YouteTube3.png',
-  'images/YouteTube4.png',
-  'images/toolbox1.png',
-  'images/toolbox2.png',
-  'images/toolbox3.png',
-  'images/toolbox4.png',
-  'images/francorchamps1.png',
-  'images/francorchamps2.png',
-  'images/francorchamps3.png',
-  'images/francorchamps4.png',
-  'images/francorchamps5.png',
-  'images/francorchamps6.png',
-  'images/aviron1.png',
-  'images/aviron2.png',
-  'images/aviron3.png',
-  'images/clickerlogin.png',
-  'images/clickermoney.png',
-  'images/weather.png',
-];
+import { CAROUSEL_IMAGES, SCROLL_AMOUNT } from './constants';
+import { cn } from '@/utils/cn';
 
 const Carousel: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
+  const [modalImageIndex, setModalImageIndex] = useState<number>(0);
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const theme = useAppSelector((state) => state.theme.theme);
 
-  const scrollAmount = 200;
-
-  const checkScrollPosition = () => {
+  const checkScrollPosition = useCallback(() => {
     if (trackRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = trackRef.current;
       setIsAtStart(scrollLeft <= 0);
       setIsAtEnd(Math.ceil(scrollLeft + clientWidth) >= scrollWidth);
     }
-  };
+  }, []);
 
   useEffect(() => {
     checkScrollPosition();
     const trackElement = trackRef.current;
+
     if (trackElement) {
       trackElement.addEventListener('scroll', checkScrollPosition);
     }
-
     window.addEventListener('resize', checkScrollPosition);
 
     return () => {
@@ -63,18 +40,14 @@ const Carousel: React.FC = () => {
       }
       window.removeEventListener('resize', checkScrollPosition);
     };
-  }, []);
+  }, [checkScrollPosition]);
 
   const scrollLeft = () => {
-    if (trackRef.current) {
-      trackRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    }
+    trackRef.current?.scrollBy({ left: -SCROLL_AMOUNT, behavior: 'smooth' });
   };
 
   const scrollRight = () => {
-    if (trackRef.current) {
-      trackRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+    trackRef.current?.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' });
   };
 
   const handleClickItem = (index: number): void => {
@@ -85,34 +58,37 @@ const Carousel: React.FC = () => {
 
   const closeModal = (): void => {
     setIsModalOpen(false);
-    setModalImageIndex(null);
     document.documentElement.classList.remove('popup-active');
   };
+
+  const buttonClassName = cn(
+    styles.carousel__button,
+    theme === 'dark'
+      ? 'bg-[#00000099] text-[#fff]'
+      : 'bg-[#fff] text-[#00000099] shadow-md',
+  );
 
   return (
     <div className={styles.carousel}>
       {!isAtStart && (
         <button
-          className={
-            styles.carousel__button +
-            ' ' +
-            styles.left +
-            (theme === 'dark'
-              ? ' bg-[#00000099] text-[#fff]'
-              : ' bg-[#fff] text-[#00000099] shadow-md')
-          }
+          className={cn(buttonClassName, styles.left)}
           onClick={scrollLeft}
+          aria-label='Scroll left'
         >
           <MdOutlineArrowBackIosNew />
         </button>
       )}
 
       <div className={styles.track} ref={trackRef}>
-        {images.map((image, index) => (
+        {CAROUSEL_IMAGES.map((image, index) => (
           <div
-            key={index}
+            key={image}
             className={styles.item}
             onClick={() => handleClickItem(index)}
+            role='button'
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && handleClickItem(index)}
           >
             <img src={image} alt={`Slide ${index + 1}`} />
           </div>
@@ -121,15 +97,9 @@ const Carousel: React.FC = () => {
 
       {!isAtEnd && (
         <button
-          className={
-            styles.carousel__button +
-            ' ' +
-            styles.right +
-            (theme === 'dark'
-              ? ' bg-[#00000099] text-[#fff]'
-              : ' bg-[#fff] text-[#00000099] shadow-md')
-          }
+          className={cn(buttonClassName, styles.right)}
           onClick={scrollRight}
+          aria-label='Scroll right'
         >
           <MdOutlineArrowForwardIos />
         </button>
@@ -138,7 +108,7 @@ const Carousel: React.FC = () => {
       {isModalOpen && (
         <Modal
           isOpen={isModalOpen}
-          imageSrc={images[modalImageIndex!]}
+          imageSrc={CAROUSEL_IMAGES[modalImageIndex]}
           onClose={closeModal}
         />
       )}

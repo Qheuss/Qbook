@@ -1,114 +1,82 @@
-import { useMemo } from 'react';
+import { useCallback } from 'react';
 import { createDialog } from '../Dialog';
 import styles from './Title.module.scss';
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import Socials from './Socials';
 import { useNavigate } from '@tanstack/react-router';
 import { useAppSelector } from '@/redux/hooks';
 import { useTranslation } from 'react-i18next';
+import { cn, getBgColor, getTextColor } from '@/utils/cn';
+import { SOCIAL_LINKS, PROFILE_IMAGE, PROFILE_NAME } from './constants';
 
 const Title = () => {
   const navigate = useNavigate();
   const theme = useAppSelector((state) => state.theme.theme);
   const { t } = useTranslation();
 
-  const socials = [
-    {
-      icon: FaLinkedin,
-      link: 'https://www.linkedin.com/in/quentin-heusse',
-      colorDark: '#0a66c2',
-      colorLight: '#0a66c2',
-      text: 'Linkedin',
-    },
-    {
-      icon: FaGithub,
-      link: 'https://github.com/Qheuss',
-      colorDark: '#fff',
-      colorLight: '#000',
-      text: 'Github',
-    },
-  ];
-
-  const createContactDialog = useMemo(() => {
-    return async () => {
-      createDialog((resolve, reject) => (
-        <div
-          className={
-            styles.dialog +
-            (theme === 'dark'
-              ? ' bg-headerDark text-fontDarker'
-              : ' bg-commentsLight text-fontLighter')
-          }
-        >
-          <section>
-            <h4
-              className={
-                theme === 'dark' ? ' text-fontDark' : ' text-fontLight'
-              }
-            >
-              {t('Title.dialog.title')}
-            </h4>
-            <p>{t('Title.dialog.description')}</p>
-          </section>
-          <div>
-            <button
-              onClick={resolve}
-              className={
-                'text-accent' +
-                (theme === 'dark' ? ' bg-searchDark' : ' bg-searchLight')
-              }
-            >
-              {t('Title.dialog.yes')}
-            </button>
-            <button
-              onClick={reject}
-              className={
-                theme === 'dark'
-                  ? ' bg-searchDark text-fontDarker'
-                  : ' bg-searchLight text-fontLighter'
-              }
-            >
-              {t('Title.dialog.no')}
-            </button>
-          </div>
+  const createContactDialog = useCallback(async () => {
+    createDialog((resolve, reject) => (
+      <div
+        className={cn(
+          styles.dialog,
+          getBgColor(theme, 'comments'),
+          getTextColor(theme, 'secondary'),
+        )}
+      >
+        <section>
+          <h4 className={getTextColor(theme, 'primary')}>
+            {t('Title.dialog.title')}
+          </h4>
+          <p>{t('Title.dialog.description')}</p>
+        </section>
+        <div>
+          <button
+            onClick={resolve}
+            className={cn('text-accent', getBgColor(theme, 'search'))}
+          >
+            {t('Title.dialog.yes')}
+          </button>
+          <button
+            onClick={reject}
+            className={cn(
+              getBgColor(theme, 'search'),
+              getTextColor(theme, 'secondary'),
+            )}
+          >
+            {t('Title.dialog.no')}
+          </button>
         </div>
-      )).then(
-        async () => {
-          navigate({ to: '/contact' });
-        },
-        () => {}
-      );
-    };
+      </div>
+    )).then(
+      () => {
+        navigate({ to: '/contact' });
+      },
+      () => {},
+    );
   }, [navigate, t, theme]);
 
   return (
-    <div
-      className={
-        styles.title + (theme === 'dark' ? ' bg-headerDark' : ' bg-headerLight')
-      }
-    >
+    <div className={cn(styles.title, getBgColor(theme, 'header'))}>
       <div>
-        <img src='images/QuentinHeusse.jpg' alt='Quentin Heusse' />
+        <img src={PROFILE_IMAGE} alt={PROFILE_NAME} />
         <button
           onClick={createContactDialog}
-          className={
-            theme === 'dark'
-              ? ' bg-searchDark text-fontDarker'
-              : ' bg-commentsLight text-fontLighter'
-          }
+          className={cn(
+            theme === 'dark' ? 'bg-searchDark' : 'bg-commentsLight',
+            getTextColor(theme, 'secondary'),
+          )}
         >
           <h1 data-test='cliquezici'>{t('Title.clickHere')}</h1>
         </button>
       </div>
       <div
-        className={
-          styles.lineBreak +
-          (theme === 'dark' ? ' bg-[#ffffff13]' : ' bg-[#e2e2e2]')
-        }
+        className={cn(
+          styles.lineBreak,
+          theme === 'dark' ? 'bg-[#ffffff13]' : 'bg-[#e2e2e2]',
+        )}
       ></div>
       <ul>
-        {socials.map((item, i) => (
-          <Socials key={i} {...item} />
+        {SOCIAL_LINKS.map((item) => (
+          <Socials key={item.text} {...item} />
         ))}
       </ul>
     </div>

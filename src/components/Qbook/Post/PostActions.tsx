@@ -4,24 +4,43 @@ import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { useState } from 'react';
 import { useAppSelector } from '@/redux/hooks';
 import { useTranslation } from 'react-i18next';
+import { cn, getTextColor, getHoverBg } from '@/utils/cn';
+
+const generateRandomCount = () => Math.floor(Math.random() * 1001);
 
 const PostActions = () => {
-  const [likes, setLikes] = useState(() => Math.floor(Math.random() * 1001));
-  const [shares, setShares] = useState(() => Math.floor(Math.random() * 1001));
-  const [comments] = useState(() => Math.floor(Math.random() * 1001));
+  const [likes, setLikes] = useState(generateRandomCount);
+  const [shares, setShares] = useState(generateRandomCount);
+  const [comments] = useState(generateRandomCount);
 
   const theme = useAppSelector((state) => state.theme.theme);
-
   const { t } = useTranslation();
+
+  const handleShare = async () => {
+    setShares(shares + 1);
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: t('Post.shareAction.title'),
+          text: t('Post.shareAction.text'),
+          url: window.location.href,
+        });
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    } else {
+      alert(t('Post.shareAction.error'));
+    }
+  };
+
+  const buttonClassName = cn(
+    getTextColor(theme, 'secondary'),
+    getHoverBg(theme),
+  );
 
   return (
     <div className={styles.actions}>
-      <div
-        className={
-          styles.likes +
-          (theme === 'dark' ? ' text-fontDarker' : ' text-fontLighter')
-        }
-      >
+      <div className={cn(styles.likes, getTextColor(theme, 'secondary'))}>
         <div>
           <AiFillLike />
           <span>{likes}</span>
@@ -38,49 +57,21 @@ const PostActions = () => {
       <hr />
       <div className={styles.buttons}>
         <button
-          className={
-            theme === 'dark'
-              ? ' text-fontDarker hover:bg-iconsDark'
-              : ' text-fontLighter hover:bg-iconsLight'
-          }
+          className={buttonClassName}
           onClick={() => setLikes(likes + 1)}
+          aria-label={t('Post.like')}
         >
           <AiOutlineLike />
           <span>{t('Post.like')}</span>
         </button>
-        <button
-          className={
-            theme === 'dark'
-              ? ' text-fontDarker hover:bg-iconsDark'
-              : ' text-fontLighter hover:bg-iconsLight'
-          }
-        >
+        <button className={buttonClassName} aria-label={t('Post.comment')}>
           <TbMessageCircle />
           <span>{t('Post.comment')}</span>
         </button>
         <button
-          className={
-            theme === 'dark'
-              ? ' text-fontDarker hover:bg-iconsDark'
-              : ' text-fontLighter hover:bg-iconsLight'
-          }
-          onClick={async () => {
-            setShares(shares + 1);
-            if (navigator.share) {
-              try {
-                await navigator.share({
-                  title: t('Post.shareAction.title'),
-                  text: t('Post.shareAction.text'),
-                  url: window.location.href,
-                });
-                console.log('Shared successfully!');
-              } catch (error) {
-                console.error('Error sharing:', error);
-              }
-            } else {
-              alert(t('Post.shareAction.error'));
-            }
-          }}
+          className={buttonClassName}
+          onClick={handleShare}
+          aria-label={t('Post.share')}
         >
           <TbShare3 />
           <span>{t('Post.share')}</span>

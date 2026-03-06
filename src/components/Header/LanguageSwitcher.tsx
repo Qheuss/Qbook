@@ -6,6 +6,7 @@ import {
 } from '@/i18n/i18n';
 import styles from './LanguageSwitcher.module.scss';
 import { useAppSelector } from '@/redux/hooks';
+import { cn, getBgColor, getTextColor } from '@/utils/cn';
 
 interface Language {
   code: string;
@@ -36,21 +37,25 @@ const LanguageSwitcher: React.FC = () => {
     <div className={styles.container}>
       <button
         onClick={toggleDrawer}
-        className={`${styles.toggleButton} ${
-          theme === 'dark' ? 'bg-searchDark' : 'bg-searchLight'
-        }  text-accent pr-1 pl-2 md:pr-2 md:pl-3`}
+        className={cn(
+          styles.toggleButton,
+          getBgColor(theme, 'search'),
+          'text-accent pr-1 pl-2 md:pr-2 md:pl-3',
+        )}
         aria-expanded={isDrawerOpen}
         aria-controls='language-drawer'
         onBlur={() => setTimeout(() => setIsDrawerOpen(false), 150)}
       >
-        <span className={styles.languageCode + ' text-sm'}>
+        <span className={cn(styles.languageCode, 'text-sm')}>
           {currentLang.code.toUpperCase()}
         </span>
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className={`${styles.arrow} ${
-            isDrawerOpen ? styles.arrowOpen : ''
-          } text-gray-500`}
+          className={cn(
+            styles.arrow,
+            isDrawerOpen && styles.arrowOpen,
+            'text-gray-500',
+          )}
           viewBox='0 0 20 20'
           fill='currentColor'
         >
@@ -65,25 +70,25 @@ const LanguageSwitcher: React.FC = () => {
       {/* Drawer */}
       <div
         id='language-drawer'
-        className={`${styles.drawer} ${
-          isDrawerOpen ? styles.drawerOpen : styles.drawerClosed
-        }
-        ${
-          theme === 'dark'
-            ? ' bg-searchDark text-fontDarker'
-            : ' bg-searchLight text-fontLighter'
-        } text-sm`}
+        className={cn(
+          styles.drawer,
+          isDrawerOpen ? styles.drawerOpen : styles.drawerClosed,
+          getBgColor(theme, 'search'),
+          getTextColor(theme, 'secondary'),
+          'text-sm',
+        )}
       >
         <div className={styles.drawerContent}>
           {languages.map((language) => (
             <button
               key={language.code}
               onClick={() => handleLanguageChange(language.code)}
-              className={`${styles.languageItem} ${
+              className={cn(
+                styles.languageItem,
                 currentLanguage === language.code
                   ? 'text-accent'
-                  : 'hover:bg-accent-50'
-              }`}
+                  : 'hover:bg-accent-50',
+              )}
               aria-label={`Switch to ${language.code}`}
             >
               <span className={styles.languageCode}>
@@ -91,7 +96,7 @@ const LanguageSwitcher: React.FC = () => {
               </span>
               {currentLanguage === language.code && (
                 <svg
-                  className={`${styles.checkIcon} text-accent`}
+                  className={cn(styles.checkIcon, 'text-accent')}
                   xmlns='http://www.w3.org/2000/svg'
                   viewBox='0 0 20 20'
                   fill='currentColor'
