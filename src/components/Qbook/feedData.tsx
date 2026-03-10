@@ -83,8 +83,8 @@ export const POSTS_DATA: PostData[] = [
           'Francorchamps.description4',
         ]}
         link={{
-          href: 'https://francorchamps.bike/',
-          label: 'francorchamps.bike',
+          href: 'https://velo-francorchamps-qheuss-projects.vercel.app/fr/',
+          label: 'velo-francorchamps-qheuss-projects.vercel.app/fr/',
           ariaLabel: 'Francorchamps Bike Website',
         }}
         images={[
