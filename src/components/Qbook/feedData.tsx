@@ -83,9 +83,9 @@ export const POSTS_DATA: PostData[] = [
           'Francorchamps.description4',
         ]}
         link={{
-          href: 'https://velo-francorchamps-qheuss-projects.vercel.app/fr/',
-          label: 'velo-francorchamps-qheuss-projects.vercel.app/fr/',
-          ariaLabel: 'Francorchamps Bike Website',
+          href: 'https://github.com/Qheuss/velo-francorchamps',
+          label: 'github.com/Qheuss/velo-francorchamps',
+          ariaLabel: 'Francorchamps Bike GitHub Repository',
         }}
         images={[
           'images/francorchamps1.png',
