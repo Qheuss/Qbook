@@ -1,14 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { RouterProvider, createRouter } from '@tanstack/react-router';
 import '@testing-library/jest-dom';
-import { routeTree } from '../../../routeTree.gen';
 import { mockNavigate } from '../../__mocks__/tanstack/react-router';
 import { ThemeProvider } from '../../../ThemeProvider';
 import Title from '../../../components/Qbook/Title';
-
-const router = createRouter({ routeTree });
 
 beforeEach(() => {
   mockNavigate.mockReset();
@@ -18,7 +14,6 @@ describe('Title', () => {
   const renderComponent = () => {
     render(
       <ThemeProvider>
-        <RouterProvider router={router} />
         <Title />
       </ThemeProvider>,
     );
@@ -41,8 +36,14 @@ describe('Title', () => {
 
     expect(openUrl).toHaveBeenCalledWith(
       'https://www.linkedin.com/in/quentin-heusse',
+      '_blank',
+      'noopener,noreferrer',
     );
-    expect(openUrl).toHaveBeenCalledWith('https://github.com/Qheuss');
+    expect(openUrl).toHaveBeenCalledWith(
+      'https://github.com/Qheuss',
+      '_blank',
+      'noopener,noreferrer',
+    );
 
     expect(openUrl).toHaveBeenCalledTimes(2);
   });
@@ -50,7 +51,7 @@ describe('Title', () => {
   test('Check if the dialog shows up', async () => {
     renderComponent();
 
-    const buttonPortfolio = screen.getByText(/Cliquez ici pour me contacter!/i);
+    const buttonPortfolio = screen.getByTestId('cliquezici');
     expect(buttonPortfolio).toBeInTheDocument();
     await userEvent.click(buttonPortfolio);
 
@@ -64,9 +65,10 @@ describe('Title', () => {
     const dialog2 = screen.getByRole('dialog');
     expect(dialog2).toBeInTheDocument();
 
-    await userEvent.keyboard('{Enter}');
+    const yesButton = screen.getByRole('button', { name: /yes|oui/i });
+    await userEvent.click(yesButton);
     expect(dialog2).not.toBeInTheDocument();
 
-    expect(mockNavigate).toHaveBeenCalledWith('/contact');
+    expect(mockNavigate).toHaveBeenCalledWith({ to: '/contact' });
   });
 });

@@ -65,7 +65,7 @@ const Title = () => {
             getTextColor(theme, 'secondary'),
           )}
         >
-          <h1 data-test='cliquezici'>{t('Title.clickHere')}</h1>
+          <h1 data-testid='cliquezici'>{t('Title.clickHere')}</h1>
         </button>
       </div>
       <div

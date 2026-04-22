@@ -147,7 +147,7 @@ const ContactForm: React.FC = () => {
           <label
             className={getTextColor(theme, 'secondary')}
             htmlFor='name'
-            data-test='name-label'
+            data-testid='name-label'
           >
             {t('Contact.name')}:
           </label>
@@ -159,7 +159,7 @@ const ContactForm: React.FC = () => {
             {...register('name')}
             id='name'
             autoComplete='name'
-            data-test='name-input'
+            data-testid='name-input'
           />
           {errors.name && <p className='error-text'>{errors.name.message}</p>}
         </motion.div>
@@ -168,7 +168,7 @@ const ContactForm: React.FC = () => {
           <label
             className={getTextColor(theme, 'secondary')}
             htmlFor='email'
-            data-test='email-label'
+            data-testid='email-label'
           >
             {t('Contact.email')}:
           </label>
@@ -179,7 +179,7 @@ const ContactForm: React.FC = () => {
             {...register('email')}
             id='email'
             autoComplete='email'
-            data-test='email-input'
+            data-testid='email-input'
           />
         </motion.div>
         {errors.email && <p className='error-text'>{errors.email.message}</p>}
@@ -188,7 +188,7 @@ const ContactForm: React.FC = () => {
           <label
             className={getTextColor(theme, 'secondary')}
             htmlFor='message'
-            data-test='message-label'
+            data-testid='message-label'
           >
             {t('Contact.message')}:
           </label>
@@ -198,7 +198,7 @@ const ContactForm: React.FC = () => {
             maxLength={1200}
             {...register('message')}
             id='message'
-            data-test='message-textarea'
+            data-testid='message-textarea'
           />
           {errors.message && (
             <p className='error-text'>{errors.message.message}</p>
@@ -207,14 +207,14 @@ const ContactForm: React.FC = () => {
 
         {/* Honeypot */}
         <div style={{ display: 'none' }}>
-          <label htmlFor='honey' data-test='honey-label'>
+          <label htmlFor='honey' data-testid='honey-label'>
             honey is yummy
           </label>
           <input
             type='text'
             {...register('honeypot')}
             id='honey'
-            data-test='honey-input'
+            data-testid='honey-input'
           />
         </div>
         {/* Honeypot */}
@@ -235,7 +235,7 @@ const ContactForm: React.FC = () => {
                 : 'white'
               : '',
           }}
-          data-test='submit-button'
+          data-testid='submit-button'
           disabled={!allFieldsFilled}
         >
           {t('Contact.send.title')}

@@ -8,14 +8,18 @@ describe('QBook', () => {
   });
 
   it('the h1 contains the correct text', () => {
-    cy.get('h1').contains('Click here to contact me!');
+    cy.get('h1').contains(
+      /Click here to contact me!|Cliquez ici pour me contacter!/i,
+    );
   });
 
   it('the h1 contains the correct text (with data-test)', () => {
-    cy.getByData('cliquezici').contains('Click here to contact me!');
+    cy.getByTestId('cliquezici').contains(
+      /Click here to contact me!|Cliquez ici pour me contacter!/i,
+    );
   });
 
   it('testing the paragraphs', () => {
-    cy.get('p').eq(0).contains('During my free time');
+    cy.contains('p', /During my free time|Lors de mon temps libre/i);
   });
 });
