@@ -67,16 +67,5 @@
     "typescript-eslint": "^8.60.0",
     "vite": "^8.0.14",
     "vitest": "^4.1.7"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "@tailwindcss/oxide",
-      "@tsparticles/engine",
-      "cypress",
-      "esbuild",
-      "react-tsparticles",
-      "tsparticles-engine"
-    ]
   }
 }
