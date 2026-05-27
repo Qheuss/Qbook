@@ -1,18 +1,19 @@
-import { useEffect, useMemo, useState } from 'react';
-import Particles, { initParticlesEngine } from '@tsparticles/react';
-import { Engine, ISourceOptions, Container } from '@tsparticles/engine';
+import { useMemo } from 'react';
+import Particles, { ParticlesProvider } from '@tsparticles/react';
+import {
+  type Container,
+  type Engine,
+  type ISourceOptions,
+} from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
 import { useAppSelector } from '@/redux/hooks';
 
-const ParticleBackground = () => {
-  const [init, setInit] = useState(false);
-  const theme = useAppSelector((state) => state.theme.theme);
+const particlesInit = async (engine: Engine): Promise<void> => {
+  await loadSlim(engine);
+};
 
-  useEffect(() => {
-    initParticlesEngine(async (engine: Engine) => {
-      await loadSlim(engine);
-    }).then(() => setInit(true));
-  }, []);
+const ParticleBackground = () => {
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const particlesLoaded = async (container?: Container) => {
     if (!container) {
@@ -22,19 +23,19 @@ const ParticleBackground = () => {
 
   const options = useMemo(() => {
     const backgroundDark = getComputedStyle(
-      document.documentElement
+      document.documentElement,
     ).getPropertyValue('--backgroundDark');
 
     const backgroundLight = getComputedStyle(
-      document.documentElement
+      document.documentElement,
     ).getPropertyValue('--backgroundLight');
 
     const colorDark = getComputedStyle(
-      document.documentElement
+      document.documentElement,
     ).getPropertyValue('--colorDark');
 
     const colorLight = getComputedStyle(
-      document.documentElement
+      document.documentElement,
     ).getPropertyValue('--colorLight');
 
     const darkOptions: ISourceOptions = {
@@ -115,15 +116,17 @@ const ParticleBackground = () => {
     return theme === 'dark' ? darkOptions : lightOptions;
   }, [theme]);
 
-  return init ? (
+  return (
     <div className='fixed inset-0 -z-10'>
-      <Particles
-        id='tsparticles'
-        particlesLoaded={particlesLoaded}
-        options={options}
-      />
+      <ParticlesProvider init={particlesInit}>
+        <Particles
+          id='tsparticles'
+          particlesLoaded={particlesLoaded}
+          options={options}
+        />
+      </ParticlesProvider>
     </div>
-  ) : null;
+  );
 };
 
 export default ParticleBackground;

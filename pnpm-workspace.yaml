@@ -2,3 +2,6 @@ allowBuilds:
   '@parcel/watcher': true
   '@tsparticles/engine': true
   cypress: true
+minimumReleaseAgeExclude:
+  - cypress@15.16.0
+  - pnpm@11.4.0
